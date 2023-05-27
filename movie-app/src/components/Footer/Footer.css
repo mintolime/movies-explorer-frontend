@@ -1,0 +1,41 @@
+.main-page {
+  width: 100%;
+  /* min-width: 300px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 0;
+  /* overflow: hidden; */
+}
+
+.main-page__title {
+  max-width: 300px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+  /* or 127% */
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding: 44px 0;
+}
+
+.main-page__subtitle {
+  max-width: 260px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  margin: 0;
+  padding: 24px 0 80px;
+}
+
+.main-page__illustration {
+  width: 210px;
+  height: 206px;
+}
