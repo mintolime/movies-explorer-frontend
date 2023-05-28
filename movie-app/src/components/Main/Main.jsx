@@ -3,16 +3,18 @@ import '../Main/Main.css'
 
 function Main() {
   return (
-   <main className="content">
-        <section aria-label="учебный проект студента" className="main-page">
-          <img className="main-page__illustration" src={globus} alt="Логотип веба в форме глобуса" />
-          <h1 className="main-page__title">Учебный проект студента факультета Веб-разработки.</h1>
-          <p className="main-page__subtitle">
+    <main className="content">
+      <section aria-label="стартовая страница о проекте" className="promo">
+        <img className="promo__illustration" src={globus} alt="Логотип веба в форме глобуса" />
+        <div className="promo__context">
+          <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
+          <p className="promo__subtitle">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <button><a className="main-page__link" href="#">Узнать</a></button>
-        </section>
-      </main>
+           <button className='button button_type_about' ><a className="promo__link" href="#">Узнать больше</a></button>
+        </div>
+      </section>
+    </main>
   );
 }
 

@@ -5,9 +5,19 @@
   padding: 18px 0;
 }
 
+.header__nav-box {
+  display: flex;
+  gap: 14px;
+}
+
+@media screen and (min-width: 1024px) {
+  .header__nav-box {
+   gap: 30px;
+  }
+}
+
 .logo {
   height: 38px;
   width: 38px;
   background-repeat: no-repeat;
 }
-
