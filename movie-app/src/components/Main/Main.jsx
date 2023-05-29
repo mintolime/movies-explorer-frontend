@@ -3,6 +3,7 @@ import Promo from '../Promo/Promo';
 import AboutProgect from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
+import Portfolio from '../Portfolio/Portfolio';
 
 function Main() {
   return (
@@ -11,6 +12,7 @@ function Main() {
       <AboutProgect />
       <Techs />
       <AboutMe />
+      <Portfolio />
     </main>
   );
 }
