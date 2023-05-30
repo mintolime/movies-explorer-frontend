@@ -1,7 +1,15 @@
 .footer {
   width: 100%;
-  padding: 80px 30px 20px;
+  padding: 80px 10px 20px;
   box-sizing: border-box;
+  background-color: #fff;
+}
+
+@media screen and (min-width: 720px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 .footer__columns {

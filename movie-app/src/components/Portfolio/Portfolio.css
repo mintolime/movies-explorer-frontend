@@ -15,7 +15,8 @@
   /* identical to box height, or 143% */
   color: #A0A0A0;
   mix-blend-mode: normal;
-  padding-bottom: 40px;
+  padding: 0 0 40px;
+  margin: 0;
 }
 
 @media screen and (min-width: 720px) {

@@ -1,10 +1,8 @@
 .techs {
-  background-color: #fff4f4;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #000;
-
 }
 
 .techs__title {

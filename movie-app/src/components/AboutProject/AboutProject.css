@@ -1,6 +1,5 @@
 .about-progect {
   width: 100%;
-  background-color: #fff;
 }
 
 .about-project__list {
@@ -18,8 +17,6 @@
     gap: 0 30px;
   }
 }
-
-
 
 .about-project__title {
   font-weight: 400;
@@ -68,7 +65,7 @@
   font-size: 11px;
   line-height: 13px;
   text-align: center;
-  padding: 60px 0 93px;
+  padding-top: 60px;
 }
 
 @media screen and (min-width: 720px) {
