@@ -1,27 +1,24 @@
 import portfolio from '../../images/portfolio.jpg';
-import '../AboutMe/AboutMe.css'
+import '../AboutMe/AboutMe.css';
 
 function AboutMe() {
   return (
     <>
       <div className="content__inner">
-        <p className='content__about'>Студент</p>
+        <p className="content__about">Студент</p>
       </div>
-    <article className="about-me">
-      <img className="about-me__image" src={portfolio} alt="Логотип веба в форме глобуса" />
-      <div className="about-me__brief">
-        <h1 className="about-me__title">Евгения</h1>
-        <p className="about-me__subtitle">
-          Фронтенд-разработчица, 26 лет
-        </p>
-        <p className="about-me__text">
-          Фронтенд-разработчица, 26 лет
-        </p>
-        <a className="about-me__link" href="#git">Github</a>
-      </div>
-    </article>
+      <article className="about-me">
+        <img className="about-me__image" src={portfolio} alt="Логотип веба в форме глобуса" />
+        <div className="about-me__brief">
+          <h1 className="about-me__title">Евгения</h1>
+          <p className="about-me__subtitle">Фронтенд-разработчица, 26 лет</p>
+          <p className="about-me__text">Фронтенд-разработчица, 26 лет</p>
+          <a className="about-me__link" href="#git">
+            Github
+          </a>
+        </div>
+      </article>
     </>
-
   );
 }
 

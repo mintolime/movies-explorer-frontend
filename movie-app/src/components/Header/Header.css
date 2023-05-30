@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   padding: 18px 0;
+  background-color: #F3C1F8;
 }
 
 .header__nav-box {
@@ -12,7 +13,7 @@
 
 @media screen and (min-width: 1024px) {
   .header__nav-box {
-   gap: 30px;
+    gap: 30px;
   }
 }
 

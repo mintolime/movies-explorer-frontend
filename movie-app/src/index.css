@@ -16,20 +16,8 @@
   -moz-text-size-adjust: 100%;
   margin: 0;
   /* background-color: #F3C1F8; */
-  padding: 0 18px;
+  /* padding: 0 18px; */
   box-sizing: border-box;
-}
-
-@media screen and (min-width: 720px) {
-  .page {
-    padding: 0 30px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .page {
-    padding: 0 70px;
-  }
 }
 
 .button {

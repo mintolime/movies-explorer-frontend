@@ -21,6 +21,11 @@
   margin-bottom: 60px;
 }
 
+.content__inner_footer {
+  border-bottom: 1px #E8E8E8 solid;
+  margin-bottom: 21px;
+}
+
 @media screen and (min-width: 720px) {
   .content__inner {
     margin-bottom: 70px;
@@ -35,6 +40,15 @@
   letter-spacing: -0.04em;
   padding: 0 0 28px;
   margin: 0;
+}
+
+.content__about_footer {
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height */
+  text-align: center;
+  color: #A0A0A0;
+  padding-bottom: 21px;
 }
 
 @media screen and (min-width: 720px) {
