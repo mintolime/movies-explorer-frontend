@@ -32,6 +32,7 @@
 .content__inner_footer {
   border-bottom: 1px #E8E8E8 solid;
   padding-bottom: 21px;
+  margin-bottom: 30px;
 }
 
 .content__about {
@@ -40,7 +41,7 @@
   font-size: 18px;
   line-height: 22px;
   letter-spacing: -0.04em;
-  padding: 0 14px 28px;
+  padding: 0 0 28px;
   margin: 0;
 }
 
@@ -50,7 +51,8 @@
   /* identical to box height */
   text-align: center;
   color: #A0A0A0;
-  padding-bottom: 21px;
+  padding: 0;
+  margin: 0;
 }
 
 @media screen and (min-width: 720px) {

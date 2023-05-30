@@ -58,4 +58,6 @@
   line-height: 15px;
   /* identical to box height */
   color: #a0a0a0;
+  padding: 0;
+  margin: 0;
 }

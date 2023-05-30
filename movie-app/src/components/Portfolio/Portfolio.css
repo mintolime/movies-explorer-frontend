@@ -1,3 +1,8 @@
+/* сброс верхнего отступа в миксе бэм блока */
+.portfolio {
+  padding-top: 0;
+}
+
 .portfolio__list {
   width: 100%;
   display: flex;
@@ -39,7 +44,7 @@
   line-height: 28px;
   /* identical to box height, or 156% */
   letter-spacing: -0.04em;
-  padding: 0;
+  padding: 0 0 19px;
   margin: 0;
 }
 
@@ -50,9 +55,10 @@
   }
 }
 
+/* по макету 18 х 28 возможно вместе с отступами */
 .portfolio__icon {
-  width: 18px;
-  height: 28px;
+  width: 13px;
+  height: 23px;
   object-fit: contain;
 }
 

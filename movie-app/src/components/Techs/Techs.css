@@ -27,7 +27,7 @@
   font-weight: 400;
   font-size: 11px;
   line-height: 16px;
-  padding: 26px 0 100px;
+  padding: 24px 0 50px;
   text-align: center;
   margin: 0;
 }
@@ -49,13 +49,14 @@
 }
 
 .techs__list {
-  width: 100%;
+  /* width: 100%; */
+  max-width: 200px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(84px, 90px));
   gap: 10px;
   justify-content: center;
   list-style: none;
-  padding: 0 0 70px;
+  padding: 0;
   margin: 0;
 }
 
