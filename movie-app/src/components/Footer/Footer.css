@@ -5,8 +5,10 @@
   background-color: #fff;
 }
 
+/* ПЕРЕПРОВЕРИТЬ */
 @media screen and (min-width: 720px) {
   .footer {
+    padding-top: 49px;
     padding-left: 30px;
     padding-right: 30px;
   }

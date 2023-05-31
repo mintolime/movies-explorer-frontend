@@ -40,6 +40,7 @@
 
 .portfolio__description {
   font-weight: 400;
+  min-height: 50px;
   font-size: 18px;
   line-height: 28px;
   /* identical to box height, or 156% */
@@ -63,7 +64,9 @@
 }
 
 @media screen and (min-width: 720px) {
-  .portfolio__description {
-    height: 60px;
+  .portfolio__icon  {
+   width: 17px;
+  height: 40px;
   }
 }
+

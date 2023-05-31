@@ -46,10 +46,12 @@
   letter-spacing: -0.04em;
   margin: 0;
   padding-top: 44px;
+  letter-spacing: inherit;
 }
 
 @media screen and (min-width: 720px) {
   .promo__title {
+    padding-top: 48px;
     /* max-width: 680px; */
     font-size: 40px;
     line-height: 50px;

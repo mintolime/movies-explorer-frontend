@@ -7,16 +7,21 @@
   box-sizing: border-box;
   background-color: #F3C1F8;
 }
-
+@media screen and (min-width: 720px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
 .header__nav-box {
   display: flex;
-  gap: 14px;
+  gap: 0 14px;
   max-height: 30px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 720px) {
   .header__nav-box {
-    gap: 30px;
+    gap: 0 30px;
   }
 }
 

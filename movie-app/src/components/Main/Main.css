@@ -28,6 +28,11 @@
   border-bottom: 1px #000 solid;
   margin-bottom: 60px;
 }
+@media screen and (min-width: 720px) {
+  .content__inner {
+    margin-bottom: 70px;
+  }
+}
 
 .content__inner_footer {
   border-bottom: 1px #E8E8E8 solid;
