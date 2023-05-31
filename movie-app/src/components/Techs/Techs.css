@@ -24,6 +24,12 @@
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .techs__title {
+    padding-top: 20px;
+  }
+}
+
 .techs__subtitle {
   font-weight: 400;
   font-size: 11px;
@@ -50,8 +56,10 @@
 
 @media screen and (min-width: 1024px) {
   .techs__subtitle {
+    font-size: 14px;
+    line-height: 20px;
     max-width: 460px;
-    padding: 22px 0 83px;
+    padding: 22px 0 100px;
   }
 }
 

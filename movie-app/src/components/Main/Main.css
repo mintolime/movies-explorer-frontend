@@ -40,6 +40,12 @@
   margin-bottom: 30px;
 }
 
+@media screen and (min-width: 720px) {
+  .content__inner_footer {
+    margin-bottom: 20px;
+  }
+}
+
 .content__about {
   color: #000;
   font-weight: 400;

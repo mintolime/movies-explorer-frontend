@@ -13,6 +13,13 @@
     padding-right: 30px;
   }
 }
+@media screen and (min-width: 1024px) {
+  .footer {
+    padding-top: 75px;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
 
 .footer__columns {
   display: flex;
@@ -34,8 +41,8 @@
   align-items: center;
   row-gap: 12px;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 13px;
+  line-height: 16px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -56,8 +63,8 @@
 
 .footer__copyright {
   font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 13px;
+  line-height: 16px;
   /* identical to box height */
   color: #a0a0a0;
   padding: 0;

@@ -7,10 +7,18 @@
   box-sizing: border-box;
   background-color: #F3C1F8;
 }
+
 @media screen and (min-width: 720px) {
   .header {
     padding-left: 30px;
     padding-right: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    padding-left: 70px;
+    padding-right: 70px;
   }
 }
 .header__nav-box {

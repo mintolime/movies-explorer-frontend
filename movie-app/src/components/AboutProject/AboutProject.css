@@ -18,6 +18,12 @@
   }
 }
 
+@media screen and (min-width: 720px) {
+  .about-project__list {
+    gap: 0 40px;
+  }
+}
+
 .about-project__title {
   font-weight: 400;
   font-size: 18px;
@@ -80,7 +86,8 @@
 
 @media screen and (min-width: 1024px) {
   .about_project__result {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 228px 1fr;
+    padding-top: 110px;
   }
 }
 
