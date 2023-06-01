@@ -1,0 +1,44 @@
+.not-found {
+  display: grid;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 40px;
+}
+
+/* ПОДУМАТЬ НАД РЕАЛИЗАЦИЕЙ */
+@media screen and (min-width: 720px) {
+  .not-found{
+     height: 70vh;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .not-found{
+     height: 90vh;
+  }
+}
+
+.not-found__inner {
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 1 / 2 / 2;
+  align-items: center;
+}
+
+.not-found__heading {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  padding: 0;
+  margin: 0;
+}
+
+.not-found__subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 0;
+  margin: 0;
+}
