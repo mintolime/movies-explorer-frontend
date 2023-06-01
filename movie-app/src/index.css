@@ -3,6 +3,7 @@
 
 .page {
   width: 100%;
+  height: 100vh;
   min-width: 320px;
   font-family: "Inter", sans-serif;
   text-rendering: optimizeLegibility;
@@ -75,8 +76,15 @@
   margin-bottom: 30px;
 }
 
+
 /* .logo_place_header {
   position: absolute;
   top: 30px;
   left: 64px;
 } */
+
+@media screen and (min-width: 720px) {
+  .logo_place_login {
+    display: block;
+  }
+}

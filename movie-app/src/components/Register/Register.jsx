@@ -17,45 +17,53 @@ function Register({ onRegister }) {
       linkText="Уже зарегистрированы? Войти"
       onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_login">
+
+        <label className="form__label">Имя</label>
           <input
-          className="form__input form__input_login"
-          value={values.name || ''}
-          onChange={handleChange}
-          name="name"
-          type="email"
-          aria-label="Ваше имя"
-          placeholder="Имя"
-          minLength="2"
-          maxLength="100"
-          required
-        />
+            className="form__input form__input_login"
+            value={values.name || ''}
+            onChange={handleChange}
+            name="name"
+            type="email"
+            aria-label="Ваше имя"
+            // placeholder="Имя"
+            minLength="2"
+            maxLength="100"
+            required
+          />
+
         <span className="form__input-error">{errors.name}</span>
-        <input
-          className="form__input form__input_login"
-          value={values.email || ''}
-          onChange={handleChange}
-          name="email"
-          type="email"
-          aria-label="Ваша почта"
-          placeholder="Email"
-          minLength="2"
-          maxLength="30"
-          required
-        />
+        <label className="form__label">Email</label>
+          <input
+            className="form__input form__input_login"
+            value={values.email || ''}
+            onChange={handleChange}
+            name="email"
+            type="email"
+            aria-label="Ваша почта"
+            // placeholder="Email"
+            minLength="2"
+            maxLength="30"
+            required
+          />
+
+
         <span className="form__input-error">{errors.email}</span>
-        <input
-          className="form__input form__input_login"
-          name="password"
-          type="password"
-          aria-label="Ваш пароль"
-          placeholder="Пароль"
-          value={values.password || ''}
-          minLength="8"
-          maxLength="30"
-          onChange={handleChange}
-          required
-        />
-        <span className="form__input-error"> {errors.password}</span>
+        <label className="form__label">Пароль</label>
+          <input
+            className="form__input form__input_login"
+            name="password"
+            type="password"
+            aria-label="Ваш пароль"
+            // placeholder="Пароль"
+            value={values.password || ''}
+            minLength="8"
+            maxLength="30"
+            onChange={handleChange}
+            required
+          />
+          <span className="form__input-error"> {errors.password}</span>
+
       </fieldset>
     </EntryForm>
   );

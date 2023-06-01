@@ -1,33 +1,72 @@
-.form {
+.entry-form {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 56px;
+  padding: 56px 0 30px;
 }
 
-.form__title {
+@media screen and (min-width: 720px) {
+  .entry-form {
+    padding-top: 232px;
+    padding-bottom: 232px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .entry-form {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+/* дочерний элемент компонентра EntryForm, включает в себя все импуты форм */
+.entry-form__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: start;
+  margin: 0;
+}
+
+.entry-form__title {
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  padding: 0 0 80px;
+  padding: 40px 0 80px;
   margin: 0;
   /* color: #fff; */
   color: #000;
 }
 
+@media screen and (min-width: 720px) {
+  .entry-form__title {
+    text-align: start;
+    padding-bottom: 40px;
+  }
+}
+
 /* контейнер с элементами формы, включая кнопку сабмит  */
-.form__container {
+.entry-form__container {
   width: 100%;
-  padding: 50px 30px 30px;
+  max-width: 260px;
+  /* padding: 50px 30px 30px; */
   box-sizing: border-box;
   text-align: center;
 }
 
-.form__auth-link {
+@media screen and (min-width: 720px) {
+  .entry-form__container {
+    max-width: 400px;
+  }
+}
+
+.entry-form__auth-link {
+  display: block;
+  /* text-align: center; */
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -45,7 +84,7 @@
   width: 100%;
   color: #fff;
   border-radius: 2px;
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
   padding: 15px 68px;
   transition: 0.3s ease;
   background-color: #000;

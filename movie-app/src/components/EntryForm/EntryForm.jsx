@@ -6,17 +6,17 @@ import logo from '../../images/logo-header.png';
 //поправить название
 function EntryForm({ title, children, btnText, linkText, onSubmit }) {
   return (
-    <section className="form" aria-label={title}>
-      <img className="logo logo_place_header " src={logo} alt="логотип шапки сайта" />
-      <div className="form__container">
-        <h3 className="form__title">{title}</h3>
-        <form name="form" className="form__box" onSubmit={onSubmit} >
+    <section className="entry-form" aria-label={title}>
+      <div className="entry-form__container">
+         <img className="logo logo_place_login " src={logo} alt="логотип шапки сайта" />
+        <h3 className="entry-form__title">{title}</h3>
+        <form name="form" className="entry-form__box" onSubmit={onSubmit} >
           {children}
         </form>
-        <button className="button button_type_entry" type="submit">
+        <button className="button button_type_entry button_type_entry_profile" type="submit">
           {btnText}
         </button>
-        <span className="form__auth-link">{linkText}</span>
+        <span className="entry-form__auth-link entry-form__profile-link">{linkText}</span>
       </div>
       {/* <Link to="/signin" className="form__auth-link">
         {linkText}
