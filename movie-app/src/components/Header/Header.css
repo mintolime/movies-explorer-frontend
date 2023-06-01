@@ -21,6 +21,11 @@
     padding-right: 70px;
   }
 }
+
+.header_login{
+ background: #fff;
+}
+
 .header__nav-box {
   display: flex;
   gap: 0 14px;

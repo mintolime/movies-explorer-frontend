@@ -8,7 +8,7 @@ function AboutMe() {
         <p className="content__about">Студент</p>
       </div>
       <article className="about-me_box">
-        <img className="about-me__image" src={portfolio} alt="Логотип веба в форме глобуса" />
+        <img className="about-me__image" src={portfolio} alt="персональная фотография" />
         <div className="about-me__brief">
           <h1 className="about-me__title">Евгения</h1>
           <p className="about-me__subtitle">Фронтенд-разработчица, 26 лет</p>
