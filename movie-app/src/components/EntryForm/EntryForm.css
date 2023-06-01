@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 60px 0 267px;
+  padding-top: 56px;
 }
 
 .form__title {
@@ -13,12 +13,13 @@
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  padding: 0;
+  padding: 0 0 80px;
   margin: 0;
   /* color: #fff; */
   color: #000;
 }
 
+/* контейнер с элементами формы, включая кнопку сабмит  */
 .form__container {
   width: 100%;
   padding: 50px 30px 30px;

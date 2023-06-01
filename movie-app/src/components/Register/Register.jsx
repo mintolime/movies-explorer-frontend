@@ -12,11 +12,24 @@ function Register({ onRegister }) {
   }
   return (
     <EntryForm
-      title="Регистрация"
+      title="Добро пожаловать!"
       btnText="Зарегистрироваться"
       linkText="Уже зарегистрированы? Войти"
       onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_login">
+          <input
+          className="form__input form__input_login"
+          value={values.name || ''}
+          onChange={handleChange}
+          name="name"
+          type="email"
+          aria-label="Ваше имя"
+          placeholder="Имя"
+          minLength="2"
+          maxLength="100"
+          required
+        />
+        <span className="form__input-error">{errors.name}</span>
         <input
           className="form__input form__input_login"
           value={values.email || ''}

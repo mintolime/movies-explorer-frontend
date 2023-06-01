@@ -10,13 +10,13 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
       <img className="logo logo_place_header " src={logo} alt="логотип шапки сайта" />
       <div className="form__container">
         <h3 className="form__title">{title}</h3>
-        <form name="form" className="form" onSubmit={onSubmit} >
+        <form name="form" className="form__box" onSubmit={onSubmit} >
           {children}
         </form>
-   <button className="button button_type_entry" type="submit">
-            {btnText}
-          </button>
-          <span className="form__auth-link">{linkText}</span>
+        <button className="button button_type_entry" type="submit">
+          {btnText}
+        </button>
+        <span className="form__auth-link">{linkText}</span>
       </div>
       {/* <Link to="/signin" className="form__auth-link">
         {linkText}

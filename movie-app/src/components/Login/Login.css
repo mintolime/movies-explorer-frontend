@@ -1,4 +1,5 @@
-.form {
+/* дочерний элемент компонентра EntryForm, включает в себя все импуты форм */
+.form__box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +28,7 @@
   padding: 0;
   margin: 0;
   border: 0;
+  text-align: start;
 }
 
 .form__input-error_active {
