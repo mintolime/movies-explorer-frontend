@@ -5,15 +5,17 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
+import Navigation from '../Navigation/Navigation.';
 
 function Main() {
   return (
     <main className="content">
-      <Promo />
-      <AboutProgect />
+      <Navigation />
+      {/* <Promo /> */}
+      {/* <AboutProgect /> */}
       <Techs />
-      <AboutMe />
-      <Portfolio />
+      {/* <AboutMe /> */}
+      {/* <Portfolio /> */}
       <Footer />
     </main>
   );
