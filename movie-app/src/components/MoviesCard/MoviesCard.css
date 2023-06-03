@@ -24,6 +24,12 @@
   margin: 0;
 }
 
+@media screen and (min-width: 720px) {
+  .movies__title {
+    font-size: 15px;
+  }
+}
+
 .movies__time {
   font-size: 10px;
   line-height: 18px;
