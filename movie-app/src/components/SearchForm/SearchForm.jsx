@@ -12,7 +12,7 @@ function SearchForm() {
         <input
           className="search-form__input"
           type="text"
-          placeholder='Фильмы'
+          placeholder='Фильм'
           value={values.movies || ''}
           onChange={handleChange}
           name="movies"
