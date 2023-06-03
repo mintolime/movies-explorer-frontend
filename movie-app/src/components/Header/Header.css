@@ -22,8 +22,8 @@
   }
 }
 
-.header_login{
- background: #fff;
+.header_white {
+  background: #fff;
 }
 
 .header__nav-box {
@@ -41,5 +41,4 @@
 .logo {
   height: 38px;
   width: 38px;
-  background-repeat: no-repeat;
 }
