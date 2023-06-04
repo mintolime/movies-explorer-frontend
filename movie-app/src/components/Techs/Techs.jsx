@@ -30,7 +30,6 @@ function Techs() {
         <li className="techs__item">
           <p className="techs__stek_text">mongoDB</p>
         </li>
-
       </ul>
     </section>
 

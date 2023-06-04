@@ -1,5 +1,7 @@
 import '../MoviesCard/MoviesCard.css'
 import { getTimeFromMins } from '../../utils/getTimeFromMins';
+import Button from '../Button/Button';
+
 function MoviesCard({ movie }) {
   // let time = movie.duration;
   // console.log(time)
@@ -14,16 +16,9 @@ function MoviesCard({ movie }) {
         src={movie.thumbnail}
         alt={movie.nameRU}
       />
-      {/* <div className="movies__inner"> */}
 
-      {/* <div className="movies__items"> */}
-      <button
-        className="button button_type_save"
-        type="button">Сохранить</button>
-
-      {/* </div> */}
-      {/* </div> */}
-      {/* <button className="button button_type_delete" /> */}
+      {/* <Button btnClass='button_type_save button_type_delete' btnType='button' /> */}
+      <Button btnClass='button_type_save button_type_save_active' btnType='button' />
     </li>
   );
 }

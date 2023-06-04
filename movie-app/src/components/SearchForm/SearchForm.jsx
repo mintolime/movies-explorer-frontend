@@ -1,7 +1,8 @@
 import '../SearchForm/SearchForm.css'
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import find from '../../images/icon-find.png';
+// import find from '../../images/icon-find.png';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import Button from '../Button/Button';
 function SearchForm() {
 
   const { values, handleChange } = useFormAndValidation();
@@ -20,7 +21,10 @@ function SearchForm() {
           name="movies"
           aria-label="Поиск фильмов">
         </input>
-        <button className="button button_type_search" type="submit"><img className="search-form__icon" src={find} alt="иконка поиска" /></button>
+        <Button btnClass='button_type_search' btnType='submit' />
+        {/* <button className="button button_type_search" type="submit">
+<img className="search-form__icon" src={find} alt="иконка поиска" />
+</button> */}
       </form>
 
       <FilterCheckbox />
