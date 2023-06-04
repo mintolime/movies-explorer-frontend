@@ -20,20 +20,20 @@
   border-radius: 3px;
 }
 
-.button_type_auth {
+/* .button_type_auth {
   color: #000;
   font-weight: 500;
   font-size: 10px;
   line-height: 16px;
-}
+} */
 
-@media screen and (min-width: 720px) {
+/* @media screen and (min-width: 720px) {
   .button_type_auth {
     font-size: 12px;
   }
-}
+} */
 
-.button_type_login {
+/* .button_type_login {
   color: #fff;
   background: #000;
   border-radius: 3px;
@@ -41,14 +41,14 @@
   font-weight: 500;
   font-size: 10px;
   line-height: 16px;
-}
+} */
 
-@media screen and (min-width: 720px) {
+/* @media screen and (min-width: 720px) {
   .button_type_login {
     padding: 8px 20px;
     font-size: 12px;
   }
-}
+} */
 
 .button_type_back {
   font-size: 12px;
@@ -83,10 +83,13 @@
 }
 
 .button_type_search {
-  display: block;
+  /* display: block; */
+  width: 36px;
+  height: 36px;
   /* margin-right: 20px; */
   /* для позиционирования кнопки в импуте поиска фильмов */
-  transform: translate(-30px, -5px);
+  transform: translate(-50px, -3px);
+  background: center/100% no-repeat url('../../images/icon-find.png');
 }
 
 .button_type_more {
@@ -100,4 +103,11 @@
   border: 1px #E8E8E8 solid;
   border-radius: 5px;
   margin: 50px 40px 0;
+}
+
+.button_type_profile-edit {
+  color: #000;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
 }

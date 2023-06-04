@@ -14,11 +14,12 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 function App() {
   return (
     <>
+    <Header/>
       <Routes>
-       <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
-         <Route path="/saved-movies" element={<SavedMovies />} />
-         <Route path="/profile" element={<Profile />} />
+        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
       </Routes>
