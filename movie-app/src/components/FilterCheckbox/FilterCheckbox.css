@@ -38,7 +38,10 @@
 .search-form__checkbox {
   height: 0;
   width: 0;
-  visibility: hidden;
+}
+
+.search-form__toogle:focus-within .search-form__label {
+  outline: 1px solid #797979;
 }
 
 .search-form__label {
@@ -92,4 +95,3 @@
 .search-form__label:active:after {
   width: 10px;
 }
-

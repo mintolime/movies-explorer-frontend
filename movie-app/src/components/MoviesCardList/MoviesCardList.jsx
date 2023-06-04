@@ -1,6 +1,7 @@
 import '../MoviesCardList/MoviesCardList.css'
 import { moviesData } from '../../utils/movies'
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Button from '../Button/Button';
 
 function MoviesCardList() {
   return (
@@ -13,6 +14,7 @@ function MoviesCardList() {
             />
           ))}
         </ul>
+        <Button btnClass='button_type_more' btnType='button' btnText='Ещё' />
       </section>
   );
 }
