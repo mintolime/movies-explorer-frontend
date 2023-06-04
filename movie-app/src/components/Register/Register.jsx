@@ -31,8 +31,8 @@ function Register({ onRegister }) {
             maxLength="100"
             required
           />
-
         <span className="form__input-error">{errors.name}</span>
+        
         <label className="form__label">Email</label>
           <input
             className="form__input form__input_login"
@@ -46,9 +46,8 @@ function Register({ onRegister }) {
             maxLength="30"
             required
           />
-
-
         <span className="form__input-error">{errors.email}</span>
+
         <label className="form__label">Пароль</label>
           <input
             className="form__input form__input_login"
