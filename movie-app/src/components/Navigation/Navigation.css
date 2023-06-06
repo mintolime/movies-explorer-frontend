@@ -1,4 +1,4 @@
-/* .navigation {
+.navigation {
   display: flex;
   position: fixed;
   bottom: 0;
@@ -7,17 +7,14 @@
   top: 0;
   height: 100%;
   width: 100%;
-  background: rgb(0, 0, 0, .5);
-  align-items: center;
-  justify-content: center;
-} */
+  align-items: start;
+  justify-content: end;
+}
 
 .navigation__menu {
-  display: block;
-  position: absolute;
-  top: 10px;
-  right: 0px;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -32,33 +29,28 @@
   color: tomato;
 }
 
-
 .navigation__checkbox {
   display: block;
   width: 40px;
   height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
+  position: relative;
+  top: 13px;
+  right: 13px;
   cursor: pointer;
   opacity: 0;
-  /* hide this */
   z-index: 2;
-  /* and place it over the hamburger */
   -webkit-touch-callout: none;
 }
 
-/*
- * Just a quick hamburger
- */
 .navigation__toogle {
   display: block;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  background: #cdcdcd;
-  border-radius: 3px;
+  top: -10px;
+  right: 15px;
+  background: #000;
   z-index: 1;
   transform-origin: 4px 0px;
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
@@ -74,68 +66,40 @@
   transform-origin: 0% 100%;
 }
 
-/*
- * Transform all the slices of hamburger
- * into a crossmark.
- */
 .navigation__checkbox:checked~span {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: #232323;
 }
 
-/*
- * But let's hide the middle one.
- */
 .navigation__checkbox:checked~span:nth-last-child(3) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
 .navigation__checkbox:checked~span:nth-last-child(2) {
   transform: rotate(-45deg) translate(0, -1px);
 }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
 .navigation__list {
-      max-width: 430px;
-  width: calc(100% - 44px);
+  width: 68vw;
+  height: 100vh;
+  max-width: 430px;
   min-height: 320px;
-  /* border-radius: 10px; */
-  box-sizing: border-box;
-  background: #FFFFFF;
-  padding: 25px 22px;
-  position: relative;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
-
-/* old */
-  /* position: absolute; */
-  /* position: relative; */
-  /* width: 300px; */
-  /* margin: -100px 0 0 -50px; */
-  /* padding: 25px 50px 50px; */
-  /* padding-top: 125px; */
-  background: #ededed;
-  /* background: #fff; */
-
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
   /* dont touch */
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
   transform-origin: 0% 0%;
   transform: none;
-
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-  margin: 0;
-  /* visibility:visible; */
   visibility: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .navigation__link-item {
@@ -143,11 +107,6 @@
   font-size: 22px;
 }
 
-/*
- * And let's slide it in from the left
- */
 .navigation__checkbox:checked~ul {
-  /* transform: none; */
-  transform: translate(-100%, 0);
   visibility: visible;
 }

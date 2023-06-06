@@ -6,6 +6,7 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation.';
+import Header from '../Header/Header';
 
 function Main() {
   return (
