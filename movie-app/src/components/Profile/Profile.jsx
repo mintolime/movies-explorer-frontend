@@ -1,0 +1,60 @@
+import { Link } from 'react-router-dom';
+
+import useFormAndValidation from '../../hooks/useFormAndValidation';
+import Button from '../Button/Button';
+import '../Profile/Profile.css';
+
+function Profile() {
+  const { values, handleChange, errors } = useFormAndValidation();
+
+  return (
+    <section className="profile">
+      <form className="profile__form">
+        <p className="profile__heading">{`Привет, друг !`}</p>
+        <fieldset className="profile__container">
+          <label className="profile__label">Имя</label>
+          <input
+            className="profile__input"
+            value={values.name || ''}
+            onChange={handleChange}
+            name="name"
+            type="email"
+            aria-label="Ваше имя"
+            // placeholder="Имя"
+            minLength="2"
+            maxLength="100"
+            required
+          />
+          <span className="profile__input-error">{errors.name}</span>
+        </fieldset>
+
+        <fieldset className="profile__container">
+          <label className="profile__label">Email</label>
+          <input
+            className="profile__input"
+            value={values.email || ''}
+            onChange={handleChange}
+            name="email"
+            type="email"
+            aria-label="Ваша почта"
+            // placeholder="Email"
+            minLength="2"
+            maxLength="30"
+            required
+          />
+          <span className="profile__input-error">{errors.email}</span>
+        </fieldset>
+      </form>
+
+      <div className="profile__button-box">
+        <Button btnClass="button_type_profile-edit" btnType="submit" btnText="Редактировать" />
+        <Link to="/" className="profile__link_logout">
+          Выйти из аккаунта
+        </Link>
+      </div>
+      
+    </section>
+  );
+}
+
+export default Profile;
