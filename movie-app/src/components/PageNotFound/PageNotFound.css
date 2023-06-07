@@ -1,55 +1,80 @@
 .not-found {
-  display: grid;
-  height: 100vh;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+   display: flex;
+  flex-direction: column;
   align-items: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 40px;
+  justify-content: center;
+  padding: 100px 0;
 }
 
 /* ПОДУМАТЬ НАД РЕАЛИЗАЦИЕЙ */
-@media screen and (min-width: 720px) {
-  .not-found{
-     height: 70vh;
+/* @media screen and (min-width: 720px) {
+  .not-found {
+    height: 70vh;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .not-found{
-     height: 90vh;
+  .not-found {
+    height: 90vh;
   }
-}
+} */
 
 .not-found__inner {
-  display: flex;
-  flex-direction: column;
-  grid-area: 1 / 1 / 2 / 2;
-  align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+min-height: 400px;
 }
 
 .not-found__heading {
   font-weight: 400;
-  font-size: 140px;
-  line-height: 169px;
-  padding: 0;
+  font-size: 80px;
+  line-height: 97px;
+  padding: 0 0 10px;
   margin: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .not-found__heading {
+    font-size: 140px;
+    line-height: 169px;
+  }
 }
 
 .not-found__subtitle {
   font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 12px;
+  line-height: 15px;
   padding: 0;
   margin: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .not-found__subtitle {
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 .not-found__link {
   text-decoration: none;
   cursor: pointer;
+  font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   /* identical to box height */
   text-align: center;
   color: #000;
   margin-bottom: 30px;
+}
+
+@media screen and (min-width: 720px) {
+  .not-found__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
