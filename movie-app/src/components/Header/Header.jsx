@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+import '../Header/Header.css';
 import Navigation from '../Navigation/Navigation';
 import { useResize } from '../../hooks/useResize';
 import logo from '../../images/logo-header.png';
-import '../Header/Header.css';
 import icon from '../../images/icon-profile.png';
 
 function Header() {
   const size = useResize();
-
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+ const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   return (
-    <header className="header header_white header_movie">
+    <header className={`header  ${location.pathname === '/'  ? 'header_pink' : ''}`}>
       <Link className="header__link" to="/">
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>
@@ -44,7 +45,6 @@ function Header() {
           </Link>
         </div>
       )}
-
     </header>
   );
 }

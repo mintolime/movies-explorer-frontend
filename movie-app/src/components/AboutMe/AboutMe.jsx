@@ -3,7 +3,7 @@ import '../AboutMe/AboutMe.css';
 
 function AboutMe() {
   return (
-    <section className='about-me content__box-white'>
+    <section className='about-me content__box-main'>
       <div className="content__inner">
         <p className="content__about">Студент</p>
       </div>

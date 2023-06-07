@@ -5,6 +5,7 @@
   align-items: center;
   padding: 70px 10px 30px;
   box-sizing: border-box;
+  background-color: #F3C1F8;
 }
 
 @media screen and (min-width: 720px) {

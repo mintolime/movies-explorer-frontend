@@ -1,23 +1,22 @@
 .content {
   display: grid;
-  background-color: #F3C1F8;
+  background-color: #fff;
   box-sizing: border-box;
 }
 
-.content__box-white {
-  background-color: #fff;
+.content__box-main {
   padding: 70px 15px;
   box-sizing: border-box;
 }
 
 @media screen and (min-width: 720px) {
-  .content__box-white {
+  .content__box-main {
     padding: 90px 50px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .content__box-white {
+  .content__box-main {
     padding: 110px 70px;
   }
 }
@@ -28,6 +27,7 @@
   border-bottom: 1px #000 solid;
   margin-bottom: 60px;
 }
+
 @media screen and (min-width: 720px) {
   .content__inner {
     margin-bottom: 70px;

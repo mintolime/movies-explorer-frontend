@@ -8,7 +8,8 @@
   grid-template-columns: 40px 1fr 1fr;
   padding: 18px 14px;
   box-sizing: border-box;
-  background-color: #F3C1F8;
+  /* background-color: #F3C1F8; */
+  background-color: #fff;
 }
 
 @media screen and (min-width: 720px) {
@@ -25,8 +26,8 @@
   }
 }
 
-.header_white {
-  background: #fff;
+.header_pink {
+  background-color: #F3C1F8;
 }
 
 .header__nav-box {

@@ -2,7 +2,7 @@ import '../Techs/Techs.css'
 
 function Techs() {
   return (
-    <section className='techs  content__box-white'>
+    <section className='techs  content__box-main'>
       <div className="content__inner">
         <p className='content__about'>Технологии</p>
       </div>

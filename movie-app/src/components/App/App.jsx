@@ -15,7 +15,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -25,7 +25,7 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 }

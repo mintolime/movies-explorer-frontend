@@ -2,7 +2,7 @@ import '../AboutProject/AboutProject.css';
 
 function AboutProgect() {
   return (
-    <article aria-label="компонент с описанием дипломного проекта" className="about-progect content__box-white">
+    <article aria-label="компонент с описанием дипломного проекта" className="about-progect content__box-main">
       <div className="content__inner">
         <p className='content__about'>О проекте</p>
       </div>
