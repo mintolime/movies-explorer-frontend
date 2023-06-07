@@ -50,14 +50,7 @@
   }
 } */
 
-.button_type_back {
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  /* text-align: center; */
-  color: #000;
-  margin-bottom: 30px;
-}
+
 
 .button_type_save {
   width: 100px;

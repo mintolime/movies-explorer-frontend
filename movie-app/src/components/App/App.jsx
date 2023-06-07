@@ -10,11 +10,12 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   return (
     <>
-    <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -22,6 +23,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

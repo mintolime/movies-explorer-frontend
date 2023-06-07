@@ -3,17 +3,18 @@ import { useLocation } from 'react-router-dom';
 
 import logo from '../../images/logo-header.png';
 import '../Header/Header.css';
+import Navigation from '../Navigation/Navigation';
 
 function Header() {
   const location = useLocation();
 
   return (
-    <header className="header">
-      <img className="header__logo " src={logo} alt="логотип шапки сайта" />
+    <header className="header header_white">
+      <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       <div className="header__nav-box">
         {/* <button className='button button_type_auth'>Регистрация</button>
         <button className='button button_type_login'>Войти</button> */}
-
+        {/*
         {location.pathname === '/' && (
           <>
             <Link to="/signup" className="header__link-auth">
@@ -23,8 +24,8 @@ function Header() {
               Войти
             </Link>
           </>
-        )}
-
+        )} */}
+        <Navigation />
       </div>
     </header>
   );
