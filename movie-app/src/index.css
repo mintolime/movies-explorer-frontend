@@ -14,3 +14,13 @@
   -moz-text-size-adjust: 100%;
   margin: 0;
 }
+
+/* подумать где можно оставить */
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+.page__icon-profile {
+  padding-left: 24px;
+}

@@ -38,6 +38,7 @@
 .search-form__checkbox {
   height: 0;
   width: 0;
+  visibility: hidden;
 }
 
 .search-form__toogle:focus-within .search-form__label {

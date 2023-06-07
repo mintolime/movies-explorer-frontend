@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import '../../../src/index.css';
@@ -25,6 +25,7 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <Footer/>
     </>
   );
 }

@@ -26,7 +26,6 @@ function SearchForm() {
 <img className="search-form__icon" src={find} alt="иконка поиска" />
 </button> */}
       </form>
-
       <FilterCheckbox />
     </section>
   );

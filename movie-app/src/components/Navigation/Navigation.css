@@ -25,10 +25,23 @@
   text-decoration: none;
   color: #232323;
   transition: color 0.3s ease;
+  opacity: 1;
+}
+
+.navigation__link-profile {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  align-self: center;
+  padding-top: 100%;
 }
 
 .navigation__link:hover {
-  color: tomato;
+  opacity: 0.7;
+}
+
+.navigation__link:active {
+  border-bottom: #000 2px solid;
 }
 
 .navigation__checkbox {
@@ -105,10 +118,13 @@
 }
 
 .navigation__link-item {
-  padding: 10px 0;
-  font-size: 22px;
+  padding: 0 0 24px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .navigation__checkbox:checked~ul {
   visibility: visible;
+  z-index: 2;
 }

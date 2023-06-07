@@ -8,8 +8,8 @@ import Portfolio from '../Portfolio/Portfolio';
 function Main() {
   return (
     <main className="content">
-      {/* <Promo /> */}
-      {/* <AboutProgect /> */}
+      <Promo />
+      <AboutProgect />
       <Techs />
       <AboutMe />
       <Portfolio />
