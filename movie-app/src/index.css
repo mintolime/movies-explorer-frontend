@@ -16,9 +16,13 @@
 }
 
 /* подумать где можно оставить */
-.link {
+.page__link {
   text-decoration: none;
   color: #000;
+  opacity: 1;
+}
+.page__link:hover {
+  opacity: .7;
 }
 
 .page__icon-profile {

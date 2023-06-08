@@ -1,11 +1,11 @@
 .search-form {
   width: 100%;
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
   row-gap: 41px;
   background-color: #fff;
   padding: 90px 14px 51px;
@@ -33,7 +33,6 @@
 }
 
 .search-form__input {
-  width: inherit;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
