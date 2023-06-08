@@ -52,13 +52,15 @@
 }
 
 /* отступы от формы */
-.form__inner_login {
-  padding: 0 0 267px;
+.form__inner_padding-bottom {
+  /* padding: 0 0 267px; */
+  padding-bottom: 70%;
 }
 
 @media screen and (min-width: 720px) {
-  .form__inner_login {
-    padding-bottom: 179px;
+  .form__inner_padding-bottom {
+    /* padding-bottom: 179px; */
+    padding-bottom: 25%;
   }
 }
 

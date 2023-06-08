@@ -16,7 +16,7 @@ function Register({ onRegister }) {
       btnText="Зарегистрироваться"
       linkText="Уже зарегистрированы? Войти"
       onSubmit={handleSubmit}>
-      <fieldset className="form__inner form__inner_login">
+      <fieldset className="form__inner form__inner_padding-bottom">
 
         <label className="form__label">Имя</label>
           <input

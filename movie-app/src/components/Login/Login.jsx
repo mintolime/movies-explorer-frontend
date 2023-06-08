@@ -13,14 +13,14 @@ function Login({ onAuthorization }) {
     }
     onAuthorization(values);
   }
-  
+
   return (
     <EntryForm
       title="Рады видеть!"
       btnText="Войти"
       linkText="Ещё не зарегистрированы? Регистрация"
       onSubmit={handleSubmit}>
-      <fieldset className="form__inner form__inner_login">
+      <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>
         <input
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
