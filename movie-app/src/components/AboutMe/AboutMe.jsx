@@ -18,7 +18,7 @@ function AboutMe() {
           Путь в разработке начался в середине 2022 г., за это время удалось усилить свои навыки во фронтенд-разработке.
           После окончания планирую также развиваться в этой области.
           </p>
-          <a className="about-me__link" href="#git" target="_blank" rel="noreferrer">
+          <a className="about-me__link" href="https://github.com/mintolime" target="_blank" rel="noreferrer">
             Github
           </a>
         </div>

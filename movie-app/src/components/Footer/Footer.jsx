@@ -16,7 +16,7 @@ function Footer() {
               </a>
             </li>
             <li className="footer__links-item">
-              <a href="#links" className="footer__link">
+              <a href="https://github.com/yandex-practicum" className="footer__link" target="_blank" rel="noreferrer">
                 Github
               </a>
             </li>
