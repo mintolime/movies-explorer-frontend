@@ -25,35 +25,20 @@
   border-radius: 3px;
 }
 
-/* .button_type_auth {
-  color: #000;
+.button_type_entry {
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 10px;
-  line-height: 16px;
-} */
-
-/* @media screen and (min-width: 720px) {
-  .button_type_auth {
-    font-size: 12px;
-  }
-} */
-
-/* .button_type_login {
+  font-size: 12px;
+  line-height: 15px;
+  width: 100%;
   color: #fff;
-  background: #000;
+  border-radius: 2px;
+  /* margin-bottom: 14px; */
+  padding: 15px 68px;
+  transition: 0.3s ease;
+  background-color: #000;
   border-radius: 3px;
-  padding: 5px 13px;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 16px;
-} */
-
-/* @media screen and (min-width: 720px) {
-  .button_type_login {
-    padding: 8px 20px;
-    font-size: 12px;
-  }
-} */
+}
 
 .button_type_save {
   width: 100px;

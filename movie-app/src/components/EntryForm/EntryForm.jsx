@@ -10,7 +10,7 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
     <section className="entry-form" aria-label={title}>
       <div className="entry-form__container">
        <Link className="entry-form__link" to="/">
-        <img className="logo logo_place_login " src={logo} alt="логотип шапки сайта" />
+        <img className="logo logo_place_login" src={logo} alt="логотип шапки сайта" />
       </Link>
         <h3 className="entry-form__title">{title}</h3>
         <form name="form" className="entry-form__box" onSubmit={onSubmit} >

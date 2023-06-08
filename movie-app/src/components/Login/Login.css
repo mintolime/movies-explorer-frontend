@@ -6,8 +6,6 @@
   color: #8B8B8B;
 }
 
-
-
 .form__input {
   display: block;
   /* font-weight: 400; */
@@ -17,10 +15,13 @@
   /* border-bottom: 1px solid rgba(0, 0, 0, .2); */
   color: #000;
   font-family: inherit;
-  padding-bottom: 13px;
-
+  padding-bottom: 10px;
   border-bottom: 1px solid #E8E8E8;
   font-weight: 500;
+}
+
+.form__input:focus {
+  outline: 1px solid #000;
 }
 
 .form__input-error {
@@ -29,7 +30,7 @@
   font-size: 10px;
   line-height: 12px;
   color: #FF4062;
-  min-height: 30px;
+  min-height: 24px;
   padding: 0;
   margin: 0;
   border: 0;
@@ -39,11 +40,6 @@
 .form__input-error_active {
   color: #FF4062;
 }
-
-/* .form__input_login {
-  border-bottom: 1px solid #E8E8E8;
-  font-weight: 500;
-} */
 
 .form__inner {
   padding: 0;
@@ -55,6 +51,19 @@
   width: 100%;
 }
 
+/* отступы от формы */
 .form__inner_login {
-  padding: 0 0 282px;
+  padding: 0 0 267px;
+}
+
+@media screen and (min-width: 720px) {
+  .form__inner_login {
+    padding-bottom: 179px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .logo_place_login {
+    display: block;
+  }
 }

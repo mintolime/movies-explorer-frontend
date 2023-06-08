@@ -36,7 +36,7 @@
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  padding: 40px 0 80px;
+  padding: 50px 0 80px;
   margin: 0;
   /* color: #fff; */
   color: #000;
@@ -46,6 +46,7 @@
   .entry-form__title {
     text-align: start;
     padding-bottom: 40px;
+    padding-top: 40px;
   }
 }
 
@@ -76,17 +77,4 @@
   padding-top: 15px;
 }
 
-.button_type_entry {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  width: 100%;
-  color: #fff;
-  border-radius: 2px;
-  /* margin-bottom: 14px; */
-  padding: 15px 68px;
-  transition: 0.3s ease;
-  background-color: #000;
-  border-radius: 3px;
-}
+

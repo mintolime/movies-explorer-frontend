@@ -54,6 +54,10 @@
   border: 0;
 }
 
+.profile__input:focus {
+  outline: 1px solid #000;
+}
+
 .profile__input-error {
   display: block;
   font-weight: 400;
