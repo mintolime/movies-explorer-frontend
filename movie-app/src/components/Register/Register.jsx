@@ -3,7 +3,7 @@ import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Register({ onRegister }) {
-  const { values, handleChange, errors } = useFormAndValidation();
+  const { values, handleChange,isValid, errors } = useFormAndValidation();
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -20,7 +20,7 @@ function Register({ onRegister }) {
 
         <label className="form__label">Имя</label>
           <input
-            className="form__input form__input_login"
+            className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
             value={values.name || ''}
             onChange={handleChange}
             name="name"
@@ -32,10 +32,10 @@ function Register({ onRegister }) {
             required
           />
         <span className="form__input-error">{errors.name}</span>
-        
+
         <label className="form__label">Email</label>
           <input
-            className="form__input form__input_login"
+           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
             value={values.email || ''}
             onChange={handleChange}
             name="email"

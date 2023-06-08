@@ -6,16 +6,21 @@
   color: #8B8B8B;
 }
 
+
+
 .form__input {
   display: block;
-  font-weight: 400;
+  /* font-weight: 400; */
   font-size: 14px;
   line-height: 17px;
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  /* border-bottom: 1px solid rgba(0, 0, 0, .2); */
   color: #000;
   font-family: inherit;
   padding-bottom: 13px;
+
+  border-bottom: 1px solid #E8E8E8;
+  font-weight: 500;
 }
 
 .form__input-error {
@@ -25,7 +30,6 @@
   line-height: 12px;
   color: #FF4062;
   min-height: 30px;
-  /* min-height: 45px; */
   padding: 0;
   margin: 0;
   border: 0;
@@ -34,16 +38,12 @@
 
 .form__input-error_active {
   color: #FF4062;
-  border-bottom: 1px #FF4062 solid;
 }
 
-.form__input_login {
-  /* background-color: black; */
-  /* color: white; */
-  color: #000;
+/* .form__input_login {
   border-bottom: 1px solid #E8E8E8;
   font-weight: 500;
-}
+} */
 
 .form__inner {
   padding: 0;

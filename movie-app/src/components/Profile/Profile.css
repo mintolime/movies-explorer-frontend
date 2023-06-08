@@ -54,6 +54,19 @@
   border: 0;
 }
 
+.profile__input-error {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF4062;
+  min-height: 30px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-align: center;
+}
+
 .profile__link_logout {
   font-weight: 500;
   font-size: 12px;

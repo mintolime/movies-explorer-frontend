@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import '../Profile/Profile.css';
 
 function Profile() {
-  const { values, handleChange, errors } = useFormAndValidation();
+  const { values, handleChange } = useFormAndValidation();
 
   return (
     <section className="profile">
@@ -25,7 +25,7 @@ function Profile() {
             maxLength="100"
             required
           />
-          <span className="profile__input-error">{errors.name}</span>
+          {/* <span className="profile__input-error">{errors.name}</span> */}
         </fieldset>
 
         <fieldset className="profile__container">
@@ -42,17 +42,18 @@ function Profile() {
             maxLength="30"
             required
           />
-          <span className="profile__input-error">{errors.email}</span>
+          {/* <span className="profile__input-error">{errors.email}</span> */}
         </fieldset>
       </form>
 
       <div className="profile__button-box">
-        <Button btnClass="button_type_profile-edit" btnType="submit" btnText="Редактировать" />
+        {/* <Button btnClass="button button_type_profile-edit" btnType="submit" btnText="Редактировать" />
         <Link to="/" className="profile__link_logout">
           Выйти из аккаунта
-        </Link>
+        </Link> */}
+         <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
+        <Button btnClass="button button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" />
       </div>
-      
     </section>
   );
 }
