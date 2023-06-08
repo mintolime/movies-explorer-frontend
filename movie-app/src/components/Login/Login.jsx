@@ -46,7 +46,6 @@ function Login({ onAuthorization }) {
             required
           />
         <span className="form__input-error"> {errors.password}</span>
-
       </fieldset>
     </EntryForm>
   );

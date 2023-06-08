@@ -1,8 +1,8 @@
-import '../Footer/Footer.css'
+import '../Footer/Footer.css';
 
 function Footer() {
   return (
-    <footer className='footer'>
+    <footer className="footer">
       <div className="content__inner content__inner_footer ">
         <p className="content__about_footer ">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       </div>
@@ -11,7 +11,7 @@ function Footer() {
         <nav className="footer__links">
           <ul className="footer__links-list">
             <li className="footer__links-item">
-              <a href="https://practicum.yandex.ru/" className="footer__link">
+              <a href="https://practicum.yandex.ru/" className="footer__link" target="_blank" rel="noreferrer">
                 Яндекс.Практикум
               </a>
             </li>

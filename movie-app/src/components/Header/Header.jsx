@@ -10,11 +10,11 @@ import icon from '../../images/icon-profile.png';
 
 function Header() {
   const size = useResize();
- const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
-    <header className={`header  ${location.pathname === '/'  ? 'header_pink' : ''}`}>
+    <header className={`header  ${location.pathname === '/' ? 'header_pink' : ''}`}>
       <Link className="header__link" to="/">
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>

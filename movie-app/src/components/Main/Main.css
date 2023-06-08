@@ -28,6 +28,10 @@
   margin-bottom: 60px;
 }
 
+.content__inner-gray {
+  background: #F5F5F5;
+}
+
 @media screen and (min-width: 720px) {
   .content__inner {
     margin-bottom: 70px;
