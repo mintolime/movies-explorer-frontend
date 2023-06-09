@@ -9,6 +9,14 @@
   width: 100%;
   align-items: start;
   justify-content: end;
+  z-index: 1;
+  background: rgba(0, 0, 0, .3);
+}
+
+.navigation_no-active {
+  z-index: 0;
+  background: none;
+  position: absolute;
 }
 
 .navigation__menu {
@@ -16,7 +24,6 @@
   flex-direction: column;
   align-items: end;
   text-align: center;
-  /* background-color: #fff; */
   -webkit-user-select: none;
   user-select: none;
 }
@@ -83,7 +90,7 @@
 
 .navigation__checkbox:checked~span {
   opacity: 1;
-  transform: rotate(45deg) translate(-1px, 1.5px);
+  transform: rotate(45deg) translate(-1px, 1px);
   background: #232323;
 }
 
@@ -105,7 +112,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   /* dont touch */
