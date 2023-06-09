@@ -88,14 +88,15 @@
 }
 
 .button_type_profile-edit {
-  color: #000;
+   color: #000;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
 }
 
 .button_type_profile-save {
-  background: #3456F3;
+  background-color: #000;
+  color: #fff;
   border-radius: 3px;
   padding: 14px 67px;
 }

@@ -18,7 +18,7 @@ function Login({ onAuthorization }) {
     <EntryForm
       title="Рады видеть!"
       btnText="Войти"
-      linkText="Ещё не зарегистрированы? Регистрация"
+      linkText="Регистрация"
       onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>

@@ -14,7 +14,7 @@ function Register({ onRegister }) {
     <EntryForm
       title="Добро пожаловать!"
       btnText="Зарегистрироваться"
-      linkText="Уже зарегистрированы?"
+      linkText="Войти"
       onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_padding-bottom">
 

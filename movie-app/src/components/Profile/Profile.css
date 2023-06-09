@@ -44,7 +44,7 @@
 }
 
 @media screen and (min-width: 720px) {
-  .profile__form {
+  .profile__container {
     grid-column-gap: 140px;
   }
 }
@@ -68,6 +68,9 @@
 
 .profile__input {
   border: 0;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: left;
 }
 
 .profile__input:focus {

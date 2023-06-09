@@ -9,10 +9,11 @@
   flex-direction: column;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 460px) {
   .about-me_box {
     flex-direction: row-reverse;
     justify-content: space-between;
+    gap: 5px;
   }
 }
 

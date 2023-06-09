@@ -66,6 +66,14 @@
 }
 
 .entry-form__auth-link {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  padding-left: 6px;
+  color: #000;
+}
+
+.entry-form__auth-text {
   display: block;
   /* text-align: center; */
   font-weight: 400;
@@ -75,6 +83,5 @@
   color: #A0A0A0;
   text-decoration: none;
   padding-top: 15px;
+  margin: 0;
 }
-
-

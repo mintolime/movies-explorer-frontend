@@ -20,7 +20,7 @@ function Profile() {
             name="name"
             type="email"
             aria-label="Ваше имя"
-            // placeholder="Имя"
+            placeholder="Имя"
             minLength="2"
             maxLength="100"
             required
@@ -37,7 +37,7 @@ function Profile() {
             name="email"
             type="email"
             aria-label="Ваша почта"
-            // placeholder="Email"
+            placeholder="Email"
             minLength="2"
             maxLength="30"
             required
@@ -47,12 +47,13 @@ function Profile() {
       </form>
 
       <div className="profile__button-box">
-        {/* <Button btnClass="button button_type_profile-edit" btnType="submit" btnText="Редактировать" />
+      <span className="profile__input-error"></span>
+        <Button btnClass="button button_type_profile-edit" btnType="submit" btnText="Редактировать" />
         <Link to="/" className="profile__link_logout">
           Выйти из аккаунта
-        </Link> */}
-         <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
-        <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" />
+        </Link>
+
+        {/* <Button btnClass="button_type_profile-save" btnType="submit" btnText="Сохранить" /> */}
       </div>
     </section>
   );
