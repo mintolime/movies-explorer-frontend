@@ -8,10 +8,10 @@ import logo from '../../images/logo-header.png';
 
 import HeaderNav from './HeaderNav';
 
-function Header({isLoggedIn}) {
+function Header() {
   const size = useResize();
   const location = useLocation();
-
+  
   return (
     <header className={`header  ${location.pathname === '/' ? 'header_pink' : ''}`}>
       <Link className="header__link" to="/">

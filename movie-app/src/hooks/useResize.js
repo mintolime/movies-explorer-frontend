@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   SCREEN_SM, SCREEN_MD, SCREEN_XL
-} from '../utils/screenResize';
+} from '../utils/constants';
 
 
 export const useResize = () => {

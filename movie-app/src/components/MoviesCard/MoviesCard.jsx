@@ -1,5 +1,5 @@
 import '../MoviesCard/MoviesCard.css';
-import { getTimeFromMins } from '../../utils/getTimeFromMins';
+import { getTimeFromMins } from '../../utils/functions';
 import Button from '../Button/Button';
 
 function MoviesCard({ movie }) {

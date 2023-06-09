@@ -4,7 +4,7 @@ import React from 'react'
 import icon from '../../images/icon-profile.png'
 
 function NavContent() {
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
     return (
         isLoggedIn ?
