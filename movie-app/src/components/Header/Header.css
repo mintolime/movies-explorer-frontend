@@ -5,17 +5,17 @@
   align-items: center;
   width: 100%;
   display: grid;
-  grid-template-columns: 40px 1fr 1fr;
   padding: 18px 14px;
   box-sizing: border-box;
-  /* background-color: #F3C1F8; */
+  grid-template-columns: 40px 1fr;
   background-color: #fff;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 768px) {
   .header {
     padding-left: 30px;
     padding-right: 30px;
+    grid-template-columns: 40px repeat(2, 1fr) ;
   }
 }
 

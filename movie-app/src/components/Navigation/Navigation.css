@@ -16,7 +16,7 @@
 .navigation_no-active {
   z-index: 0;
   background: none;
-  position: absolute;
+  position: relative;
 }
 
 .navigation__menu {
@@ -75,7 +75,7 @@
   background: #000;
   z-index: 1;
   transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+  transition: transform .8s cubic-bezier(0.77, 0.2, 0.05, 1.0),
     background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
     opacity 0.55s ease;
 }
@@ -115,6 +115,7 @@
   position: fixed;
   right: 0;
   top: 0;
+  bottom: 0;
   /* dont touch */
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
@@ -135,5 +136,6 @@
 
 .navigation__checkbox:checked~ul {
   visibility: visible;
-  background-color: #fff;
+  background: #fff;
+  transition: background .7s;
 }
