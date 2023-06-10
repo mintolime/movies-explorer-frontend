@@ -3,7 +3,7 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section className='about-me content__box-main' id='aboutme'>
+    <section className='about-me content__box-main' id='aboutme' aria-label="блок о студенте">
       <div className="content__inner">
         <p className="content__about">Студент</p>
       </div>

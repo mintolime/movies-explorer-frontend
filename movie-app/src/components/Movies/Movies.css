@@ -6,13 +6,13 @@
   padding: 40px 10px 30px;
 }
 
-/* @media screen and (min-width: 720px) {
+@media screen and (min-width: 770px) {
   .movies {
     width: calc(100% - 60px);
     padding: 70px 30px 30px;
   }
-} */
-/*
+}
+
 @media screen and (min-width: 1024px) {
   .movies {
     width: calc(100% - 140px);
@@ -21,4 +21,4 @@
     padding-right: 70px;
     padding-bottom: 10px;
   }
-} */
+}

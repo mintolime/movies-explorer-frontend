@@ -24,6 +24,12 @@
   opacity: .7;
 }
 
+.page__link:active {
+  border-bottom: #000 2px solid;
+}
+
 .page__icon-profile {
   padding-left: 24px;
 }
+
+

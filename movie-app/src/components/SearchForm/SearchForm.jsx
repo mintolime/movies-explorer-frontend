@@ -7,7 +7,7 @@ function SearchForm() {
 
   const { values, handleChange } = useFormAndValidation();
   return (
-    <section className="search-form">
+    <section className="search-form" aria-label="форма поиска фильмов">
 
       <form
         className="search-form__inner"
