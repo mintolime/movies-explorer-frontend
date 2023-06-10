@@ -13,6 +13,7 @@
     padding-right: 30px;
   }
 }
+
 @media screen and (min-width: 1024px) {
   .footer {
     padding-top: 75px;

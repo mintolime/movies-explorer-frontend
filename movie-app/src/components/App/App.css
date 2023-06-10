@@ -20,6 +20,7 @@
   color: #000;
   opacity: 1;
 }
+
 .page__link:hover {
   opacity: .7;
 }
@@ -31,5 +32,3 @@
 .page__icon-profile {
   padding-left: 24px;
 }
-
-

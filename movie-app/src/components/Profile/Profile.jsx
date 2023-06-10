@@ -51,7 +51,7 @@ function Profile() {
         <Link to="/" className="profile__link_logout">
           Выйти из аккаунта
         </Link> */}
-         <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
+        <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
         <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" />
       </div>
     </section>
