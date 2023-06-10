@@ -16,15 +16,6 @@
   opacity: .8;
 }
 
-.button_type_about {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  opacity: 0.6;
-  border: 1px solid #000000;
-  border-radius: 3px;
-}
-
 .button_type_entry {
   font-family: 'Inter', sans-serif;
   font-weight: 500;

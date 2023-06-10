@@ -117,13 +117,11 @@
 }
 
 .promo__link {
-  text-decoration: none;
+  padding: 10px 20px;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  /* identical to box height, or 133% */
-  display: flex;
-  align-items: center;
-  color: #000;
-  padding: 10px 20px;
+  opacity: 0.6;
+  border: 1px solid #000000;
+  border-radius: 3px;
 }

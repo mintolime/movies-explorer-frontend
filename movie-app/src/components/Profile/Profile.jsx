@@ -48,13 +48,13 @@ function Profile() {
 
       <div className="profile__button-box">
       <span className="profile__input-error"></span>
-        <Button btnClass="button button_type_profile-edit" btnType="submit" btnText="Редактировать" />
-        <Link to="/" className="profile__link_logout">
+        <Button btnClass="button button_type_profile-edit" btnType="button" btnText="Редактировать" />
+        <Link to="/" className="profile__link_logout page__link">
           Выйти из аккаунта
         </Link>
         {/* <Button btnClass="button_type_profile-save" btnType="submit" btnText="Сохранить" /> */}
-        <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
-        <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" />
+        {/* <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
+        <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
       </div>
     </section>
   );
