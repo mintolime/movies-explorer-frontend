@@ -49,14 +49,12 @@
   }
 }
 
-
 .profile__label {
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
   text-align: left;
 }
-
 
 .profile__heading {
   font-weight: 500;
@@ -104,4 +102,16 @@
   flex-direction: column;
   padding-top: 110%;
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 420px) {
+  .profile__button-box {
+     padding-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__button-box {
+     padding-top: 20%;
+  }
 }

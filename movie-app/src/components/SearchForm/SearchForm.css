@@ -3,9 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr); */
   row-gap: 41px;
   background-color: #fff;
   padding: 90px 14px 51px;
@@ -40,6 +37,14 @@
   border: 0;
   border-bottom: 1px #E8E8E8 solid;
   padding-bottom: 15px;
+}
+
+@media screen and (min-width: 720px) {
+  .search-form__input {
+     width: 90vw;
+    font-size: 28px;
+    line-height: 34px;
+  }
 }
 
 .search-form__icon {

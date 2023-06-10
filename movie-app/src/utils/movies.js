@@ -47,28 +47,28 @@ export const moviesData = [
     duration: 80,
     thumbnail: "https://i.ibb.co/m8rVmm1/pic-COLOR-pic-6.jpg"
   },
-  {
-    movieId: 9,
-    nameRU: "Дженис: Маленькая девочка грустит",
-    duration: 80,
-    thumbnail: "https://i.ibb.co/yNysSV1/pic-COLOR-pic-10.jpg"
-  },
-  {
-    movieId: 10,
-    nameRU: "Соберись перед прыжком",
-    duration: 80,
-    thumbnail: "https://i.ibb.co/QQFMRrZ/pic-COLOR-pic-3.jpg"
-  },
-  {
-    movieId: 11,
-    nameRU: "Пи Джей Харви: A dog called money",
-    duration: 80,
-    thumbnail: "https://i.ibb.co/rm0cGVc/pic-COLOR-pic-7.jpg"
-  },
-  {
-    movieId: 12,
-    nameRU: "По волнам: Искусство звука в кино",
-    duration: 80,
-    thumbnail: "https://i.ibb.co/GQG1YJ9/pic-COLOR-pic-11.jpg"
-  }
+  // {
+  //   movieId: 9,
+  //   nameRU: "Дженис: Маленькая девочка грустит",
+  //   duration: 80,
+  //   thumbnail: "https://i.ibb.co/yNysSV1/pic-COLOR-pic-10.jpg"
+  // },
+  // {
+  //   movieId: 10,
+  //   nameRU: "Соберись перед прыжком",
+  //   duration: 80,
+  //   thumbnail: "https://i.ibb.co/QQFMRrZ/pic-COLOR-pic-3.jpg"
+  // },
+  // {
+  //   movieId: 11,
+  //   nameRU: "Пи Джей Харви: A dog called money",
+  //   duration: 80,
+  //   thumbnail: "https://i.ibb.co/rm0cGVc/pic-COLOR-pic-7.jpg"
+  // },
+  // {
+  //   movieId: 12,
+  //   nameRU: "По волнам: Искусство звука в кино",
+  //   duration: 80,
+  //   thumbnail: "https://i.ibb.co/GQG1YJ9/pic-COLOR-pic-11.jpg"
+  // }
 ];
