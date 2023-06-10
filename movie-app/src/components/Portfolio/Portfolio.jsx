@@ -1,4 +1,4 @@
-import icon from '../../images/icon-link.png'
+import icon from '../../images/icon-link.svg'
 import '../Portfolio/Portfolio.css'
 
 function Portfolio() {

@@ -1,4 +1,4 @@
-import '../Register/Register.css'
+// import '../Register/Register.css'
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 

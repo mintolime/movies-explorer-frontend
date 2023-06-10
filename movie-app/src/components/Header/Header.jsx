@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../Header/Header.css';
 import Navigation from '../Navigation/Navigation';
 import { useResize } from '../../hooks/useResize';
-import logo from '../../images/logo-header.png';
+import logo from '../../images/logo-header.svg';
 
 import HeaderNav from './HeaderNav';
 

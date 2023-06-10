@@ -57,11 +57,11 @@
 }
 
 .button_type_save_active {
-  background: center no-repeat #FF4062 url('../../images/icon-done.png');
+  background: center no-repeat #FF4062 url('../../images/icon-done.svg');
 }
 
 .button_type_delete {
-  background: center no-repeat #F9F9F9 url('../../images/icon-delete.png');
+  background: center no-repeat #F9F9F9 url('../../images/icon-delete.svg');
 }
 
 .button_type_search {
@@ -71,7 +71,7 @@
   /* margin-right: 20px; */
   /* для позиционирования кнопки в импуте поиска фильмов */
   transform: translate(-33px, -9px);
-  background: center/100% no-repeat url('../../images/icon-find.png');
+  background: center/100% no-repeat url('../../images/icon-find.svg');
 }
 
 .button_type_more {

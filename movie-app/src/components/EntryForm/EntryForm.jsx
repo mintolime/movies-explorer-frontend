@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import '../EntryForm/EntryForm.css';
-import logo from '../../images/logo-header.png';
+import logo from '../../images/logo-header.svg';
 import Button from '../Button/Button';
 
 //поправить название

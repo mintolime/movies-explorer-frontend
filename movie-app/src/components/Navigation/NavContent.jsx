@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react'
 
-import icon from '../../images/icon-profile.png'
+import icon from '../../images/icon-profile.svg'
 
 function NavContent() {
     const [isLoggedIn, setIsLoggedIn] = React.useState(true);

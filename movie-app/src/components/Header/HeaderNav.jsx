@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import icon from '../../images/icon-profile.png';
+import icon from '../../images/icon-profile.svg';
 
 function HeaderNav() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-import icon from '../../images/icon-profile.png';
+import icon from '../../images/icon-profile.svg';
 import '../Navigation/Navigation.css';
 import NavContent from './NavContent';
 

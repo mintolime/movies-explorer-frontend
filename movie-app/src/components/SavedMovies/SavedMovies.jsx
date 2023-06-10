@@ -1,4 +1,4 @@
-import '../SavedMovies/SavedMovies.css'
+// import '../SavedMovies/SavedMovies.css'
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { moviesData } from '../../utils/movies'
