@@ -9,5 +9,3 @@ function Button({ btnClass, btnType, btnText }) {
 }
 
 export default Button;
-
-// button_type_save button_type_delete

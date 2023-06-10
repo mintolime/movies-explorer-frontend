@@ -76,7 +76,7 @@
   margin: 0;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 765px) {
   .techs__list {
     max-width: 670px;
   }
@@ -88,13 +88,6 @@
   background: #E8E8E8;
   border-radius: 10px;
   text-align: center;
-}
-
-@media screen and (min-width: 720px) {
-  .techs__list {
-    /* width: 84px;
-  height: 57px; */
-  }
 }
 
 .techs__stek_text {

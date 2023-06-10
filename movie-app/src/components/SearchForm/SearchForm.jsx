@@ -22,9 +22,6 @@ function SearchForm() {
           aria-label="Поиск фильмов">
         </input>
         <Button btnClass='button_type_search' btnType='submit' />
-        {/* <button className="button button_type_search" type="submit">
-<img className="search-form__icon" src={find} alt="иконка поиска" />
-</button> */}
       </form>
       <FilterCheckbox />
     </section>

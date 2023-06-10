@@ -3,8 +3,7 @@ import { getTimeFromMins } from '../../utils/functions';
 import Button from '../Button/Button';
 
 function MoviesCard({ movie }) {
-  // let time = movie.duration;
-  // console.log(time)
+
   return (
     <li className="movies__item">
       <div className="movies__heading">

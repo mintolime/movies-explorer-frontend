@@ -1,5 +1,5 @@
 import portfolio from '../../images/portfolio.jpg';
-import '../AboutMe/AboutMe.css';
+import './AboutMe.css';
 
 function AboutMe() {
   return (
@@ -7,7 +7,7 @@ function AboutMe() {
       <div className="content__inner">
         <p className="content__about">Студент</p>
       </div>
-      <article className="about-me_box">
+      <article className="about-me__box">
         <img className="about-me__image" src={portfolio} alt="персональная фотография" />
         <div className="about-me__brief">
           <h1 className="about-me__title">Евгения</h1>

@@ -1,4 +1,4 @@
-.about-progect {
+.about-project {
   width: 100%;
 }
 
@@ -63,7 +63,7 @@
   }
 }
 
-.about_project__result {
+.about-project__result {
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 35px 13px;
@@ -75,7 +75,7 @@
 }
 
 @media screen and (min-width: 720px) {
-  .about_project__result {
+  .about-project__result {
     font-size: 14px;
     line-height: 17px;
     grid-template-columns: 140px 1fr;
@@ -85,7 +85,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .about_project__result {
+  .about-project__result {
     grid-template-columns: 228px 1fr;
     padding-top: 110px;
   }

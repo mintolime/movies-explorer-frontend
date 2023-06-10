@@ -1,8 +1,8 @@
-import '../AboutProject/AboutProject.css';
+import './AboutProject.css';
 
 function AboutProgect() {
   return (
-    <article aria-label="компонент с описанием дипломного проекта" className="about-progect content__box-main">
+    <article aria-label="компонент с описанием дипломного проекта" className="about-project content__box-main">
       <div className="content__inner">
         <p className='content__about'>О проекте</p>
       </div>
@@ -21,11 +21,11 @@ function AboutProgect() {
           </p>
         </li>
       </ul>
-      <div className="about_project__result">
-       <p className="about-project__week about-project__week_black">1 неделя</p>
-       <p className="about-project__week">4 недели</p>
-          <p className="about-project__web">Back-end</p>
-          <p className="about-project__web">Front-end</p>
+      <div className="about-project__result">
+        <p className="about-project__week about-project__week_black">1 неделя</p>
+        <p className="about-project__week">4 недели</p>
+        <p className="about-project__web">Back-end</p>
+        <p className="about-project__web">Front-end</p>
       </div>
     </article>
   );

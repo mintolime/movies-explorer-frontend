@@ -7,8 +7,7 @@ import Button from '../Button/Button';
 
 //поправить название
 function EntryForm({ title, children, btnText, linkText, onSubmit }) {
-  // const [isRegister,setIsRegister] = React.useState(true)
-  const location = useLocation;
+  const location = useLocation();
 
   return (
     <section className="entry-form" aria-label={title}>

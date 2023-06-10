@@ -7,7 +7,7 @@ function SavedMovies() {
   return (
     <>
       <MoviesCardList />
-       <MoviesCard movie={moviesData}/>
+       {/* <MoviesCard movie={moviesData}/> */}
     </>
   );
 }

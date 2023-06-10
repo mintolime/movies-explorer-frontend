@@ -8,19 +8,6 @@
   padding: 100px 0;
 }
 
-/* ПОДУМАТЬ НАД РЕАЛИЗАЦИЕЙ */
-/* @media screen and (min-width: 720px) {
-  .not-found {
-    height: 70vh;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .not-found {
-    height: 90vh;
-  }
-} */
-
 .not-found__inner {
 display: flex;
 flex-direction: column;
