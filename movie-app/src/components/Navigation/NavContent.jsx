@@ -9,10 +9,10 @@ function NavContent() {
     return (
         isLoggedIn ?
             <>
-                <Link to="/" className='navigation__link navigation__link-item'>Главная</Link>
-                <Link to="/movies" className='navigation__link navigation__link-item'>Фильмы</Link>
-                <Link to="/saved-movies" className='navigation__link navigation__link-item'>Сохранённые фильмы</Link>
-                <Link to="/profile" className='navigation__link navigation__link-profile'>Аккаунт <img src={icon} alt="иконка профиля" /></Link>
+                <Link to="/" className='navigation__link navigation__link-item page__link'>Главная</Link>
+                <Link to="/movies" className='navigation__link navigation__link-item page__link'>Фильмы</Link>
+                <Link to="/saved-movies" className='navigation__link navigation__link-item page__link'>Сохранённые фильмы</Link>
+                <Link to="/profile" className='navigation__link navigation__link-profile page__link'>Аккаунт <img src={icon} alt="иконка профиля" /></Link>
             </>
             :
             <>

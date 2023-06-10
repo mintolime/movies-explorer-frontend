@@ -4,16 +4,17 @@
   }
 }
 
-.about-me_box {
+.about-me__box {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-@media screen and (min-width: 460px) {
-  .about-me_box {
+@media screen and (min-width: 720px) {
+  .about-me__box {
     flex-direction: row-reverse;
     justify-content: space-between;
-    gap: 5px;
+    align-items: start;
   }
 }
 

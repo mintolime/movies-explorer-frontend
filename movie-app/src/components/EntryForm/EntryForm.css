@@ -22,7 +22,7 @@
   }
 }
 
-/* дочерний элемент компонентра EntryForm, включает в себя все импуты форм */
+/* дочерний элемент компонента EntryForm, включает в себя все импуты форм */
 .entry-form__box {
   display: flex;
   flex-direction: column;
@@ -85,3 +85,4 @@
   padding-top: 15px;
   margin: 0;
 }
+

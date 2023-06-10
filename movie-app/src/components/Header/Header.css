@@ -16,7 +16,7 @@
   .header {
     padding-left: 30px;
     padding-right: 30px;
-    grid-template-columns: 40px repeat(2, 1fr) ;
+    grid-template-columns: 40px repeat(2, 1fr);
   }
 }
 
@@ -52,7 +52,6 @@
   width: 38px;
 }
 
-
 .header__link-login {
   color: #fff;
   background: #000;
@@ -78,7 +77,6 @@
   line-height: 16px;
   text-decoration: none;
 }
-
 
 @media screen and (min-width: 720px) {
   .header__link-auth {

@@ -7,7 +7,7 @@ function SearchForm() {
 
   const { values, handleChange } = useFormAndValidation();
   return (
-    <section className="search-form">
+    <section className="search-form" aria-label="форма поиска фильмов">
 
       <form
         className="search-form__inner"
@@ -22,9 +22,6 @@ function SearchForm() {
           aria-label="Поиск фильмов">
         </input>
         <Button btnClass='button_type_search' btnType='submit' />
-        {/* <button className="button button_type_search" type="submit">
-<img className="search-form__icon" src={find} alt="иконка поиска" />
-</button> */}
       </form>
       <FilterCheckbox />
     </section>

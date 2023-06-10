@@ -6,7 +6,7 @@
   padding: 70px 10px 40px;
   text-align: center;
   box-sizing: border-box;
-  justify-content: center;
+  justify-content: start;
 }
 
 .profile__form {
@@ -62,7 +62,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  padding: 70px 0 80px;
+  padding: 0 0 80px;
   margin: 0;
 }
 
@@ -102,6 +102,6 @@
 .profile__button-box {
   display: flex;
   flex-direction: column;
-  padding-top: 30%;
+  padding-top: 110%;
   box-sizing: border-box;
 }

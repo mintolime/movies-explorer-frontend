@@ -1,1 +1,34 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/fonts/fonts.css');
 
+.page {
+  width: 100%;
+  height: 100vh;
+  min-width: 320px;
+  font-family: "Inter", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  margin: 0;
+}
+
+.page__link {
+  text-decoration: none;
+  color: #000;
+  opacity: 1;
+}
+
+.page__link:hover {
+  opacity: .7;
+}
+
+.page__link:active {
+  border-bottom: #000 2px solid;
+}
+
+.page__icon-profile {
+  padding-left: 24px;
+}

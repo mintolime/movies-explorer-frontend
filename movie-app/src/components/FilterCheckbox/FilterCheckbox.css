@@ -40,11 +40,12 @@
 .search-form__checkbox {
   height: 0;
   width: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .search-form__toogle:focus-within .search-form__label {
-  outline: 1px solid #797979;
+  outline: none;
+  box-shadow: 0 0 0 3px lightskyblue;
 }
 
 .search-form__label {

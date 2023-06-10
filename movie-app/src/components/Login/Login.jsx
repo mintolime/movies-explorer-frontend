@@ -3,7 +3,7 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import '../Login/Login.css';
 
 function Login({ onAuthorization }) {
-  const { values, handleChange, resetForm, isValid, errors } = useFormAndValidation();
+  const { values, handleChange, isValid, errors } = useFormAndValidation();
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -37,7 +37,6 @@ function Login({ onAuthorization }) {
 
         <label className="form__label form__label_profile">Пароль </label>
         <input
-          // className="form__input form__input-error_active"
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
           name="password"
           type="password"

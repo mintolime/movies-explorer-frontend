@@ -76,7 +76,7 @@
   margin: 0;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 765px) {
   .techs__list {
     max-width: 670px;
   }
@@ -90,14 +90,7 @@
   text-align: center;
 }
 
-@media screen and (min-width: 720px) {
-  .techs__list {
-    /* width: 84px;
-  height: 57px; */
-  }
-}
-
-.techs__stek_text {
+.techs__item-text {
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;

@@ -11,7 +11,7 @@ import HeaderNav from './HeaderNav';
 function Header() {
   const size = useResize();
   const location = useLocation();
-  
+
   return (
     <header className={`header  ${location.pathname === '/' ? 'header_pink' : ''}`}>
       <Link className="header__link" to="/">
