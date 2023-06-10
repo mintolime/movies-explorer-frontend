@@ -26,6 +26,7 @@ function Register({ onRegister }) {
           name="name"
           type="text"
           aria-label="Ваше имя"
+          placeholder='Ваше имя'
           minLength="2"
           maxLength="100"
           required
@@ -40,6 +41,7 @@ function Register({ onRegister }) {
           name="email"
           type="email"
           aria-label="Ваша почта"
+          placeholder='Ваша почта'
           minLength="2"
           maxLength="30"
           required
@@ -52,6 +54,7 @@ function Register({ onRegister }) {
           name="password"
           type="password"
           aria-label="Ваш пароль"
+          placeholder='Ваш пароль'
           value={values.password || ''}
           minLength="8"
           maxLength="30"

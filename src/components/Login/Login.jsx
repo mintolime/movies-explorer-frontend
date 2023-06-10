@@ -29,6 +29,7 @@ function Login({ onAuthorization }) {
           name="email"
           type="email"
           aria-label="Ваша почта"
+          placeholder='Введите почту'
           minLength="2"
           maxLength="30"
           required
@@ -41,6 +42,7 @@ function Login({ onAuthorization }) {
           name="password"
           type="password"
           aria-label="Ваш пароль"
+          placeholder='Ваш пароль'
           value={values.password || ''}
           minLength="8"
           maxLength="30"
