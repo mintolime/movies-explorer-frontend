@@ -3,9 +3,9 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section className="about-me content__box-main" id="aboutme" aria-label="блок о студенте">
-      <div className="content__inner">
-        <p className="content__about">Студент</p>
+    <section className="about-me page__box-main" id="aboutme" aria-label="блок о студенте">
+      <div className="page__inner">
+        <p className="page__about">Студент</p>
       </div>
       <article className="about-me__box">
         <img className="about-me__image" src={portfolio} alt="персональная фотография" />

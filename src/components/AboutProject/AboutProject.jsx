@@ -4,9 +4,9 @@ function AboutProgect() {
   return (
     <article
       aria-label="компонент с описанием дипломного проекта"
-      className="about-project content__box-main">
-      <div className="content__inner">
-        <p className="content__about">О проекте</p>
+      className="about-project page__box-main">
+      <div className="page__inner">
+        <p className="page__about">О проекте</p>
       </div>
       <ul className="about-project__list">
         <li className="about-project__item">

@@ -3,8 +3,8 @@ import '../Footer/Footer.css';
 function Footer() {
   return (
     <footer className="footer">
-      <div className="content__inner content__inner_footer ">
-        <p className="content__about_footer ">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <div className="page__inner page__inner_footer ">
+        <p className="page__footer page__footer_description">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       </div>
 
       <div className="footer__columns">

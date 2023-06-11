@@ -2,9 +2,9 @@ import '../Techs/Techs.css';
 
 function Techs() {
   return (
-    <section className="techs  content__box-main">
-      <div className="content__inner content__inner-gray">
-        <p className="content__about">Технологии</p>
+    <section className="techs  page__box-main">
+      <div className="page__inner page__inner-gray">
+        <p className="page__about">Технологии</p>
       </div>
       <h2 className="techs__title">7 технологий</h2>
       <p className="techs__subtitle">
