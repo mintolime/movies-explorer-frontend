@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import icon from '../../images/icon-profile.svg';
 
 function HeaderNav() {
+  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   return isLoggedIn ? (
@@ -15,8 +16,15 @@ function HeaderNav() {
           Сохранённые фильмы
         </Link>
       </div>
-      <Link to="/profile" className="header__link-profile page__link">
-        Аккаунт <img className="page__icon-profile" src={icon} alt="иконка профиля" />
+      <Link to="/profile" className="page__link-profile page__link">
+        <p className="header__link-text">Аккаунт</p>
+        <img
+          className={`page__icon-profile  ${
+            location.pathname === '/' ? 'page__icon-profile-pink' : ''
+          }`}
+          src={icon}
+          alt="иконка профиля"
+        />
       </Link>
     </>
   ) : (

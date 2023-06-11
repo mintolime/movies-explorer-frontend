@@ -99,8 +99,8 @@
   gap: 0 16px;
 }
 
-.header__link-profile {
-  text-decoration: none;
-  color: #000;
-  justify-self: end;
+.header__link-text {
+  text-align: center;
+  padding: 0;
+  margin: 0;
 }

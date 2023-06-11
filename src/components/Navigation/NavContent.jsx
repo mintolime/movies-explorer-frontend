@@ -17,8 +17,9 @@ function NavContent() {
       <Link to="/saved-movies" className="navigation__link navigation__link-item page__link">
         Сохранённые фильмы
       </Link>
-      <Link to="/profile" className="navigation__link navigation__link-profile page__link">
-        Аккаунт <img src={icon} alt="иконка профиля" />
+      <Link to="/profile" className="navigation__link navigation__link-profile page__link page__link-profile">
+        <p>Аккаунт</p>
+        <img src={icon} className="page__icon-profile" alt="иконка профиля" />
       </Link>
     </>
   ) : (

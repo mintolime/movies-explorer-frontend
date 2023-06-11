@@ -31,10 +31,21 @@
 }
 
 .page__icon-profile {
-  padding-left: 24px;
+  padding: 8px;
   background: #F5F5F5;
   border-radius: 4px;
-  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.page__icon-profile-pink {
+  background: #f2abf9;
+}
+
+.page__link-profile {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  justify-self: end;
 }
 
 /*миксы для блоков контента*/
