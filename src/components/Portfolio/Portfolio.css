@@ -32,9 +32,9 @@
 }
 
 .portfolio__item {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   border-bottom: 1px #E6E6E6 solid;
 }
 
@@ -69,4 +69,11 @@
     width: 17px;
     height: 40px;
   }
+}
+
+.portfolio__link {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }

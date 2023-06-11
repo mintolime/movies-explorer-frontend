@@ -18,9 +18,7 @@ function Header() {
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>
 
-      {size.isScreenMd ? (
-        <Navigation />
-      ) : <HeaderNav />}
+      {size.isScreenMd ? <Navigation /> : <HeaderNav />}
     </header>
   );
 }

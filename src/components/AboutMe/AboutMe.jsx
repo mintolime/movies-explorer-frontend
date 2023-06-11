@@ -3,7 +3,7 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section className='about-me content__box-main' id='aboutme' aria-label="блок о студенте">
+    <section className="about-me content__box-main" id="aboutme" aria-label="блок о студенте">
       <div className="content__inner">
         <p className="content__about">Студент</p>
       </div>
@@ -13,12 +13,16 @@ function AboutMe() {
           <h1 className="about-me__title">Евгения</h1>
           <p className="about-me__subtitle">Фронтенд-разработчица, 26 лет</p>
           <p className="about-me__text">
-            Я проживаю ,в богатом природой, городе Красноярск.
-            На данный момент работаю инженером технической группы,свободное время посвящаю обучению и фотосъемке.
-            Путь в разработке начался в середине 2022 г., за это время удалось усилить свои навыки во фронтенд-разработке.
-            После окончания планирую также развиваться в этой области.
+            Я проживаю ,в богатом природой, городе Красноярск. На данный момент работаю инженером
+            технической группы,свободное время посвящаю обучению и фотосъемке. Путь в разработке
+            начался в середине 2022 г., за это время удалось усилить свои навыки во
+            фронтенд-разработке. После окончания планирую также развиваться в этой области.
           </p>
-          <a className="page__link about-me__link" href="https://github.com/mintolime" target="_blank" rel="noreferrer">
+          <a
+            className="page__link about-me__link"
+            href="https://github.com/mintolime"
+            target="_blank"
+            rel="noreferrer">
             Github
           </a>
         </div>

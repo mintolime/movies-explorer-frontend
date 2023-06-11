@@ -47,8 +47,12 @@ function Profile() {
       </form>
 
       <div className="profile__button-box">
-      <span className="profile__input-error"></span>
-        <Button btnClass="button button_type_profile-edit" btnType="button" btnText="Редактировать" />
+        <span className="profile__input-error"></span>
+        <Button
+          btnClass="button button_type_profile-edit"
+          btnType="button"
+          btnText="Редактировать"
+        />
         <Link to="/" className="profile__link_logout page__link">
           Выйти из аккаунта
         </Link>

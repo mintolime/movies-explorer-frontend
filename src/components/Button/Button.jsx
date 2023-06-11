@@ -1,10 +1,10 @@
-import '../Button/Button.css'
+import '../Button/Button.css';
 
 function Button({ btnClass, btnType, btnText }) {
   return (
-    <button
-      className={`button ${btnClass}`}
-      type={btnType}>{btnText}</button>
+    <button className={`button ${btnClass}`} type={btnType}>
+      {btnText}
+    </button>
   );
 }
 

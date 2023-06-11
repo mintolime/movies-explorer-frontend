@@ -1,4 +1,4 @@
-import '../Main/Main.css'
+import '../Main/Main.css';
 import Promo from '../Promo/Promo';
 import AboutProgect from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';

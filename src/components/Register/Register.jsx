@@ -17,7 +17,6 @@ function Register({ onRegister }) {
       linkText="Войти"
       onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_padding-bottom">
-
         <label className="form__label">Имя</label>
         <input
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
@@ -26,7 +25,7 @@ function Register({ onRegister }) {
           name="name"
           type="text"
           aria-label="Ваше имя"
-          placeholder='Ваше имя'
+          placeholder="Ваше имя"
           minLength="2"
           maxLength="100"
           required
@@ -41,7 +40,7 @@ function Register({ onRegister }) {
           name="email"
           type="email"
           aria-label="Ваша почта"
-          placeholder='Ваша почта'
+          placeholder="Ваша почта"
           minLength="2"
           maxLength="30"
           required
@@ -54,7 +53,7 @@ function Register({ onRegister }) {
           name="password"
           type="password"
           aria-label="Ваш пароль"
-          placeholder='Ваш пароль'
+          placeholder="Ваш пароль"
           value={values.password || ''}
           minLength="8"
           maxLength="30"
@@ -62,7 +61,6 @@ function Register({ onRegister }) {
           required
         />
         <span className="form__input-error"> {errors.password}</span>
-
       </fieldset>
     </EntryForm>
   );

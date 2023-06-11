@@ -12,14 +12,15 @@
     font-size: 28px;
     line-height: 34px;
     padding-bottom: 13px;
-     align-self: end;
+    padding-right: 30px;
+    align-self: end;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .search-form__toogle {
     column-gap: 14px;
-    justify-content: start;
+    align-self: start;
   }
 }
 
@@ -46,7 +47,7 @@
 
 .search-form__toogle:focus-within .search-form__label {
   outline: none;
-  box-shadow: 0 0 0 3px lightskyblue;
+  box-shadow: 0 0 0 3px #87cefa;
 }
 
 .search-form__label {
