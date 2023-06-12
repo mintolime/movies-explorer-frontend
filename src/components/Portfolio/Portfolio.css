@@ -1,0 +1,79 @@
+/* сброс верхнего отступа в миксе бэм блока */
+.portfolio {
+  padding-top: 0;
+}
+
+.portfolio__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.portfolio__title {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+  color: #A0A0A0;
+  mix-blend-mode: normal;
+  padding: 0 0 40px;
+  margin: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .portfolio__title {
+    font-size: 18px;
+    padding-bottom: 50px;
+  }
+}
+
+.portfolio__item {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  border-bottom: 1px #E6E6E6 solid;
+}
+
+.portfolio__description {
+  font-weight: 400;
+  min-height: 50px;
+  font-size: 18px;
+  line-height: 28px;
+  /* identical to box height, or 156% */
+  letter-spacing: -0.04em;
+  padding: 0 0 19px;
+  margin: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .portfolio__description {
+    font-size: 28px;
+    line-height: 50px;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* по макету 18 х 28 возможно вместе с отступами */
+.portfolio__icon {
+  width: 13px;
+  height: 23px;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 720px) {
+  .portfolio__icon {
+    width: 17px;
+    height: 40px;
+  }
+}
+
+.portfolio__link {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
