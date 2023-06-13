@@ -18,7 +18,7 @@ function SearchForm() {
           name="movies"
           aria-label="Поиск фильмов"
           required></input>
-        <Button btnClass="button_type_search" btnType="submit" />
+        <Button btnClass="button_type_search button_disabled" btnType="submit" />
       </form>
       <span className="search-form__input-error">{errors.movies}</span>
       <FilterCheckbox />

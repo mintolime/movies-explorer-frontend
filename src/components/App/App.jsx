@@ -22,7 +22,8 @@ function App() {
   const location = useLocation();
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
-
+ 
+  const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
 
   React.useEffect(() => {
@@ -38,7 +39,7 @@ function App() {
   }, []);
   
    return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
@@ -50,7 +51,7 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}
-    </>
+      </CurrentUserContext.Provider>
   );
 }
 
