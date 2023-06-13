@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 import './App.css';
@@ -14,14 +15,29 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 import { headerRoutes, footerRoutes } from '../../utils/constants';
 import { checkPath } from '../../utils/functions';
+import { apiDataMovies } from '../../utils/api/MoviesApi';
+
 
 function App() {
   const location = useLocation();
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
-  // console.log('проверка',checkPath(headerRoutes,location))
-  // console.log('локация',location)
-  return (
+
+  const [movies, setMovies] = React.useState([]);
+
+  React.useEffect(() => {
+    apiDataMovies
+      .getAllData()
+      .then(([initialMovies]) => {
+        setMovies(initialMovies);
+        console.log(initialMovies)
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  }, []);
+  
+   return (
     <>
       {headerView && <Header />}
       <Routes>

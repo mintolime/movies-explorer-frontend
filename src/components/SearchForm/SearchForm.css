@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 41px;
+  row-gap: 21px;
   background-color: #fff;
   padding: 90px 14px 51px;
   box-sizing: border-box;
@@ -11,14 +11,14 @@
 
 @media screen and (min-width: 720px) {
   .search-form {
-    row-gap: 30px;
+    row-gap: 10px;
     padding: 80px 30px 61px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .search-form {
-    row-gap: 33px;
+    row-gap: 13px;
     padding: 70px 70px 48px;
   }
 }
@@ -47,6 +47,20 @@
     line-height: 34px;
   }
 }
+
+.search-form__input-error {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF4062;
+  min-height: 20px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  align-self: flex-start;
+}
+
 
 .search-form__icon {
   width: 34px;

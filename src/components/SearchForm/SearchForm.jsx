@@ -5,7 +5,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Button from '../Button/Button';
 
 function SearchForm() {
-  const { values, handleChange } = useFormAndValidation();
+  const { values, handleChange, errors } = useFormAndValidation();
   return (
     <section className="search-form" aria-label="форма поиска фильмов">
       <form className="search-form__inner">
@@ -20,6 +20,7 @@ function SearchForm() {
           required></input>
         <Button btnClass="button_type_search" btnType="submit" />
       </form>
+      <span className="search-form__input-error">{errors.movies}</span>
       <FilterCheckbox />
     </section>
   );
