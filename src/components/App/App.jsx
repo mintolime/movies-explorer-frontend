@@ -18,7 +18,6 @@ import { checkPath } from '../../utils/functions';
 import { apiDataMovies } from '../../utils/api/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 
-
 function App() {
   const location = useLocation();
   const headerView = checkPath(headerRoutes, location);
@@ -26,9 +25,11 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
+  const [isSearchMovies, setSearchMovies] = React.useState(false);
 
   React.useEffect(() => {
-    apiDataMovies
+    if(isSearchMovies){
+      apiDataMovies
       .getAllData()
       .then(([initialMovies]) => {
         setMovies(initialMovies);
@@ -37,14 +38,21 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
-  }, []);
+    }
+  }, [isSearchMovies]);
+  
+  const handleSearchMovies = () =>{
+    setSearchMovies(true)
+  }
+ 
+  console.log(isSearchMovies)
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies movies={movies} />} />
+        <Route path="/movies" element={<Movies movies={movies} onHandleSearch={handleSearchMovies}/>} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />

@@ -61,9 +61,11 @@
   height: 34px;
   /* margin-right: 20px; */
   /* для позиционирования кнопки в импуте поиска фильмов */
-  transform: translate(-33px, -9px);
+  transform: translate(-40px, -5px);
   background: center/100% no-repeat url('../../images/icon-find.svg');
 }
+
+
 
 .button_type_more {
   width: 240px;

@@ -6,6 +6,7 @@ function MoviesCard({ movie }) {
   const apiUrl = 'https://api.nomoreparties.co'
   // console.log('movie', movie.image.url)
   // console.log(`${apiUrl}${movie.image.url}`)
+
   return (
     <li className="movies__item">
       <div className="movies__heading">
@@ -15,8 +16,8 @@ function MoviesCard({ movie }) {
       <img className="movies__image" src={`${apiUrl}${movie.image.url}`} alt={movie.nameRU} />
 
       {/* <Button btnClass='button_ button_type_delete' btnType='button' /> */}
-      <Button btnClass='button button_type_save button_type_save_active' btnType='button' />
-      {/* <Button btnClass="button_type_save" btnType="button" btnText="Coхранить" /> */}
+      {/* <Button btnClass='button button_type_save button_type_save_active' btnType='button' /> */}
+      <Button btnClass="button_type_save" btnType="button" btnText="Coхранить" />
     </li>
   );
 }

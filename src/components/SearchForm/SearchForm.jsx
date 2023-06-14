@@ -4,14 +4,24 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Button from '../Button/Button';
 
-function SearchForm() {
-  const { values, handleChange, errors } = useFormAndValidation();
+function SearchForm({ onSearchMovies }) {
+  const { values, handleChange, isValid } = useFormAndValidation();
+  
+  function handleSubmit(evt) {
+    // Запрещаем браузеру переходить по адресу формы
+    evt.preventDefault();
+    if (!values.movies) {
+      return;
+    }
+    onSearchMovies();
+  }
+
   return (
     <section className="search-form" aria-label="форма поиска фильмов">
-      <form className="search-form__inner">
+      <form className="search-form__inner" onSubmit={handleSubmit}>
         <input
           className="search-form__input"
-          type="text"
+          type="search"
           placeholder="Фильм"
           value={values.movies || ''}
           onChange={handleChange}
@@ -20,7 +30,7 @@ function SearchForm() {
           required></input>
         <Button btnClass="button_type_search button_disabled" btnType="submit" />
       </form>
-      <span className="search-form__input-error">{errors.movies}</span>
+      <span className="search-form__input-error">{isValid ? '' : 'Нужно ввести ключевое слово'}</span>
       <FilterCheckbox />
     </section>
   );
