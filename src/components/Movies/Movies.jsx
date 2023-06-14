@@ -2,11 +2,12 @@ import '../Movies/Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies() {
+function Movies({movies}) {
+// console.log(movies)
   return (
     <>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList moviesData={movies} />
     </>
   );
 }

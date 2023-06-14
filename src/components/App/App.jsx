@@ -16,13 +16,14 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { headerRoutes, footerRoutes } from '../../utils/constants';
 import { checkPath } from '../../utils/functions';
 import { apiDataMovies } from '../../utils/api/MoviesApi';
+import { CurrentUserContext } from '../../context/CurrentUserContext'
 
 
 function App() {
   const location = useLocation();
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
- 
+
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
 
@@ -31,19 +32,19 @@ function App() {
       .getAllData()
       .then(([initialMovies]) => {
         setMovies(initialMovies);
-        console.log(initialMovies)
+        // console.log(initialMovies)
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
   }, []);
-  
-   return (
+
+  return (
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies movies={movies} />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
@@ -51,7 +52,7 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}
-      </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

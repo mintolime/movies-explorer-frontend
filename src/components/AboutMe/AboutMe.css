@@ -130,6 +130,14 @@
   }
 }
 
+.about-me__links{
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
 .about-me__link {
   font-weight: 500;
   font-size: 14px;
