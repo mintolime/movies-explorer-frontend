@@ -2,11 +2,11 @@ import '../Movies/Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies({movies,onHandleSearch}) {
+function Movies({movies,onSearch,onSave}) {
 // console.log(movies)
   return (
     <>
-      <SearchForm onSearchMovies={onHandleSearch}/>
+      <SearchForm onSearchMovies={onSearch}/>
       <MoviesCardList moviesData={movies} />
     </>
   );

@@ -7,3 +7,10 @@ class MainApi{
       }
       
 }
+
+export const apiDataMain = new MainApi({
+  url: 'https://api.mintolime-movies.nomoredomains.rocks',
+  headers: {
+    'Content-Type': 'application/json; charset=UTF-8',
+  },
+});

@@ -26,6 +26,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const [isSearchMovies, setSearchMovies] = React.useState(false);
+  const [isMovieSave, setMovieSave] = React.useState(false); 
+  // const [isLoading,setLoading] = React.useState(false)
 
   React.useEffect(() => {
     if(isSearchMovies){
@@ -33,14 +35,19 @@ function App() {
       .getAllData()
       .then(([initialMovies]) => {
         setMovies(initialMovies);
-        // console.log(initialMovies)
+        console.log(initialMovies)
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
     }
+     return setMovies([]);
   }, [isSearchMovies]);
   
+  const handleMovieSave = () =>{
+    setMovieSave(true)
+  }
+
   const handleSearchMovies = () =>{
     setSearchMovies(true)
   }
@@ -52,7 +59,7 @@ function App() {
       {headerView && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies movies={movies} onHandleSearch={handleSearchMovies}/>} />
+        <Route path="/movies" element={<Movies movies={movies} onSearch={handleSearchMovies} onSave={handleMovieSave}/>} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />

@@ -14,9 +14,7 @@ class MovieApi{
         return fetch(`${this.url}/`, {
           headers: this.headers,
         }).then((res) => handleResponce(res));
-      }
-
-      
+      } 
 }
 
 export const apiDataMovies = new MovieApi({
