@@ -4,7 +4,7 @@ import icon from '../../images/icon-profile.svg';
 
 function HeaderNav() {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return isLoggedIn ? (
     <>

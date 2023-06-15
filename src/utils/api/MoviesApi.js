@@ -1,20 +1,20 @@
 import { handleResponce } from "../functions";
 
-class MovieApi{
-    constructor({ url, headers }) {
-        this.url = url;
-        this.headers = headers;
-      }
+class MovieApi {
+  constructor({ url, headers }) {
+    this.url = url;
+    this.headers = headers;
+  }
 
-      getAllData(){
-        return Promise.all([this.getAllMovies()]);
-    }
+  getAllData() {
+    return Promise.all([this.getAllMovies()]);
+  }
 
-      getAllMovies(){
-        return fetch(`${this.url}/`, {
-          headers: this.headers,
-        }).then((res) => handleResponce(res));
-      } 
+  getAllMovies() {
+    return fetch(`${this.url}/`, {
+      headers: this.headers,
+    }).then((res) => handleResponce(res));
+  }
 }
 
 export const apiDataMovies = new MovieApi({

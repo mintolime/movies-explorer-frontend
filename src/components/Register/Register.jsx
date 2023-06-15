@@ -8,6 +8,7 @@ function Register({ onRegister }) {
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
+    console.log('values',values)
     onRegister(values);
   }
   return (

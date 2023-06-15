@@ -1,11 +1,17 @@
 import { handleResponce } from "../functions";
 
 class MainApi{
-    constructor({ url, headers }) {
-        this.url = url;
-        this.headers = headers;
-      }
-      
+
+   getAllData() {
+    return Promise.all([this.getAllOwnMovies()]);
+  }
+
+   getAllOwnMovies() {
+    return fetch(`${this.url}/movies`, {
+      headers: this.headers,
+    }).then((res) => handleResponce(res));
+  }
+
 }
 
 export const apiDataMain = new MainApi({

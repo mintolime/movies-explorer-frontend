@@ -18,12 +18,13 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
         <h3 className="entry-form__title">{title}</h3>
         <form name="form" className="entry-form__box" onSubmit={onSubmit}>
           {children}
+          <Button
+            btnClass="button_type_entry button_type_entry_profile"
+            btnType="submit"
+            btnText={btnText}
+          />
         </form>
-        <Button
-          btnClass="button_type_entry button_type_entry_profile"
-          btnType="submit"
-          btnText={btnText}
-        />
+
         {location.pathname === '/signup' && (
           <p className=" entry-form__auth-text">
             Уже зарегистрированы?
