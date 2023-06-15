@@ -47,6 +47,10 @@
   background: #F9F9F9;
 }
 
+.button_type_save:hover{
+  background: #ccc;
+}
+
 .button_type_save_active {
   background: center no-repeat #FF4062 url('../../images/icon-done.svg');
 }
