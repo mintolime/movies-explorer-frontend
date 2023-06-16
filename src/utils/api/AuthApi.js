@@ -56,7 +56,7 @@ class Auth {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({ email, password }),
-    }).then((res) => handleResponce(res));
+    }).then((res) => handleResponce(res))
   }
 
   checkToken(token) {
