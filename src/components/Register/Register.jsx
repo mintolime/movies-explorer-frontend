@@ -1,6 +1,7 @@
 // import '../Register/Register.css'
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import React from 'react';
 
 function Register({ onRegister }) {
   const { values, handleChange, isValid, errors } = useFormAndValidation();
@@ -8,15 +9,17 @@ function Register({ onRegister }) {
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    console.log('values',values)
+    console.log('values', values);
     onRegister(values);
   }
+
   return (
     <EntryForm
       title="Добро пожаловать!"
       btnText="Зарегистрироваться"
       linkText="Войти"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      isValidBtn={isValid}>
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
         <input

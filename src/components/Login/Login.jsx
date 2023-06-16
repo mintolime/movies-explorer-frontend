@@ -1,3 +1,5 @@
+import React from 'react';
+
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import '../Login/Login.css';
@@ -15,7 +17,12 @@ function Login({ onAuthorization }) {
   }
 
   return (
-    <EntryForm title="Рады видеть!" btnText="Войти" linkText="Регистрация" onSubmit={handleSubmit}>
+    <EntryForm
+      title="Рады видеть!"
+      btnText="Войти"
+      linkText="Регистрация"
+      onSubmit={handleSubmit}
+      isValidBtn={isValid}>
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>
         <input

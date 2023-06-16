@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 
 function SearchForm({ onSearchMovies }) {
   const { values, handleChange, isValid } = useFormAndValidation();
-  
+
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
