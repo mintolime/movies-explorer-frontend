@@ -8,7 +8,7 @@ import logo from '../../images/logo-header.svg';
 
 import HeaderNav from './HeaderNav';
 
-function Header() {
+function Header({isLoggedIn}) {
   const size = useResize();
   const location = useLocation();
 
@@ -18,7 +18,11 @@ function Header() {
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>
 
-      {size.isScreenMd ? <Navigation /> : <HeaderNav />}
+      {size.isScreenMd ? (
+        <Navigation isLoggedIn={isLoggedIn} />
+      ) : (
+        <HeaderNav isLoggedIn={isLoggedIn} />
+      )}
     </header>
   );
 }

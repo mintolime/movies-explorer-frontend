@@ -37,17 +37,17 @@ import { handleResponce } from "../functions";
 //   }).then((res) => handleResponce(res));
 // };
 
- class Auth {
+class Auth {
   constructor({ url, headers }) {
     this.url = url;
     this.headers = headers;
   }
 
-  register({ email, password }) {
+  register({ name, email, password }) {
     return fetch(`${this.url}/signup`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, email, password }),
     }).then((res) => handleResponce(res));
   }
 
@@ -61,7 +61,7 @@ import { handleResponce } from "../functions";
 
   checkToken(token) {
     return fetch(`${this.url}/users/me`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         ...this.headers,
         Authorization: `Bearer ${token}`,

@@ -3,8 +3,8 @@ import React from 'react';
 
 import icon from '../../images/icon-profile.svg';
 
-function NavContent() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+function NavContent({isLoggedIn}) {
+  // const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   return isLoggedIn ? (
     <>
@@ -24,10 +24,10 @@ function NavContent() {
     </>
   ) : (
     <>
-      <Link to="/signin" className="navigation__link navigation__link-item">
+      <Link to="/signin" className="navigation__link navigation__link-item page__link">
         Войти
       </Link>
-      <Link to="/signup" className="navigation__link navigation__link-item">
+      <Link to="/signup" className="navigation__link navigation__link-item page__link">
         Регистрация
       </Link>
     </>
