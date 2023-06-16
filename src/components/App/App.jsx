@@ -29,7 +29,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   // const [isOwnMovies, setIsOwnMovies] = React.useState([]);
-  const [isRegister, setIsRegister] = React.useState(false);
+  const [isRegistration, setIsRegistration] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [isSearchMovies, setSearchMovies] = React.useState(false);
   const [isMovieSave, setMovieSave] = React.useState(false);
@@ -48,6 +49,10 @@ function App() {
         });
     }
   }, [isSearchMovies]);
+
+  // React.useEffect(() => {
+  //   handleCheckToken();
+  // }, []);
 
   // сделать в одну функцию
   //  React.useEffect(() => {
@@ -72,13 +77,51 @@ function App() {
     return apiAuth
       .register(data)
       .then((res) => {
-        setIsRegister(true)
+        setIsRegistration(true);
+        console.log(res);
+        navigate('/signin', { replace: true });
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  };
+
+  const handleAuthorization = (data) => {
+    apiAuth
+      .authorize(data)
+      .then((res) => {
+        setIsLoggedIn(true);
+        localStorage.setItem('jwt', data.token);
         console.log(res);
         navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
+  };
+
+  // const handleCheckToken = () => {
+  //   const jwt = localStorage.getItem('jwt');
+  //   if (jwt) {
+  //     // проверим токен
+  //     apiAuth
+  //       .checkToken(jwt)
+  //       .then((res) => {
+  //         if (res) {
+  //           setIsLoggedIn(true);
+  //           navigate('/', { replace: true });
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+  //       });
+  //   }
+  // };
+
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/signin', { replace: true });
+    setIsLoggedIn(false);
   };
 
   const handleSearchMovies = () => {
@@ -89,7 +132,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {headerView && <Header />}
+      {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route
@@ -101,7 +144,7 @@ function App() {
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}
