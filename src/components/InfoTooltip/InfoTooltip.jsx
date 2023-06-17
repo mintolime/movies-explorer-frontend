@@ -2,8 +2,7 @@ import '../InfoTooltip/InfoTooltip.css';
 import successIcon from '../../images/icon-success-status.png';
 import errorIcon from '../../images/icon-error-status.png';
 
-function InfoTooltip({ isOpen, onClose, isCorrectResponse,isError }) {
-
+function InfoTooltip({ isOpen, onClose, isCorrectResponse, isError }) {
   return (
     <section
       className={`popup  ${isOpen ? 'popup_opened' : ''}`}
@@ -18,7 +17,8 @@ function InfoTooltip({ isOpen, onClose, isCorrectResponse,isError }) {
         <h3 className="popup__container_login-title">
           {isCorrectResponse
             ? 'Успешно!'
-            : `Что-то пошло не так! Попробуйте ещё раз. "${isError}" `}
+            : `Что-то пошло не так! Попробуйте ещё раз.
+            "${isError}" `}
         </h3>
       </div>
     </section>

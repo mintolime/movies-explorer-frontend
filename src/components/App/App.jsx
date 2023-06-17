@@ -19,6 +19,7 @@ import { apiDataMovies } from '../../utils/api/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { apiDataMain } from '../../utils/api/MainApi';
 import { apiAuth } from '../../utils/api/AuthApi';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App() {
   const location = useLocation();
@@ -28,21 +29,43 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
-  // const [isOwnMovies, setIsOwnMovies] = React.useState([]);
+  const [isOwnMovies, setIsOwnMovies] = React.useState([]);
   const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [isSearchMovies, setSearchMovies] = React.useState(false);
   const [isMovieSave, setMovieSave] = React.useState(false);
   // const [isLoading,setLoading] = React.useState(false)
+  const [errorMessage, setErrorMessage] = React.useState({});
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
 
+  // React.useEffect(() => {
+  //   if (isSearchMovies) {
+  //     apiDataMovies
+  //       .getAllData()
+  //       .then(([initialMovies]) => {
+  //         setMovies(initialMovies);
+  //         console.log(initialMovies);
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+  //       });
+  //   }
+  // }, [isSearchMovies]);
+
+  // React.useEffect(() => {
+  //   handleCheckToken();
+  // }, []);
+
+  // сделать в одну функцию
   React.useEffect(() => {
     if (isSearchMovies) {
-      apiDataMovies
+      apiDataMain
         .getAllData()
-        .then(([initialMovies]) => {
-          setMovies(initialMovies);
-          console.log(initialMovies);
+        .then(([initialOwnMovies]) => {
+          setIsOwnMovies(initialOwnMovies);
+          console.log(initialOwnMovies);
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -50,27 +73,12 @@ function App() {
     }
   }, [isSearchMovies]);
 
-  // React.useEffect(() => {
-  //   handleCheckToken();
-  // }, []);
+  const handleOpenPopupSuccess = () => {
+    setIsInfoTooltipOpen(true);
+  };
 
-  // сделать в одну функцию
-  //  React.useEffect(() => {
-  //   if(isSearchMovies){
-  //     apiDataMain
-  //     .getAllData()
-  //     .then(([initialOwnMovies]) => {
-  //       setIsOwnMovies(initialOwnMovies);
-  //       console.log(initialOwnMovies)
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-  //     });
-  //   }
-  // }, [isSearchMovies]);
-
-  const handleMovieSave = () => {
-    setMovieSave(true);
+  const closePopup = () => {
+    setIsInfoTooltipOpen(false);
   };
 
   const handleRegister = (data) => {
@@ -91,12 +99,16 @@ function App() {
       .authorize(data)
       .then((res) => {
         setIsLoggedIn(true);
+        setIsSuccessResponse(true);
+        handleOpenPopupSuccess();
         localStorage.setItem('jwt', data.token);
-        console.log(res);
         navigate('/', { replace: true });
       })
       .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        console.log(`Что-то пошло не так: ошибка запроса ${err.message}  😔`);
+        handleOpenPopupSuccess();
+        setIsSuccessResponse(false);
+        setErrorMessage(err.errorText);
       });
   };
 
@@ -135,19 +147,23 @@ function App() {
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/movies" element={<Movies movies={movies} onSearch={handleSearchMovies} />} />
         <Route
-          path="/movies"
-          element={
-            <Movies movies={movies} onSearch={handleSearchMovies} onSave={handleMovieSave} />
-          }
+          path="/saved-movies"
+          element={<SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
-        <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closePopup}
+        isCorrectResponse={isSuccessResponse}
+        isError={errorMessage}
+      />
     </CurrentUserContext.Provider>
   );
 }

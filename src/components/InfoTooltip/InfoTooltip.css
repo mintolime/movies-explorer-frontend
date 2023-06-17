@@ -45,13 +45,14 @@
 }
 
 .popup__container_login-title {
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 25px;
   text-align: center;
   color: #000000;
   padding: 32px 0 0;
   margin: 0;
+  white-space: pre-line;
 }
 
 .popup__container_login-icon {

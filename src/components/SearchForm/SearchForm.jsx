@@ -27,10 +27,14 @@ function SearchForm({ onSearchMovies }) {
           onChange={handleChange}
           name="movies"
           aria-label="Поиск фильмов"
+          minLength="2"
+          maxLength="100"
           required></input>
-        <Button btnClass="button_type_search button_disabled" btnType="submit" />
+        <Button btnClass="button_type_search" btnType="submit" />
       </form>
-      <span className="search-form__input-error">{isValid ? '' : 'Нужно ввести ключевое слово'}</span>
+      {/* <span className="search-form__input-error">
+        {isValid ? '' : 'Нужно ввести ключевое слово'}
+      </span> */}
       <FilterCheckbox />
     </section>
   );
