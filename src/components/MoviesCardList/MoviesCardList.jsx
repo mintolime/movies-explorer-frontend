@@ -10,10 +10,9 @@ function MoviesCardList({moviesData}) {
       <ul className="movies__list">
         {moviesData.map((movie) => (
           <MoviesCard movie={movie} key={movie.id} />
-          // console.log('map',movie.image.url)
         ))}
+        <Button btnClass="button_type_more" btnType="button" btnText="Ещё" />
       </ul>
-      <Button btnClass="button_type_more" btnType="button" btnText="Ещё" />
     </section>
   );
 }

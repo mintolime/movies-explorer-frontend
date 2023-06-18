@@ -4,8 +4,8 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import Button from '../Button/Button';
 import '../Profile/Profile.css';
 
-function Profile() {
-  const { values, handleChange } = useFormAndValidation();
+function Profile({onLogout}) {
+  const { values, handleChange, errors } = useFormAndValidation();
 
   return (
     <section className="profile">
@@ -18,7 +18,7 @@ function Profile() {
             value={values.name || ''}
             onChange={handleChange}
             name="name"
-            type="email"
+            type="text"
             aria-label="Ваше имя"
             placeholder="Имя"
             minLength="2"
@@ -44,21 +44,22 @@ function Profile() {
           />
           {/* <span className="profile__input-error">{errors.email}</span> */}
         </fieldset>
+        {/* <span className="profile__input-error">{`Ошибка ввода имени: ${errors.name}`}</span>
+        <span className="profile__input-error">{`Ошибка ввода почты: ${errors.email}`}</span> */}
       </form>
 
       <div className="profile__button-box">
-        <span className="profile__input-error"></span>
         <Button
           btnClass="button button_type_profile-edit"
           btnType="button"
           btnText="Редактировать"
         />
-        <Link to="/" className="profile__link_logout page__link">
+        <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
           Выйти из аккаунта
         </Link>
         {/* <Button btnClass="button_type_profile-save" btnType="submit" btnText="Сохранить" /> */}
-        {/* <span className="profile__input-error">При обновлении профиля произошла ошибка.</span>
-        <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
+
+        {/* <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
       </div>
     </section>
   );

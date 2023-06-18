@@ -1,9 +1,9 @@
 import { handleResponce } from "../functions";
 
-class MainApi{
+export class MainApi{
 
    getAllData() {
-    return Promise.all([this.getAllOwnMovies()]);
+    return Promise.all([this.getUserData()]);
   }
 
    getAllOwnMovies() {
@@ -12,11 +12,12 @@ class MainApi{
     }).then((res) => handleResponce(res));
   }
 
+  getUserData() {
+    return fetch(`${this.url}/users/me `, {
+      headers: this.headers,
+    }).then((res) => handleResponce(res));
+  }
+
 }
 
-export const apiDataMain = new MainApi({
-  url: 'https://api.mintolime-movies.nomoredomains.rocks',
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-  },
-});
+

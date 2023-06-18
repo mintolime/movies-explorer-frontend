@@ -11,7 +11,7 @@ function Login({ onAuthorization }) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     if (!values.email || !values.password) {
-      return;
+      return ;
     }
     onAuthorization(values);
   }
