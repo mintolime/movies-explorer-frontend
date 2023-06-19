@@ -18,7 +18,7 @@ import { checkPath } from '../../utils/functions';
 import { apiDataMovies } from '../../utils/api/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { MainApi, apiDataMain } from '../../utils/api/MainApi';
-import { apiAuth } from '../../utils/api/AuthApi';
+import { Auth, apiAuth } from '../../utils/api/AuthApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App() {
@@ -48,33 +48,55 @@ function App() {
     },
   });
 
-  // React.useEffect(() => {
-  //   if (isSearchMovies) {
-  //     apiDataMovies
-  //       .getAllData()
-  //       .then(([initialMovies]) => {
-  //         setMovies(initialMovies);
-  //         console.log(initialMovies);
-  //       })
-  //       .catch((err) => {
-  //         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-  //       });
-  //   }
-  // }, [isSearchMovies]);
+  const apiAuth = new Auth({
+    url: 'https://api.mintolime-movies.nomoredomains.rocks',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  });
 
   React.useEffect(() => {
-    handleCheckToken();
+    if (isSearchMovies) {
+      apiDataMovies
+        .getAllData()
+        .then(([initialMovies]) => {
+          setMovies(initialMovies);
+          console.log(initialMovies);
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        });
+    }
+  }, [isSearchMovies]);
+
+  // проверка токена 
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      // проверим токен
+      apiAuth
+        .checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            navigate('/', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        });
+    }
   }, []);
 
   // сделать в одну функцию
   React.useEffect(() => {
-    apiDataMain
-      .getAllData()
-      .then(([userData]) => {
-        // setIsOwnMovies(initialOwnMovies);
-        // setCurrentUser(userData)
+    apiDataMain.getAllData()
+      .then(([userData,initialOwnMovies]) => {
+        setIsOwnMovies(initialOwnMovies);
+        setCurrentUser(userData)
         console.log(userData)
-        // console.log(initialOwnMovies);
+        // console.log(res)
+        console.log(initialOwnMovies);
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -90,20 +112,22 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
-  React.useEffect(() => {
-    function closeByEscape(evt) {
-      if (evt.key === 'Escape') {
-        closePopup();
-      }
-    }
-    if (isInfoTooltipOpen) {
-      // навешиваем только при открытии
-      document.addEventListener('keydown', closeByEscape);
-      return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      };
-    }
-  }, [isInfoTooltipOpen]);
+  const handleUpdateUser = (data) => {
+    return apiDataMain
+      .updateUserData(data)
+      .then((data) => {
+        setIsSuccessResponse(true);
+        handleOpenPopupSuccess();
+        setCurrentUser(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
+        handleOpenPopupSuccess();
+        setIsSuccessResponse(false);
+        setErrorMessage(err.errorText);
+      });
+  };
 
   const handleRegister = (data) => {
     return apiAuth
@@ -142,30 +166,13 @@ function App() {
       });
   };
 
-  const handleCheckToken = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      // проверим токен
-      apiAuth
-        .checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setIsLoggedIn(true);
-            navigate('/', { replace: true });
-          }
-        })
-        .catch((err) => {
-          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        });
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     navigate('/signin', { replace: true });
     setIsLoggedIn(false);
   };
 
+  // отрефакторить
   const handleSearchMovies = () => {
     setSearchMovies(true);
   };
@@ -177,12 +184,12 @@ function App() {
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies movies={movies} onSearch={handleSearchMovies} />} />
+        <Route path="/movies" element={<Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />} />
         <Route
           path="/saved-movies"
           element={<SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
-        <Route path="/profile" element={<Profile onLogout={handleLogout} isSuccess={isSuccessResponse} />} />
+        <Route path="/profile" element={<Profile onLogout={handleLogout} onUpdateUser={handleUpdateUser} />} />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />

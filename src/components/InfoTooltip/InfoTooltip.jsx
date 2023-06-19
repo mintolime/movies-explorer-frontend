@@ -1,8 +1,25 @@
 import '../InfoTooltip/InfoTooltip.css';
 import successIcon from '../../images/icon-success-status.png';
 import errorIcon from '../../images/icon-error-status.png';
+import React from 'react';
 
 function InfoTooltip({ isOpen, onClose, isCorrectResponse, isError }) {
+   // todo попробовать также добавить закрытие по оверлею
+   React.useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closePopup();
+      }
+    }
+    if (isOpen) {
+      // навешиваем только при открытии
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      };
+    }
+  }, [isOpen]);
+
   return (
     <section
       className={`popup  ${isOpen ? 'popup_opened' : ''}`}
