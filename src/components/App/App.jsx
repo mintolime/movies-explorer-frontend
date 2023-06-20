@@ -20,6 +20,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { MainApi, apiDataMain } from '../../utils/api/MainApi';
 import { Auth, apiAuth } from '../../utils/api/AuthApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const location = useLocation();
@@ -125,7 +126,7 @@ function App() {
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
-      })
+      });
   };
 
   const handleRegister = (data) => {
@@ -182,20 +183,31 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<ProtectedRoute component={Main}/>} />
         <Route
           path="/movies"
           element={
-            <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
+            <ProtectedRoute component={Movies}  movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies}/>
+            // <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
           }
         />
         <Route
           path="/saved-movies"
-          element={<SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
+          element={ <ProtectedRoute component={SavedMovies} movies={isOwnMovies} onSearch={handleSearchMovies}/>}
+          // <SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
         <Route
           path="/profile"
-          element={<Profile onLogout={handleLogout} onUpdateUser={handleUpdateUser} />}
+          element={
+            <ProtectedRoute component={Profile}  onLogout={handleLogout}
+              onUpdateUser={handleUpdateUser}
+              isCorrectResponse={isSuccessResponse}/>
+            // <Profile
+            //   onLogout={handleLogout}
+            //   onUpdateUser={handleUpdateUser}
+            //   isCorrectResponse={isSuccessResponse}
+            // />
+          }
         />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />

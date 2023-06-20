@@ -6,10 +6,12 @@ import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import React from 'react';
 
-function Profile({ onLogout, onUpdateUser,isCorrectResponse }) {
-  const { values, handleChange, errors, resetForm,isValid, EmailValidator } = useFormAndValidation();
+function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
+  const { values, handleChange, errors, resetForm, isValid, EmailValidator } =
+    useFormAndValidation();
   const validEmail = EmailValidator(values.email);
   const currentUser = React.useContext(CurrentUserContext);
+  const [showSaveBtn, setShowSaveBtn] = React.useState(false);
 
   React.useEffect(() => {
     currentUser ? resetForm(currentUser) : resetForm();
@@ -26,7 +28,15 @@ function Profile({ onLogout, onUpdateUser,isCorrectResponse }) {
     });
   }
 
-  // console.log(isCorrectResponse)
+  // мелькает, вывести в APP
+  // React.useEffect(() => {
+  //   if (isCorrectResponse) {
+  //     setShowSaveBtn(false);
+  //   }
+  // }, [isCorrectResponse]);
+
+  console.log('response', isCorrectResponse);
+  console.log('btn', showSaveBtn);
   return (
     <section className="profile">
       <form className="profile__form" onSubmit={handleSubmit}>
@@ -70,12 +80,25 @@ function Profile({ onLogout, onUpdateUser,isCorrectResponse }) {
           {/* <span className="profile__input-error">{errors.email}</span> */}
         </fieldset>
         <div className="profile__button-box">
-          {/* <Button
-          btnClass="button button_type_profile-edit"
-          btnType="button"
-          btnText="Редактировать"
-        /> */}
-          <Button btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`} btnType="submit" btnText="Сохранить" />
+          {/* {showSaveBtn ? ( */}
+            <Button
+              btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`}
+              btnType="submit"
+              btnText="Сохранить"
+            />
+          {/* ) : (
+            <Button
+              btnClass="button button_type_profile-edit"
+              btnType="button"
+              btnText="Редактировать"
+              onClick={(evt) => {
+                evt.preventDefault();
+                setShowSaveBtn(true);
+              }}
+            />
+          )} */}
+
+          {/* <Button btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`} btnType="submit" btnText="Сохранить" /> */}
           <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
             Выйти из аккаунта
           </Link>
