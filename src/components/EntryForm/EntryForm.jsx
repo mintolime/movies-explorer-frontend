@@ -6,7 +6,7 @@ import logo from '../../images/logo-header.svg';
 import Button from '../Button/Button';
 
 //поправить название
-function EntryForm({ title, children, btnText, linkText, onSubmit,isValidBtn }) {
+function EntryForm({ title, children, btnText, linkText, onSubmit,isValidBtn,isValidEmail }) {
   const location = useLocation();
 
   return (
@@ -20,7 +20,7 @@ function EntryForm({ title, children, btnText, linkText, onSubmit,isValidBtn }) 
           {children}
           <Button
             btnClass={`button_type_entry button_type_entry_profile ${
-              isValidBtn ? '' : 'button_disabled'
+              isValidBtn & isValidEmail ? '' : 'button_disabled'
             }`}
             btnType="submit"
             btnText={btnText}

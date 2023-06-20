@@ -7,7 +7,7 @@ function Register({ onRegister }) {
   const { values, handleChange, isValid, errors, EmailValidator } = useFormAndValidation();
   // валидация почты
   const validEmail = EmailValidator(values.email);
-  
+
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
@@ -21,7 +21,9 @@ function Register({ onRegister }) {
       btnText="Зарегистрироваться"
       linkText="Войти"
       onSubmit={handleSubmit}
-      isValidBtn={isValid}>
+      isValidBtn={isValid}
+      isValidEmail={validEmail}
+      >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
         <input
@@ -34,7 +36,7 @@ function Register({ onRegister }) {
           placeholder="Ваше имя"
           minLength="2"
           maxLength="100"
-          autocomplete="off"
+          autoComplete="off"
           required
         />
         <span className="form__input-error">{errors.name}</span>
@@ -50,11 +52,11 @@ function Register({ onRegister }) {
           placeholder="Ваша почта"
           minLength="2"
           maxLength="30"
-          autocomplete="off"
+          autoComplete="off"
           required
         />
         <span className="form__input-error">
-          {validEmail ? '' : `Email введен неверно: ${errors.email}`}
+          {validEmail ? '' : `Email введен неверно ${errors.email}`}
         </span>
 
         <label className="form__label">Пароль</label>
@@ -68,7 +70,7 @@ function Register({ onRegister }) {
           minLength="8"
           maxLength="30"
           onChange={handleChange}
-          autocomplete="off"
+          autoComplete="off"
           required
         />
         <span className="form__input-error"> {errors.password}</span>

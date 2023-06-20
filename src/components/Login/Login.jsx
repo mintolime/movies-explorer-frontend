@@ -25,7 +25,9 @@ function Login({ onAuthorization }) {
       btnText="Войти"
       linkText="Регистрация"
       onSubmit={handleSubmit}
-      isValidBtn={isValid}>
+      isValidBtn={isValid}
+      isValidEmail={validEmail}
+      >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>
         <input
@@ -41,7 +43,7 @@ function Login({ onAuthorization }) {
           required
         />
         <span className="form__input-error">
-          {validEmail ? '' : `Email введен неверно: ${errors.email}`}
+          {validEmail ? '' : `Email введен неверно ${errors.email}`}
         </span>
 
         <label className="form__label form__label_profile">Пароль </label>
