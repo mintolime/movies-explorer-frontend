@@ -6,10 +6,11 @@ import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import React from 'react';
 
-function Profile({onLogout,onUpdateUser}) {
-  const { values, handleChange, errors,resetForm} = useFormAndValidation();
+function Profile({ onLogout, onUpdateUser,isCorrectResponse }) {
+  const { values, handleChange, errors, resetForm,isValid, EmailValidator } = useFormAndValidation();
+  const validEmail = EmailValidator(values.email);
   const currentUser = React.useContext(CurrentUserContext);
-  
+
   React.useEffect(() => {
     currentUser ? resetForm(currentUser) : resetForm();
   }, [resetForm, currentUser]);
@@ -25,11 +26,10 @@ function Profile({onLogout,onUpdateUser}) {
     });
   }
 
-  // console.log(currentUser)
-  // console.log(currentUser.name)
+  // console.log(isCorrectResponse)
   return (
     <section className="profile">
-      <form className="profile__form"  onSubmit={handleSubmit}>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <p className="profile__heading">{`Привет, ${values.name} !`}</p>
         <fieldset className="profile__container">
           <label className="profile__label">Имя</label>
@@ -45,6 +45,7 @@ function Profile({onLogout,onUpdateUser}) {
             maxLength="100"
             required
           />
+          <span className="profile__input-error">{errors.name}</span>
           {/* <span className="profile__input-error">{errors.name}</span> */}
         </fieldset>
 
@@ -62,27 +63,26 @@ function Profile({onLogout,onUpdateUser}) {
             maxLength="30"
             required
           />
+          <span className="profile__input-error">
+            {validEmail ? '' : `Email введен неверно ${errors.email}`}
+          </span>
+
           {/* <span className="profile__input-error">{errors.email}</span> */}
         </fieldset>
-        {/* <span className="profile__input-error">{`Ошибка ввода имени: ${errors.name}`}</span>
-        <span className="profile__input-error">{`Ошибка ввода почты: ${errors.email}`}</span> */}
-        <Button btnClass="button_type_profile-save" btnType="submit" btnText="Сохранить"/>
-      </form>
-
-      <div className="profile__button-box">
-        {/* <Button
+        <div className="profile__button-box">
+          {/* <Button
           btnClass="button button_type_profile-edit"
           btnType="button"
           btnText="Редактировать"
         /> */}
-        
-        <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
-          Выйти из аккаунта
-        </Link>
-        
+          <Button btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`} btnType="submit" btnText="Сохранить" />
+          <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
+            Выйти из аккаунта
+          </Link>
 
-        {/* <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
-      </div>
+          {/* <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
+        </div>
+      </form>
     </section>
   );
 }

@@ -56,6 +56,21 @@ function App() {
   });
 
   React.useEffect(() => {
+    apiDataMain
+      .getAllData()
+      .then(([userData, initialOwnMovies]) => {
+        setIsOwnMovies(initialOwnMovies);
+        setCurrentUser(userData);
+        // console.log(userData)
+        // console.log(res)
+        // console.log(initialOwnMovies);
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  }, []);
+
+  React.useEffect(() => {
     if (isSearchMovies) {
       apiDataMovies
         .getAllData()
@@ -69,7 +84,7 @@ function App() {
     }
   }, [isSearchMovies]);
 
-  // проверка токена 
+  // проверка токена
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -86,22 +101,6 @@ function App() {
           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         });
     }
-  }, []);
-
-  // сделать в одну функцию
-  React.useEffect(() => {
-    apiDataMain.getAllData()
-      .then(([userData,initialOwnMovies]) => {
-        setIsOwnMovies(initialOwnMovies);
-        setCurrentUser(userData)
-        console.log(userData)
-        // console.log(res)
-        console.log(initialOwnMovies);
-      })
-      .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
-
   }, []);
 
   const handleOpenPopupSuccess = () => {
@@ -126,7 +125,7 @@ function App() {
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
-      });
+      })
   };
 
   const handleRegister = (data) => {
@@ -154,7 +153,7 @@ function App() {
         setIsLoggedIn(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
-        console.log(data)
+        console.log(data);
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
@@ -184,12 +183,20 @@ function App() {
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />} />
+        <Route
+          path="/movies"
+          element={
+            <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
+          }
+        />
         <Route
           path="/saved-movies"
           element={<SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
-        <Route path="/profile" element={<Profile onLogout={handleLogout} onUpdateUser={handleUpdateUser} />} />
+        <Route
+          path="/profile"
+          element={<Profile onLogout={handleLogout} onUpdateUser={handleUpdateUser} />}
+        />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />

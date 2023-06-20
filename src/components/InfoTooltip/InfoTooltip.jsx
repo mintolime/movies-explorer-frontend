@@ -8,7 +8,7 @@ function InfoTooltip({ isOpen, onClose, isCorrectResponse, isError }) {
    React.useEffect(() => {
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
-        closePopup();
+        onClose();
       }
     }
     if (isOpen) {

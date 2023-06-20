@@ -1,11 +1,13 @@
 // import '../Register/Register.css'
+import React from 'react';
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import React from 'react';
 
 function Register({ onRegister }) {
-  const { values, handleChange, isValid, errors } = useFormAndValidation();
-
+  const { values, handleChange, isValid, errors, EmailValidator } = useFormAndValidation();
+  // валидация почты
+  const validEmail = EmailValidator(values.email);
+  
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
@@ -32,6 +34,7 @@ function Register({ onRegister }) {
           placeholder="Ваше имя"
           minLength="2"
           maxLength="100"
+          autocomplete="off"
           required
         />
         <span className="form__input-error">{errors.name}</span>
@@ -47,9 +50,12 @@ function Register({ onRegister }) {
           placeholder="Ваша почта"
           minLength="2"
           maxLength="30"
+          autocomplete="off"
           required
         />
-        <span className="form__input-error">{errors.email}</span>
+        <span className="form__input-error">
+          {validEmail ? '' : `Email введен неверно: ${errors.email}`}
+        </span>
 
         <label className="form__label">Пароль</label>
         <input
@@ -62,6 +68,7 @@ function Register({ onRegister }) {
           minLength="8"
           maxLength="30"
           onChange={handleChange}
+          autocomplete="off"
           required
         />
         <span className="form__input-error"> {errors.password}</span>

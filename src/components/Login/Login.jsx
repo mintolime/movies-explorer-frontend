@@ -3,15 +3,18 @@ import React from 'react';
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import '../Login/Login.css';
+// import { validate } from '../../utils/functions';
 
 function Login({ onAuthorization }) {
-  const { values, handleChange, isValid, errors } = useFormAndValidation();
+  const { values, handleChange, isValid, errors, EmailValidator } = useFormAndValidation();
+  // валидация почты
+  const validEmail = EmailValidator(values.email);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     if (!values.email || !values.password) {
-      return ;
+      return;
     }
     onAuthorization(values);
   }
@@ -37,7 +40,9 @@ function Login({ onAuthorization }) {
           maxLength="30"
           required
         />
-        <span className="form__input-error">{errors.email}</span>
+        <span className="form__input-error">
+          {validEmail ? '' : `Email введен неверно: ${errors.email}`}
+        </span>
 
         <label className="form__label form__label_profile">Пароль </label>
         <input

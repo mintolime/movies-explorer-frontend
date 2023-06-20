@@ -39,7 +39,7 @@
 
 .profile__container:first-of-type {
   border-bottom: #E8E8E8 1px solid;
-  padding-bottom: 16px;
+  /* padding-bottom: 16px; */
   margin-bottom: 17px;
 }
 
@@ -76,12 +76,13 @@
 }
 
 .profile__input-error {
+  width: inherit;
   display: block;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #FF4062;
-  min-height: 30px;
+  min-height: 28px;
   padding: 0;
   margin: 0;
   border: 0;
@@ -106,12 +107,12 @@
 
 @media screen and (min-width: 420px) {
   .profile__button-box {
-     padding-top: 25%;
+    padding-top: 25%;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .profile__button-box {
-     padding-top: 20%;
+    padding-top: 20%;
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { regExpEmail } from '../utils/constants';
 
 export default function useFormAndValidation() {
   const [values, setValues] = React.useState({});
@@ -21,5 +22,16 @@ export default function useFormAndValidation() {
     [setValues, setErrors, setIsValid],
   );
 
-  return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid };
+  // для валидации почты
+  const EmailValidator = (values) => {
+    const [isValidEmail, setIsValidEmail] = React.useState(false);
+
+    React.useEffect(() => {
+      setIsValidEmail(regExpEmail.test(values));
+    }, [values]);
+
+    return isValidEmail;
+  }
+
+  return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid, EmailValidator };
 }

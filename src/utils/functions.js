@@ -18,13 +18,13 @@ export const handleResponce = (res) => {
   //      throw new Error(text) })
   // }
   // return Promise.reject(res.status);
-     return res.text().then((text) => {
-      return Promise.reject({
-        status: res.status,
-        errorText: JSON.parse(text).message,
-        joiMessage: JSON.parse(text).validation?.body.message || ''
-      });
+  return res.text().then((text) => {
+    return Promise.reject({
+      status: res.status,
+      errorText: JSON.parse(text).message,
+      joiMessage: JSON.parse(text).validation?.body.message || ''
     });
+  });
 };
 
 
