@@ -1,6 +1,6 @@
 import '../Preloader/Preloader.css'
 
-export const Preloader = () => {
+function Preloader(){
   return (
     <div className="preloader">
       <div className="preloader__container">
@@ -10,3 +10,4 @@ export const Preloader = () => {
   )
 };
 
+export default Preloader;

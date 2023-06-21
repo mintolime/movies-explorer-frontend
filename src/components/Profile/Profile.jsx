@@ -28,12 +28,11 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
     });
   }
 
-  // мелькает, вывести в APP
-  // React.useEffect(() => {
-  //   if (isCorrectResponse) {
-  //     setShowSaveBtn(false);
-  //   }
-  // }, [isCorrectResponse]);
+  React.useEffect(() => {
+    if (isCorrectResponse) {
+      setShowSaveBtn(false);
+    } 
+  }, [isCorrectResponse]);
 
   console.log('response', isCorrectResponse);
   console.log('btn', showSaveBtn);
@@ -53,6 +52,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
             placeholder="Имя"
             minLength="2"
             maxLength="100"
+            id='input-name'
             required
           />
           <span className="profile__input-error">{errors.name}</span>
@@ -80,24 +80,40 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
           {/* <span className="profile__input-error">{errors.email}</span> */}
         </fieldset>
         <div className="profile__button-box">
-          {/* {showSaveBtn ? ( */}
+          {showSaveBtn ? (
             <Button
-              btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`}
+              btnClass={`button_type_profile-save `}
               btnType="submit"
               btnText="Сохранить"
             />
-          {/* ) : (
-            <Button
-              btnClass="button button_type_profile-edit"
-              btnType="button"
-              btnText="Редактировать"
-              onClick={(evt) => {
-                evt.preventDefault();
+          ) : (
+            // <Button
+            //   btnClass="button_type_profile-edit"
+            //   btnType="button"
+            //   btnText="Редактировать"
+            //   onClick={() => {
+            //     // evt.preventDefault();
+            //     // setShowSaveBtn(true);
+            //     console.log('тумба-юмба')
+            //   }}
+
+            // />
+
+            <button type="button" className=" button button_type_profile-edit" onClick={() => {
+                // evt.preventDefault();
                 setShowSaveBtn(true);
-              }}
-            />
-          )} */}
-{/* 
+                console.log('тумба-юмба')
+              }}>Редактировать</button>
+
+            // <a className="promo__link page__link" href="#input-name" onClick={() => {
+            //   // evt.preventDefault();
+            //   setShowSaveBtn(true);
+            //   console.log('тумба-юмба')
+            // }}>
+            //   Редактировать
+            // </a>
+          )}
+          {/* 
 {showSaveBtn &&
             <Button
               btnClass="button button_type_profile-edit"

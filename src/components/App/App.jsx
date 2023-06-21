@@ -36,7 +36,7 @@ function App() {
 
   const [isSearchMovies, setSearchMovies] = React.useState(false);
   const [isMovieSave, setMovieSave] = React.useState(false);
-  // const [isLoading,setLoading] = React.useState(false)
+  const [isLoading,setLoading] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
@@ -73,6 +73,7 @@ function App() {
 
   React.useEffect(() => {
     if (isSearchMovies) {
+      setLoading(true)
       apiDataMovies
         .getAllData()
         .then(([initialMovies]) => {
@@ -126,7 +127,10 @@ function App() {
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
-      });
+      })
+      // .finally(()=>{
+      //   setIsSuccessResponse(false);
+      // })
   };
 
   const handleRegister = (data) => {
@@ -188,7 +192,7 @@ function App() {
         <Route
           path="/movies"
           element={
-            <ProtectedRoute component={Movies} isLoggedIn={isLoggedIn} movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
+            <ProtectedRoute component={Movies} isLoggedIn={isLoggedIn} movies={movies} searchActive={isSearchMovies} isLoadingActive={isLoading} onSearch={handleSearchMovies} />
             // <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
           }
         />

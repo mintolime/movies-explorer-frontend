@@ -8,7 +8,7 @@ function MoviesCardList({moviesData,searchActive}) {
   return (
     <section className="movies" aria-label="галерея фильмов пользователя">
       <ul className="movies__list">
-        {moviesData.map((movie) => (
+        {moviesData.slice(0, 13).map((movie) => (
           <MoviesCard movie={movie} key={movie.id} />
         ))}
       </ul>
