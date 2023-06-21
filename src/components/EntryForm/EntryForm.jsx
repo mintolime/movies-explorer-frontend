@@ -6,7 +6,7 @@ import logo from '../../images/logo-header.svg';
 import Button from '../Button/Button';
 
 //поправить название
-function EntryForm({ title, children, btnText, linkText, onSubmit,isValidBtn,isValidEmail }) {
+function EntryForm({ title, children, btnText, linkText, onSubmit, isValidBtn, isValidEmail }) {
   const location = useLocation();
 
   return (

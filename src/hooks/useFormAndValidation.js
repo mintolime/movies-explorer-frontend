@@ -27,6 +27,7 @@ export default function useFormAndValidation() {
     const [isValidEmail, setIsValidEmail] = React.useState(false);
 
     React.useEffect(() => {
+      if (!values) { return }
       setIsValidEmail(regExpEmail.test(values));
     }, [values]);
 

@@ -17,8 +17,8 @@ import { headerRoutes, footerRoutes } from '../../utils/constants';
 import { checkPath } from '../../utils/functions';
 import { apiDataMovies } from '../../utils/api/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { MainApi, apiDataMain } from '../../utils/api/MainApi';
-import { Auth, apiAuth } from '../../utils/api/AuthApi';
+import { MainApi } from '../../utils/api/MainApi';
+import { Auth } from '../../utils/api/AuthApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -35,8 +35,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [isSearchMovies, setSearchMovies] = React.useState(false);
-  const [isMovieSave, setMovieSave] = React.useState(false);
-  const [isLoading,setLoading] = React.useState(false)
+  // const [isMovieSave, setMovieSave] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
@@ -73,16 +73,24 @@ function App() {
 
   React.useEffect(() => {
     if (isSearchMovies) {
-      setLoading(true)
-      apiDataMovies
-        .getAllData()
-        .then(([initialMovies]) => {
-          setMovies(initialMovies);
-          console.log(initialMovies);
-        })
-        .catch((err) => {
-          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        });
+      setIsLoading(true);
+      // выставляем задержку в одну секунду для отображения лоудера
+      const timeoutId = setTimeout(() => {
+        apiDataMovies
+          .getAllData()
+          .then(([initialMovies]) => {
+            setMovies(initialMovies);
+            console.log(initialMovies);
+          })
+          .catch((err) => {
+            console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [isSearchMovies]);
 
@@ -127,10 +135,10 @@ function App() {
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
-      })
-      // .finally(()=>{
-      //   setIsSuccessResponse(false);
-      // })
+      });
+    // .finally(()=>{
+    //   setIsSuccessResponse(false);
+    // })
   };
 
   const handleRegister = (data) => {
@@ -181,41 +189,46 @@ function App() {
     setSearchMovies(true);
   };
 
-  // console.log(isSearchMovies);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
-        <Route path="/" element={<Main />}
-        />
+        <Route path="/" element={<Main />} />
         <Route
           path="/movies"
           element={
-            <ProtectedRoute component={Movies} isLoggedIn={isLoggedIn} movies={movies} searchActive={isSearchMovies} isLoadingActive={isLoading} onSearch={handleSearchMovies} />
-            // <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
+            <ProtectedRoute
+              component={Movies}
+              isLoggedIn={isLoggedIn}
+              movies={movies}
+              searchActive={isSearchMovies}
+              isLoadingActive={isLoading}
+              onSearch={handleSearchMovies}
+            />
           }
         />
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} movies={isOwnMovies} onSearch={handleSearchMovies} />
+            <ProtectedRoute
+              component={SavedMovies}
+              isLoggedIn={isLoggedIn}
+              movies={isOwnMovies}
+              onSearch={handleSearchMovies}
+            />
           }
-        // <SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute component={Profile}
+            <ProtectedRoute
+              component={Profile}
+              isOpen={isInfoTooltipOpen}
               isLoggedIn={isLoggedIn}
               onLogout={handleLogout}
               onUpdateUser={handleUpdateUser}
-              isCorrectResponse={isSuccessResponse} />
-            // <Profile
-            //   onLogout={handleLogout}
-            //   onUpdateUser={handleUpdateUser}
-            //   isCorrectResponse={isSuccessResponse}
-            // />
+              isCorrectResponse={isSuccessResponse}
+            />
           }
         />
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
