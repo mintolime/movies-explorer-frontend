@@ -97,13 +97,23 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
               }}
             />
           )} */}
+{/* 
+{showSaveBtn &&
+            <Button
+              btnClass="button button_type_profile-edit"
+              btnType="submit"
+              btnText="Редактировать"
+              onClick={(evt) => {
+                evt.preventDefault();
+                setShowSaveBtn(false);
+              }}
+            />
+          } */}
 
-          {/* <Button btnClass={`button_type_profile-save ${validEmail & isValid ? '' : 'button_disabled'}`} btnType="submit" btnText="Сохранить" /> */}
           <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
             Выйти из аккаунта
           </Link>
 
-          {/* <Button btnClass="button_type_profile-save button_disabled" btnType="submit" btnText="Сохранить" /> */}
         </div>
       </form>
     </section>

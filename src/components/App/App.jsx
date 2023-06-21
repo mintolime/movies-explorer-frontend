@@ -183,25 +183,30 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header isLoggedIn={isLoggedIn} />}
       <Routes>
-        <Route path="/" element={<ProtectedRoute component={Main}/>} />
+        <Route path="/" element={<Main />}
+        />
         <Route
           path="/movies"
           element={
-            <ProtectedRoute component={Movies}  movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies}/>
+            <ProtectedRoute component={Movies} isLoggedIn={isLoggedIn} movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
             // <Movies movies={movies} searchActive={isSearchMovies} onSearch={handleSearchMovies} />
           }
         />
         <Route
           path="/saved-movies"
-          element={ <ProtectedRoute component={SavedMovies} movies={isOwnMovies} onSearch={handleSearchMovies}/>}
-          // <SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
+          element={
+            <ProtectedRoute component={SavedMovies} isLoggedIn={isLoggedIn} movies={isOwnMovies} onSearch={handleSearchMovies} />
+          }
+        // <SavedMovies movies={isOwnMovies} onSearch={handleSearchMovies} />}
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute component={Profile}  onLogout={handleLogout}
+            <ProtectedRoute component={Profile}
+              isLoggedIn={isLoggedIn}
+              onLogout={handleLogout}
               onUpdateUser={handleUpdateUser}
-              isCorrectResponse={isSuccessResponse}/>
+              isCorrectResponse={isSuccessResponse} />
             // <Profile
             //   onLogout={handleLogout}
             //   onUpdateUser={handleUpdateUser}
