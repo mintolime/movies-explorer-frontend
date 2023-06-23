@@ -7,7 +7,7 @@ export class MainApi {
   }
 
   getAllData() {
-    return Promise.all([this.getUserData(),this.getAllOwnMovies()]);
+    return Promise.all([this.getUserData(), this.getAllOwnMovies()]);
   }
 
   getAllOwnMovies() {
@@ -30,6 +30,23 @@ export class MainApi {
       method: 'PATCH',
       body: JSON.stringify(data),
     }).then((res) => handleResponce(res));
+  }
+  
+  saveMovie(movie) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(movie)
+    })
+      .then((res) => handleResponce(res));
+  }
+
+  deleteMovie(movie) {
+    return fetch(`${this._url}/movies/${movie}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then((res) => handleResponce(res));
   }
 }
 
