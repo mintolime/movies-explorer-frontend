@@ -62,26 +62,3 @@
   margin: 0 auto;
 }
 
-.button_type_close {
-  background: url('../../images/icon-close.svg');
-  background-size: cover;
-  border: none;
-  position: absolute;
-  top: -35px;
-  right: 0;
-  width: 20px;
-  height: 20px;
-}
-
-@media screen and (min-width: 720px) {
-  .button_type_close {
-    top: -45px;
-    right: -45px;
-    width: 42px;
-    height: 42px;
-  }
-}
-
-.button_type_close:hover {
-  opacity: .6;
-}

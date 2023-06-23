@@ -1,3 +1,4 @@
+import { apiBestMovieUrl } from "../constants";
 import { handleResponce } from "../functions";
 
 export class MainApi {
@@ -31,20 +32,32 @@ export class MainApi {
       body: JSON.stringify(data),
     }).then((res) => handleResponce(res));
   }
-  
+
   saveMovie(movie) {
-    return fetch(`${this._url}/movies`, {
+    return fetch(`${this.url}/movies`, {
       method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(movie)
+      headers: this.headers,
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `${apiBestMovieUrl}${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `${apiBestMovieUrl}${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN
+      }),
     })
-      .then((res) => handleResponce(res));
+      .then((res) => { handleResponce(res) });
   }
 
   deleteMovie(movie) {
-    return fetch(`${this._url}/movies/${movie}`, {
+    return fetch(`${this.url}/movies/${movie}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this.headers
     })
       .then((res) => handleResponce(res));
   }

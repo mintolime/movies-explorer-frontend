@@ -7,3 +7,5 @@ export const regExpEmail = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=
 //масcивы роутов компонента
 export const headerRoutes = ['/','/movies','/saved-movies','/profile']
 export const footerRoutes = ['/','/movies','/saved-movies']
+
+export const apiBestMovieUrl = 'https://api.nomoreparties.co';

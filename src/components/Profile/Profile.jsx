@@ -34,8 +34,8 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
     }
   }, [isCorrectResponse]);
 
-  console.log('response', isCorrectResponse);
-  console.log('btn', showSaveBtn);
+  // console.log('response', isCorrectResponse);
+  // console.log('btn', showSaveBtn);
   return (
     <section className="profile">
       <form className="profile__form" onSubmit={handleSubmit}>

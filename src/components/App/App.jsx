@@ -25,6 +25,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
 
@@ -57,19 +58,20 @@ function App() {
   });
 
   React.useEffect(() => {
-    apiDataMain
-      .getAllData()
-      .then(([userData, initialOwnMovies]) => {
-        setIsOwnMovies(initialOwnMovies);
-        setCurrentUser(userData);
-        // console.log(userData)
-        // console.log(res)
-        // console.log(initialOwnMovies);
-      })
-      .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
-  }, []);
+    isLoggedIn &&
+      apiDataMain
+        .getAllData()
+        .then(([userData, initialOwnMovies]) => {
+          setIsOwnMovies(initialOwnMovies);
+          setCurrentUser(userData);
+          // console.log(userData)
+          // console.log(res)
+          // console.log(initialOwnMovies);
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        });
+  }, [isLoggedIn]);
 
   React.useEffect(() => {
     if (isSearchMovies) {
@@ -121,6 +123,18 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
+  const handleSaveMovie = (movie) => {
+    apiDataMain
+      .saveMovie(movie)
+      .then((res) => {
+        console.log(res);
+        setIsOwnMovies(res);
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  };
+
   const handleUpdateUser = (data) => {
     return apiDataMain
       .updateUserData(data)
@@ -167,6 +181,7 @@ function App() {
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(data);
+
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
@@ -204,6 +219,7 @@ function App() {
               searchActive={isSearchMovies}
               isLoadingActive={isLoading}
               onSearch={handleSearchMovies}
+              onSaveMovie={handleSaveMovie}
             />
           }
         />
