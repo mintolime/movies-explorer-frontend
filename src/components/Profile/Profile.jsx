@@ -7,9 +7,9 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import React from 'react';
 
 function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
-  const { values, handleChange, errors, resetForm, isValid, EmailValidator } =
+  const { values, handleChange, errors, resetForm, isValid,isValidEmail } =
     useFormAndValidation();
-  const validEmail = EmailValidator(values.email);
+  // const validEmail = EmailValidator(values.email);
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
 
@@ -74,7 +74,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
             required
           />
           <span className="profile__input-error">
-            {validEmail ? '' : `Email введен неверно ${errors.email}`}
+            {isValidEmail ? '' : `Email введен неверно ${errors.email}`}
           </span>
 
           {/* <span className="profile__input-error">{errors.email}</span> */}
@@ -83,7 +83,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
           {showSaveBtn ? (
             <Button
               btnClass={`button_type_profile-save ${
-                isValid & validEmail ? '' : 'button_disabled'
+                isValid & isValidEmail ? '' : 'button_disabled'
               } `}
               btnType="submit"
               btnText="Сохранить"

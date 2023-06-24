@@ -6,9 +6,9 @@ import '../Login/Login.css';
 // import { validate } from '../../utils/functions';
 
 function Login({ onAuthorization }) {
-  const { values, handleChange, isValid, errors, EmailValidator } = useFormAndValidation();
+  const { values, handleChange, isValid,isValidEmail ,errors } = useFormAndValidation();
   // валидация почты
-  const validEmail = EmailValidator(values.email);
+  // const validEmail = EmailValidator(values.email);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -26,7 +26,7 @@ function Login({ onAuthorization }) {
       linkText="Регистрация"
       onSubmit={handleSubmit}
       isValidBtn={isValid}
-      isValidEmail={validEmail}
+      isValidEmail={isValidEmail}
       >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>
@@ -43,7 +43,7 @@ function Login({ onAuthorization }) {
           required
         />
         <span className="form__input-error">
-          {validEmail ? '' : `Email введен неверно ${errors.email}`}
+          {isValidEmail  ? '' : `Email введен неверно ${errors.email}`}
         </span>
 
         <label className="form__label form__label_profile">Пароль </label>

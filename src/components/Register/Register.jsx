@@ -4,9 +4,8 @@ import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Register({ onRegister }) {
-  const { values, handleChange, isValid, errors, EmailValidator } = useFormAndValidation();
+  const { values, handleChange, isValid, errors,isValidEmail } = useFormAndValidation();
   // валидация почты
-  const validEmail = EmailValidator(values.email);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -14,6 +13,7 @@ function Register({ onRegister }) {
     console.log('values', values);
     onRegister(values);
   }
+console.log(isValidEmail)
 
   return (
     <EntryForm
@@ -22,7 +22,7 @@ function Register({ onRegister }) {
       linkText="Войти"
       onSubmit={handleSubmit}
       isValidBtn={isValid}
-      isValidEmail={validEmail}
+      isValidEmail={isValidEmail}
       >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
@@ -56,7 +56,7 @@ function Register({ onRegister }) {
           required
         />
         <span className="form__input-error">
-          {validEmail ? '' : `Email введен неверно ${errors.email}`}
+          {isValidEmail ? '' : `Email введен неверно ${errors.email}`}
         </span>
 
         <label className="form__label">Пароль</label>
