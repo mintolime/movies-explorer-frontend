@@ -18,7 +18,7 @@ function Header({isLoggedIn}) {
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>
 
-      {size.isScreenMd ? (
+      {size.width < 767 ? (
         <Navigation isLoggedIn={isLoggedIn} />
       ) : (
         <HeaderNav isLoggedIn={isLoggedIn} />

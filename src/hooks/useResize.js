@@ -19,8 +19,8 @@ export const useResize = () => {
 
   return {
     width,
-    // isScreenSm: width >= SCREEN_SM,
-    isScreenMd: width <= SCREEN_MD,
-    // isScreenXl: width >= SCREEN_XL,
+    isScreenSm: width >= SCREEN_SM,
+    isScreenMd: width >= SCREEN_MD,
+    isScreenXl: width >= SCREEN_XL,
   };
 }
