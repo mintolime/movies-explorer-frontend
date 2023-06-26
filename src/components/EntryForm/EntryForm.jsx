@@ -20,7 +20,7 @@ function EntryForm({ title, children, btnText, linkText, onSubmit, isValidBtn, i
           {children}
           <Button
             btnClass={`button_type_entry button_type_entry_profile ${
-              isValidBtn & isValidEmail ? '' : 'button_disabled'
+              isValidBtn ? '' : 'button_disabled'
             }`}
             btnType="submit"
             btnText={btnText}

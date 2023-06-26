@@ -1,19 +1,16 @@
 // import '../Register/Register.css'
-import React from 'react';
-import EntryForm from '../EntryForm/EntryForm';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import React from "react";
+import EntryForm from "../EntryForm/EntryForm";
+import useFormAndValidation from "../../hooks/useFormAndValidation";
 
 function Register({ onRegister }) {
-  const { values, handleChange, isValid, errors,isValidEmail } = useFormAndValidation();
-  // валидация почты
-
+  const { values, handleChange, isValid, errors } = useFormAndValidation();
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    console.log('values', values);
+    console.log("values", values);
     onRegister(values);
   }
-console.log(isValidEmail)
 
   return (
     <EntryForm
@@ -22,13 +19,12 @@ console.log(isValidEmail)
       linkText="Войти"
       onSubmit={handleSubmit}
       isValidBtn={isValid}
-      isValidEmail={isValidEmail}
-      >
+    >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
         <input
-          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
-          value={values.name || ''}
+          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
+          value={values.name || ""}
           onChange={handleChange}
           name="name"
           type="text"
@@ -43,8 +39,8 @@ console.log(isValidEmail)
 
         <label className="form__label">Email</label>
         <input
-          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
-          value={values.email || ''}
+          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
+          value={values.email || ""}
           onChange={handleChange}
           name="email"
           type="email"
@@ -55,18 +51,16 @@ console.log(isValidEmail)
           autoComplete="off"
           required
         />
-        <span className="form__input-error">
-          {isValidEmail ? '' : `Email введен неверно ${errors.email}`}
-        </span>
+        <span className="form__input-error">{errors.email}</span>
 
         <label className="form__label">Пароль</label>
         <input
-          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
+          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
           name="password"
           type="password"
           aria-label="Ваш пароль"
           placeholder="Ваш пароль"
-          value={values.password || ''}
+          value={values.password || ""}
           minLength="8"
           maxLength="30"
           onChange={handleChange}

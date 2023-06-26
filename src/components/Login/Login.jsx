@@ -1,14 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import EntryForm from '../EntryForm/EntryForm';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
-import '../Login/Login.css';
+import EntryForm from "../EntryForm/EntryForm";
+import useFormAndValidation from "../../hooks/useFormAndValidation";
+import "../Login/Login.css";
 // import { validate } from '../../utils/functions';
 
 function Login({ onAuthorization }) {
-  const { values, handleChange, isValid,isValidEmail ,errors } = useFormAndValidation();
-  // валидация почты
-  // const validEmail = EmailValidator(values.email);
+  const { values, handleChange, isValid,  errors } =
+    useFormAndValidation();
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -26,13 +25,12 @@ function Login({ onAuthorization }) {
       linkText="Регистрация"
       onSubmit={handleSubmit}
       isValidBtn={isValid}
-      isValidEmail={isValidEmail}
-      >
+    >
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label form__label_profile ">Email </label>
         <input
-          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
-          value={values.email || ''}
+          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
+          value={values.email || ""}
           onChange={handleChange}
           name="email"
           type="email"
@@ -42,18 +40,16 @@ function Login({ onAuthorization }) {
           maxLength="30"
           required
         />
-        <span className="form__input-error">
-          {isValidEmail  ? '' : `Email введен неверно ${errors.email}`}
-        </span>
+        <span className="form__input-error">{errors.email}</span>
 
         <label className="form__label form__label_profile">Пароль </label>
         <input
-          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
+          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
           name="password"
           type="password"
           aria-label="Ваш пароль"
           placeholder="Ваш пароль"
-          value={values.password || ''}
+          value={values.password || ""}
           minLength="8"
           maxLength="30"
           onChange={handleChange}

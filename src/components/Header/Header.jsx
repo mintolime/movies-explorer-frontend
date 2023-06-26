@@ -7,6 +7,7 @@ import { useResize } from '../../hooks/useResize';
 import logo from '../../images/logo-header.svg';
 
 import HeaderNav from './HeaderNav';
+import { SCREEN_MD } from '../../utils/constants';
 
 function Header({isLoggedIn}) {
   const size = useResize();
@@ -17,8 +18,8 @@ function Header({isLoggedIn}) {
       <Link className="header__link" to="/">
         <img className="header__logo" src={logo} alt="логотип шапки сайта" />
       </Link>
-
-      {size.width < 767 ? (
+      
+      {size.width < SCREEN_MD ? (
         <Navigation isLoggedIn={isLoggedIn} />
       ) : (
         <HeaderNav isLoggedIn={isLoggedIn} />

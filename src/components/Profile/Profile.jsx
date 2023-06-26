@@ -1,21 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import useFormAndValidation from '../../hooks/useFormAndValidation';
-import Button from '../Button/Button';
-import '../Profile/Profile.css';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import React from 'react';
+import useFormAndValidation from "../../hooks/useFormAndValidation";
+import Button from "../Button/Button";
+import "../Profile/Profile.css";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+import React from "react";
 
 function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
-  const { values, handleChange, errors, resetForm, isValid,isValidEmail } =
+  const { values, handleChange, errors, isValid, setValues, setIsValid } =
     useFormAndValidation();
-  // const validEmail = EmailValidator(values.email);
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
-
-  React.useEffect(() => {
-    currentUser ? resetForm(currentUser) : resetForm();
-  }, [resetForm, currentUser]);
+  // // console.log('user',currentUser.name);
+  // //  console.log('value',values.name);
+  //   console.log('checkBT',currentUser.name !== values.name);
+  //    console.log('checkval',);
+    
+React.useEffect(() => {
+  if (currentUser) {
+    setValues(currentUser);
+    setIsValid(true);
+  }
+}, [currentUser, setIsValid, setValues]);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -33,9 +39,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
       setShowSaveBtn(false);
     }
   }, [isCorrectResponse]);
-
-  // console.log('response', isCorrectResponse);
-  // console.log('btn', showSaveBtn);
+  
   return (
     <section className="profile">
       <form className="profile__form" onSubmit={handleSubmit}>
@@ -44,7 +48,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
           <label className="profile__label">Имя</label>
           <input
             className="profile__input"
-            value={values.name || ''}
+            value={values.name || ""}
             onChange={handleChange}
             name="name"
             type="text"
@@ -63,7 +67,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
           <label className="profile__label">Email</label>
           <input
             className="profile__input"
-            value={values.email || ''}
+            value={values.email || ""}
             onChange={handleChange}
             name="email"
             type="email"
@@ -73,33 +77,40 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
             maxLength="30"
             required
           />
-          <span className="profile__input-error">
+          {/* <span className="profile__input-error">
             {isValidEmail ? '' : `Email введен неверно ${errors.email}`}
-          </span>
+          </span> */}
 
-          {/* <span className="profile__input-error">{errors.email}</span> */}
+          <span className="profile__input-error">{errors.email}</span>
         </fieldset>
         <div className="profile__button-box">
+           {/* по тз должна быть откл. кнопка редактирования  
+           в моей реализации она служит ссылкой на импут и переход в режим редактирования  */}
           {showSaveBtn ? (
-            <Button
-              btnClass={`button_type_profile-save ${
-                isValid & isValidEmail ? '' : 'button_disabled'
-              } `}
-              btnType="submit"
-              btnText="Сохранить"
-              // btnText={isCorrectResponse ? 'Сохранение...' : 'Сохранить'}
-            />
+             <Button
+            btnClass={`button_type_profile-save ${
+              !currentUser || currentUser.name === values.name || !isValid ? "button_disabled" : ""
+            } `}
+            btnType="submit"
+            btnText="Сохранить"
+            // disabled={!currentUser || currentUser.name === values.name || !isValid}
+          />
           ) : (
             <a
               className="promo__link page__link"
               href="#input-name"
               onClick={() => {
                 setShowSaveBtn(true);
-              }}>
+              }}
+            >
               Редактировать
             </a>
           )}
-          <Link to="/" className="profile__link_logout page__link" onClick={onLogout}>
+          <Link
+            to="/"
+            className="profile__link_logout page__link"
+            onClick={onLogout}
+          >
             Выйти из аккаунта
           </Link>
         </div>
