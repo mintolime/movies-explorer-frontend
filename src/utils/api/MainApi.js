@@ -54,12 +54,11 @@ export class MainApi {
       .then((res) => { handleResponce(res) });
   }
 
-  deleteMovie(movie) {
-    return fetch(`${this.url}/movies/${movie}`, {
+   deleteMovie(id) {
+    return fetch(`${this.url}/movies/${id}`, {
       method: 'DELETE',
       headers: this.headers
-    })
-      .then((res) => handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 }
 

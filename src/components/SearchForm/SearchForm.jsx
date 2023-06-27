@@ -1,8 +1,8 @@
-import '../SearchForm/SearchForm.css';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import "../SearchForm/SearchForm.css";
+import useFormAndValidation from "../../hooks/useFormAndValidation";
 // import find from '../../images/icon-find.png';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import Button from '../Button/Button';
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import Button from "../Button/Button";
 
 function SearchForm({ onSearchMovies }) {
   const { values, handleChange, isValid } = useFormAndValidation();
@@ -23,18 +23,22 @@ function SearchForm({ onSearchMovies }) {
           className="search-form__input"
           type="search"
           placeholder="Фильм"
-          value={values.movies || ''}
+          value={values.movies || ""}
           onChange={handleChange}
           name="movies"
           aria-label="Поиск фильмов"
           minLength="2"
           maxLength="100"
-          required></input>
-        <Button btnClass="button_type_search" btnType="submit" />
+          required
+        ></input>
+        <Button
+          btnClass={`button_type_search ${isValid ? "" : "button_disabled"}`}
+          btnType="submit"
+        />
       </form>
-      {/* <span className="search-form__input-error">
-        {isValid ? '' : 'Нужно ввести ключевое слово'}
-      </span> */}
+      <span className="search-form__input-error">
+        {isValid ? "" : "Нужно ввести ключевое слово"}
+      </span>
       <FilterCheckbox />
     </section>
   );

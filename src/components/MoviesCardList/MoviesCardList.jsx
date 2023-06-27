@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { useResize } from "../../hooks/useResize";
 import React from "react";
 
-function MoviesCardList({ moviesData, searchActive, onSaveMovie, onDelete }) {
+function MoviesCardList({ moviesData, searchActive, onSaveMovie, onDeleteMovie }) {
   const size = useResize();
   // стейт отображает количество карточек в зависимости от размера экрана 
   const [moviesToShow, setMoviesToShow] = React.useState(
@@ -29,7 +29,7 @@ function MoviesCardList({ moviesData, searchActive, onSaveMovie, onDelete }) {
             movie={movie}
             key={movie.id || movie.movieId}
             onSaveMovie={onSaveMovie}
-            onDelete={onDelete}
+            onDeleteMovie={onDeleteMovie}
           />
         ))}
       </ul>

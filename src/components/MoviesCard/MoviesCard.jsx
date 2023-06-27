@@ -6,12 +6,12 @@ import '../MoviesCard/MoviesCard.css';
 import { getTimeFromMins } from '../../utils/functions';
 import { apiBestMovieUrl } from '../../utils/constants';
 
-function MoviesCard({ movie, onSaveMovie }) {
+function MoviesCard({ movie, onSaveMovie,onDeleteMovie }) {
   const location = useLocation();
     const imageUrl = movie.image.url
     ? `${apiBestMovieUrl}${movie.image.url}`
     : movie.image;
-  // console.log(onSaveMovie)
+  // console.log(onDeleteMovie)
   return (
     <li className="movies__item">
       <div className="movies__heading">
@@ -30,7 +30,7 @@ function MoviesCard({ movie, onSaveMovie }) {
         />
       </Link>
       {location.pathname === '/saved-movies' && (
-        <Button btnClass="button button_type_movie  button_type_movie-delete" btnType="button" />
+        <Button btnClass="button button_type_movie  button_type_movie-delete" btnType="button" onClick={() => onDeleteMovie(movie)} />
       )}
 
       {/* <Button btnClass='button  button_type_movie  button_type_movie-save button_type_save_active' btnType='button' /> */}

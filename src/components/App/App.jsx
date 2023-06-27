@@ -1,26 +1,26 @@
-import React from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
-import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-import Movies from '../Movies/Movies';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import Profile from '../Profile/Profile';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import Movies from "../Movies/Movies";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import Profile from "../Profile/Profile";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
-import { headerRoutes, footerRoutes } from '../../utils/constants';
-import { checkPath } from '../../utils/functions';
-import { apiDataMovies } from '../../utils/api/MoviesApi';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { MainApi } from '../../utils/api/MainApi';
-import { Auth } from '../../utils/api/AuthApi';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { headerRoutes, footerRoutes } from "../../utils/constants";
+import { checkPath } from "../../utils/functions";
+import { apiDataMovies } from "../../utils/api/MoviesApi";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { MainApi } from "../../utils/api/MainApi";
+import { Auth } from "../../utils/api/AuthApi";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const location = useLocation();
@@ -43,17 +43,17 @@ function App() {
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
 
   const apiDataMain = new MainApi({
-    url: 'https://api.mintolime-movies.nomoredomains.rocks',
+    url: "https://api.mintolime-movies.nomoredomains.rocks",
     headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   });
 
   const apiAuth = new Auth({
-    url: 'https://api.mintolime-movies.nomoredomains.rocks',
+    url: "https://api.mintolime-movies.nomoredomains.rocks",
     headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
+      "Content-Type": "application/json; charset=UTF-8",
     },
   });
 
@@ -82,7 +82,7 @@ function App() {
           .getAllData()
           .then(([initialMovies]) => {
             setMovies(initialMovies);
-            console.log(initialMovies);
+            // console.log(initialMovies);
           })
           .catch((err) => {
             console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -98,7 +98,7 @@ function App() {
 
   // проверка токена
   React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       // проверим токен
       apiAuth
@@ -106,7 +106,7 @@ function App() {
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
-            navigate('/', { replace: true });
+            navigate(location.pathname);
           }
         })
         .catch((err) => {
@@ -124,6 +124,7 @@ function App() {
   };
 
   const handleSaveMovie = (movie) => {
+    const isLiked = movies.some((i) => i._id === currentUser._id);
     apiDataMain
       .saveMovie(movie)
       .then((res) => {
@@ -135,8 +136,21 @@ function App() {
       });
   };
 
+  const handleDeleteMovie = (movie) => {
+    apiDataMain
+      .deleteMovie(movie._id)
+      .then(() => {
+        setIsOwnMovies((state) =>
+          state.filter((item) => (item._id === movie._id ? "" : item))
+        );
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  };
+
   const handleUpdateUser = (data) => {
-    return apiDataMain
+    apiDataMain
       .updateUserData(data)
       .then((data) => {
         setIsSuccessResponse(true);
@@ -150,20 +164,17 @@ function App() {
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
       });
-    // .finally(()=>{
-    //   setIsSuccessResponse(false);
-    // })
   };
 
   const handleRegister = (data) => {
-    return apiAuth
+    apiAuth
       .register(data)
       .then((res) => {
         setIsRegistration(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(res);
-        navigate('/signin', { replace: true });
+        navigate("/signin", { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
@@ -182,8 +193,8 @@ function App() {
         handleOpenPopupSuccess();
         console.log(data);
 
-        localStorage.setItem('jwt', data.token);
-        navigate('/', { replace: true });
+        localStorage.setItem("jwt", data.token);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
@@ -194,8 +205,8 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
-    navigate('/signin', { replace: true });
+    localStorage.removeItem("jwt");
+    navigate("/signin", { replace: true });
     setIsLoggedIn(false);
   };
 
@@ -231,6 +242,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               movies={isOwnMovies}
               onSearch={handleSearchMovies}
+              onDeleteMovie={handleDeleteMovie}
             />
           }
         />
@@ -247,8 +259,14 @@ function App() {
             />
           }
         />
-        <Route path="/signup" element={<Register onRegister={handleRegister} />} />
-        <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
+        <Route
+          path="/signup"
+          element={<Register onRegister={handleRegister} />}
+        />
+        <Route
+          path="/signin"
+          element={<Login onAuthorization={handleAuthorization} />}
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}

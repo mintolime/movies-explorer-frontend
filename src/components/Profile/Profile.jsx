@@ -11,17 +11,13 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
     useFormAndValidation();
   const currentUser = React.useContext(CurrentUserContext);
   const [showSaveBtn, setShowSaveBtn] = React.useState(false);
-  // // console.log('user',currentUser.name);
-  // //  console.log('value',values.name);
-  //   console.log('checkBT',currentUser.name !== values.name);
-  //    console.log('checkval',);
-    
-React.useEffect(() => {
-  if (currentUser) {
-    setValues(currentUser);
-    setIsValid(true);
-  }
-}, [currentUser, setIsValid, setValues]);
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setValues(currentUser);
+      setIsValid(true);
+    }
+  }, [currentUser, setIsValid, setValues]);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -39,7 +35,7 @@ React.useEffect(() => {
       setShowSaveBtn(false);
     }
   }, [isCorrectResponse]);
-  
+
   return (
     <section className="profile">
       <form className="profile__form" onSubmit={handleSubmit}>
@@ -60,7 +56,6 @@ React.useEffect(() => {
             required
           />
           <span className="profile__input-error">{errors.name}</span>
-          {/* <span className="profile__input-error">{errors.name}</span> */}
         </fieldset>
 
         <fieldset className="profile__container">
@@ -84,35 +79,39 @@ React.useEffect(() => {
           <span className="profile__input-error">{errors.email}</span>
         </fieldset>
         <div className="profile__button-box">
-           {/* по тз должна быть откл. кнопка редактирования  
+          {/* по тз должна быть откл. кнопка редактирования  
            в моей реализации она служит ссылкой на импут и переход в режим редактирования  */}
           {showSaveBtn ? (
-             <Button
-            btnClass={`button_type_profile-save ${
-              !currentUser || currentUser.name === values.name || !isValid ? "button_disabled" : ""
-            } `}
-            btnType="submit"
-            btnText="Сохранить"
-            // disabled={!currentUser || currentUser.name === values.name || !isValid}
-          />
+            <Button
+              btnClass={`button_type_profile-save ${
+                !currentUser || currentUser.name === values.name || !isValid
+                  ? "button_disabled"
+                  : ""
+              } `}
+              btnType="submit"
+              btnText="Сохранить"
+              // disabled={!currentUser || currentUser.name === values.name || !isValid}
+            />
           ) : (
-            <a
-              className="promo__link page__link"
-              href="#input-name"
-              onClick={() => {
-                setShowSaveBtn(true);
-              }}
-            >
-              Редактировать
-            </a>
+            <>
+              <a
+                className="profile__link-edit page__link"
+                href="#input-name"
+                onClick={() => {
+                  setShowSaveBtn(true);
+                }}
+              >
+                Редактировать
+              </a>
+              <Link
+                to="/"
+                className="profile__link-logout page__link"
+                onClick={onLogout}
+              >
+                Выйти из аккаунта
+              </Link>
+            </>
           )}
-          <Link
-            to="/"
-            className="profile__link_logout page__link"
-            onClick={onLogout}
-          >
-            Выйти из аккаунта
-          </Link>
         </div>
       </form>
     </section>
