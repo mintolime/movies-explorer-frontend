@@ -2,6 +2,8 @@
 export const SCREEN_SM = 319;
 export const SCREEN_MD = 767;
 export const SCREEN_XL = 1279;
+// для короткометражек
+export const SHORT_DURATION = 40;
 // для валидации почты и имени
 export const regExpName = /^[a-zA-Zа-яА-ЯёЁ]+(([',. -][a-zA-Zа-яА-ЯёЁ ])?[a-zA-Zа-яА-ЯёЁ]*)*$/g;
 export const regExpEmail =
@@ -9,5 +11,5 @@ export const regExpEmail =
 //масcивы роутов компонента
 export const headerRoutes = ["/", "/movies", "/saved-movies", "/profile"];
 export const footerRoutes = ["/", "/movies", "/saved-movies"];
-
+//url для запроса к api
 export const apiBestMovieUrl = "https://api.nomoreparties.co";

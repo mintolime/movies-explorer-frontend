@@ -1,41 +1,44 @@
-import React from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
-import "./App.css";
+import './App.css';
 
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
-import Movies from "../Movies/Movies";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import Profile from "../Profile/Profile";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import PageNotFound from "../PageNotFound/PageNotFound";
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import Movies from '../Movies/Movies';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Profile from '../Profile/Profile';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
-import { headerRoutes, footerRoutes } from "../../utils/constants";
-import { checkPath } from "../../utils/functions";
-import { apiDataMovies } from "../../utils/api/MoviesApi";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { MainApi } from "../../utils/api/MainApi";
-import { Auth } from "../../utils/api/AuthApi";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { headerRoutes, footerRoutes } from '../../utils/constants';
+import { checkPath } from '../../utils/functions';
+import { apiDataMovies } from '../../utils/api/MoviesApi';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { MainApi } from '../../utils/api/MainApi';
+import { Auth } from '../../utils/api/AuthApi';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { useMovies } from '../../hooks/useMovies';
+// import {} from
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
+
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
 
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState([]);
+  // const [movies, setMovies] = React.useState([]);
   const [isOwnMovies, setIsOwnMovies] = React.useState([]);
-  const [isRegistration, setIsRegistration] = React.useState(false);
+  // const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const [isSearchMovies, setSearchMovies] = React.useState(false);
+  // const [isSearchMovies, setSearchMovies] = React.useState(false);
   // const [isMovieSave, setMovieSave] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState({});
@@ -43,62 +46,65 @@ function App() {
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
 
   const apiDataMain = new MainApi({
-    url: "https://api.mintolime-movies.nomoredomains.rocks",
+    url: 'https://api.mintolime-movies.nomoredomains.rocks',
     headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   });
 
   const apiAuth = new Auth({
-    url: "https://api.mintolime-movies.nomoredomains.rocks",
+    url: 'https://api.mintolime-movies.nomoredomains.rocks',
     headers: {
-      "Content-Type": "application/json; charset=UTF-8",
+      'Content-Type': 'application/json; charset=UTF-8',
     },
   });
 
-  React.useEffect(() => {
-    isLoggedIn &&
-      apiDataMain
-        .getAllData()
-        .then(([userData, initialOwnMovies]) => {
-          setIsOwnMovies(initialOwnMovies);
-          setCurrentUser(userData);
-          // console.log(userData)
-          // console.log(res)
-          // console.log(initialOwnMovies);
-        })
-        .catch((err) => {
-          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        });
-  }, [isLoggedIn]);
+  const { handleSetSearch, handleSetShortMovies, movies,setSearch,error,searchValue,notFound} = useMovies(apiDataMovies.getAllMovies);
+  // React.useEffect(() => {
+  //   isLoggedIn &&
+  //     apiDataMain
+  //       .getAllData()
+  //       .then(([userData, initialOwnMovies]) => {
+  //         setIsOwnMovies(initialOwnMovies);
+  //         setCurrentUser(userData);
+  //         // console.log(userData)
+  //         // console.log(res)
+  //         // console.log(initialOwnMovies);
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+  //       });
+  // }, [isLoggedIn]);
 
-  React.useEffect(() => {
-    if (isSearchMovies) {
-      setIsLoading(true);
-      // выставляем задержку в одну секунду для отображения лоудера
-      const timeoutId = setTimeout(() => {
-        apiDataMovies
-          .getAllData()
-          .then(([initialMovies]) => {
-            setMovies(initialMovies);
-            // console.log(initialMovies);
-          })
-          .catch((err) => {
-            console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
-      }, 1000);
+  // console.log(movies,'movieapp')
 
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isSearchMovies]);
+  // React.useEffect(() => {
+  //   if (isSearchMovies) {
+  //     setIsLoading(true);
+  //     // выставляем задержку в одну секунду для отображения лоудера
+  //     const timeoutId = setTimeout(() => {
+  //       apiDataMovies
+  //         .getAllData()
+  //         .then(([initialMovies]) => {
+  //           setMovies(initialMovies);
+  //           // console.log(initialMovies);
+  //         })
+  //         .catch((err) => {
+  //           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+  //         })
+  //         .finally(() => {
+  //           setIsLoading(false);
+  //         });
+  //     }, 1000);
+
+  //     return () => clearTimeout(timeoutId);
+  //   }
+  // }, [isSearchMovies]);
 
   // проверка токена
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       // проверим токен
       apiAuth
@@ -140,9 +146,7 @@ function App() {
     apiDataMain
       .deleteMovie(movie._id)
       .then(() => {
-        setIsOwnMovies((state) =>
-          state.filter((item) => (item._id === movie._id ? "" : item))
-        );
+        setIsOwnMovies((state) => state.filter((item) => (item._id === movie._id ? '' : item)));
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -170,11 +174,11 @@ function App() {
     apiAuth
       .register(data)
       .then((res) => {
-        setIsRegistration(true);
+        // setIsRegistration(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(res);
-        navigate("/signin", { replace: true });
+        navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
@@ -193,8 +197,8 @@ function App() {
         handleOpenPopupSuccess();
         console.log(data);
 
-        localStorage.setItem("jwt", data.token);
-        navigate("/", { replace: true });
+        localStorage.setItem('jwt', data.token);
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
@@ -205,15 +209,15 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt");
-    navigate("/signin", { replace: true });
+    localStorage.removeItem('jwt');
+    navigate('/signin', { replace: true });
     setIsLoggedIn(false);
   };
 
   // отрефакторить
-  const handleSearchMovies = () => {
-    setSearchMovies(true);
-  };
+  // const handleSearchMovies = () => {
+  //   setSearchMovies(true);
+  // };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -227,10 +231,13 @@ function App() {
               component={Movies}
               isLoggedIn={isLoggedIn}
               movies={movies}
-              searchActive={isSearchMovies}
               isLoadingActive={isLoading}
-              onSearch={handleSearchMovies}
               onSaveMovie={handleSaveMovie}
+              setSearch={setSearch}
+              onChangeFilter={handleSetShortMovies}
+              isError={error}
+              isNotFound={notFound}
+              isSearchValue={searchValue}
             />
           }
         />
@@ -241,8 +248,9 @@ function App() {
               component={SavedMovies}
               isLoggedIn={isLoggedIn}
               movies={isOwnMovies}
-              onSearch={handleSearchMovies}
+              onSearch={handleSetSearch}
               onDeleteMovie={handleDeleteMovie}
+              onChangeFilter={handleSetShortMovies}
             />
           }
         />
@@ -259,14 +267,8 @@ function App() {
             />
           }
         />
-        <Route
-          path="/signup"
-          element={<Register onRegister={handleRegister} />}
-        />
-        <Route
-          path="/signin"
-          element={<Login onAuthorization={handleAuthorization} />}
-        />
+        <Route path="/signup" element={<Register onRegister={handleRegister} />} />
+        <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}

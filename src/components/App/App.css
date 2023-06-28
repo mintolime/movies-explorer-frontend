@@ -124,3 +124,10 @@
     padding-bottom: 23px;
   }
 }
+
+.page__api-error {
+  font-size: 34px;
+  color: #000;
+  opacity: .4;
+  text-align: center;
+}

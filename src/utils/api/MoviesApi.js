@@ -6,15 +6,16 @@ class MovieApi {
     this.headers = headers;
   }
 
-  getAllData() {
-    return Promise.all([this.getAllMovies()]);
-  }
+  // getAllData() {
+  //   return Promise.all([this.getAllMovies()]);
+  // }
 
-  getAllMovies() {
+  getAllMovies = async () => {
     return fetch(`${this.url}/`, {
       headers: this.headers,
     }).then((res) => handleResponce(res));
   }
+
 }
 
 export const apiDataMovies = new MovieApi({
