@@ -14,28 +14,28 @@ export class MainApi {
   getAllOwnMovies() {
     return fetch(`${this.url}/movies`, {
       headers: this.headers,
-      method: 'GET',
+      method: "GET",
     }).then((res) => handleResponce(res));
   }
 
   getUserData() {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
-      method: 'GET',
+      method: "GET",
     }).then((res) => handleResponce(res));
   }
 
   updateUserData(data) {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(data),
     }).then((res) => handleResponce(res));
   }
 
-  saveMovie(movie) {
+  saveMovie = async (movie) => {
     return fetch(`${this.url}/movies`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         country: movie.country,
@@ -48,18 +48,17 @@ export class MainApi {
         thumbnail: `${apiBestMovieUrl}${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
         nameRU: movie.nameRU,
-        nameEN: movie.nameEN
+        nameEN: movie.nameEN,
       }),
-    })
-      .then((res) => { handleResponce(res) });
-  }
+    }).then((res) => {
+      handleResponce(res);
+    });
+  };
 
-   deleteMovie(id) {
+  deleteMovie(id) {
     return fetch(`${this.url}/movies/${id}`, {
-      method: 'DELETE',
-      headers: this.headers
+      method: "DELETE",
+      headers: this.headers,
     }).then((res) => handleResponce(res));
   }
 }
-
-

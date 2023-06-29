@@ -5,7 +5,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import Button from "../Button/Button";
 
 function SearchForm({ onSearchMovies }) {
-  const { values, handleChange, isValid } = useFormAndValidation();
+  const { values, handleChange, isValid,errors } = useFormAndValidation();
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -15,7 +15,7 @@ function SearchForm({ onSearchMovies }) {
     }
     onSearchMovies();
   }
-
+  
   return (
     <section className="search-form" aria-label="форма поиска фильмов">
       <form className="search-form__inner" onSubmit={handleSubmit}>
@@ -36,8 +36,7 @@ function SearchForm({ onSearchMovies }) {
           btnType="submit"
         />
       </form>
-      <span className="search-form__input-error">
-        {isValid ? "" : "Нужно ввести ключевое слово"}
+      <span className="search-form__input-error">{errors.movies}
       </span>
       <FilterCheckbox />
     </section>

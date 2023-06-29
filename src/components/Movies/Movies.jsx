@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ movies, onSearch, searchActive, isLoadingActive,onSaveMovie }) {
+function Movies({ movies,savedMovies, onSearch, searchActive, isLoadingActive,onSaveMovie }) {
   // console.log(isLoadingActive);
   return (
     <>
@@ -11,7 +11,7 @@ function Movies({ movies, onSearch, searchActive, isLoadingActive,onSaveMovie })
       {isLoadingActive ? (
         <Preloader />
       ) : (
-        <MoviesCardList moviesData={movies} searchActive={searchActive} onSaveMovie={onSaveMovie} />
+        <MoviesCardList moviesData={movies} savedMovies={savedMovies} searchActive={searchActive} onSaveMovie={onSaveMovie} />
       )}
     </>
   );

@@ -5,14 +5,14 @@ import Button from "../Button/Button";
 import { useResize } from "../../hooks/useResize";
 import React from "react";
 
-function MoviesCardList({ moviesData, searchActive, onSaveMovie, onDeleteMovie }) {
+function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onDeleteMovie }) {
   const size = useResize();
   // стейт отображает количество карточек в зависимости от размера экрана 
   const [moviesToShow, setMoviesToShow] = React.useState(
     size.isScreenSm ? 5 : size.isScreenMd ? 8 : size.isScreenXl ? 12 : 0
   );
   
-  // console.log(btnToShowMore);
+  console.log(savedMovies,'сохраненные фильмы');
   const handleLoadMore = () => {
     if (size.isScreenSm || size.isScreenMd) {
       setMoviesToShow(moviesToShow + 2);
@@ -27,13 +27,14 @@ function MoviesCardList({ moviesData, searchActive, onSaveMovie, onDeleteMovie }
         {moviesData?.slice(0, moviesToShow).map((movie) => (
           <MoviesCard
             movie={movie}
+            savedMovies={savedMovies}
             key={movie.id || movie.movieId}
             onSaveMovie={onSaveMovie}
             onDeleteMovie={onDeleteMovie}
           />
         ))}
       </ul>
-      {searchActive && (
+     {searchActive && moviesData.length > moviesToShow && (
         <Button
           btnClass="button_type_more"
           btnType="button"
