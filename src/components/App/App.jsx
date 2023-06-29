@@ -55,6 +55,7 @@ function App() {
     },
   });
 
+// запрос к апи на получение фильмов и юзера из бэка
   React.useEffect(() => {
     isLoggedIn &&
       apiDataMain
@@ -74,6 +75,7 @@ function App() {
         });
   }, [isLoggedIn]);
 
+//тут я пытаюсь достать фильмы из апи бестмуви 
   React.useEffect(() => {
     if (localStorage.getItem("movies")) {
       setMovies(JSON.parse(localStorage.getItem("movies")));
@@ -122,19 +124,23 @@ function App() {
     }
   }, []);
 
+// это авторское, понимаешь да
   React.useEffect(() => {
     isLoggedIn &&
       localStorage.setItem("savedMovies", JSON.stringify(isMovieSave));
   }, [isMovieSave, isLoggedIn]);
 
+// для попапа на открытие
   const handleOpenPopupSuccess = () => {
     setIsInfoTooltipOpen(true);
   };
 
+// для попапа на закрытие
   const closePopup = () => {
     setIsInfoTooltipOpen(false);
   };
 
+// тут фильм сохрани
   const handleSaveMovie = (movie, isLiked, id) => {
     if (isLiked) {
       handleDeleteMovie(id);
@@ -149,6 +155,7 @@ function App() {
     }
   };
 
+// тут фильм удали
   const handleDeleteMovie = (movie) => {
     apiDataMain
       .deleteMovie(movie._id)
@@ -164,6 +171,7 @@ function App() {
       });
   };
 
+// все что ниже работает на ура
   const handleUpdateUser = (data) => {
     apiDataMain
       .updateUserData(data)
@@ -187,7 +195,6 @@ function App() {
     apiAuth
       .register(data)
       .then((res) => {
-        setIsRegistration(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(res);
@@ -233,10 +240,10 @@ function App() {
     localStorage.clear();
   };
 
-  // отрефакторить
-  const handleSearchMovies = () => {
-    setSearchMovies(true);
-  };
+  // отрефакторить чисто нужен для того, чтобы на кнопочку нажать и фильмы появились. временно убрала
+  // const handleSearchMovies = () => {
+  //   setSearchMovies(true);
+  // };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -253,7 +260,7 @@ function App() {
               savedMovies={isMovieSave}
               searchActive={isSearchMovies}
               isLoadingActive={isLoading}
-              onSearch={handleSearchMovies}
+              // onSearch={handleSearchMovies}
               onSaveMovie={handleSaveMovie}
             />
           }
@@ -266,7 +273,7 @@ function App() {
               component={SavedMovies}
               isLoggedIn={isLoggedIn}
               savedMovies={isMovieSave}
-              onSearch={handleSearchMovies}
+              // onSearch={handleSearchMovies}
               onDeleteMovie={handleDeleteMovie}
             />
           }

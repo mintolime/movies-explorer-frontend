@@ -13,6 +13,7 @@ function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onD
   );
   
   console.log(savedMovies,'сохраненные фильмы');
+  // тут он у нас отслеживает хук изменения страница
   const handleLoadMore = () => {
     if (size.isScreenSm || size.isScreenMd) {
       setMoviesToShow(moviesToShow + 2);
