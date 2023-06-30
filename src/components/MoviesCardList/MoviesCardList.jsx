@@ -12,8 +12,7 @@ function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onD
     size.isScreenSm ? 5 : size.isScreenMd ? 8 : size.isScreenXl ? 12 : 0
   );
   
-  console.log(savedMovies,'сохраненные фильмы');
-  // тут он у нас отслеживает хук изменения страница
+  // тут он у нас отслеживает хук изменения страницы
   const handleLoadMore = () => {
     if (size.isScreenSm || size.isScreenMd) {
       setMoviesToShow(moviesToShow + 2);

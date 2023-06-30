@@ -148,21 +148,20 @@ function App() {
       apiDataMain
         .saveMovie(movie)
         .then((res) => {
-          setMovieSave(res);
-          console.log(isMovieSave, "сохраняю");
+          setMovieSave([...isMovieSave, res]);
         })
         .catch((error) => console.log(error));
     }
   };
 
-// тут фильм удали
-  const handleDeleteMovie = (movie) => {
+  // тут фильм удали
+  const handleDeleteMovie = (id) => {
     apiDataMain
-      .deleteMovie(movie._id)
+      .deleteMovie(id)
       .then(() => {
-        setMovieSave((state) =>
-          state.filter((item) => (item._id === movie._id ? "" : item))
-        );
+        const newSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
+
+        setMovieSave(newSavedMovies);
       })
       .catch((err) => {
         console.log(

@@ -50,9 +50,7 @@ export class MainApi {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       }),
-    }).then((res) => {
-      handleResponce(res);
-    });
+    }).then((res) => handleResponce(res));
   };
 
   deleteMovie(id) {

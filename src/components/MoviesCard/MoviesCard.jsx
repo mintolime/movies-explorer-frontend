@@ -1,16 +1,15 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import Button from "../Button/Button";
-import "../MoviesCard/MoviesCard.css";
-import { getTimeFromMins } from "../../utils/functions";
-import { apiBestMovieUrl } from "../../utils/constants";
+import Button from '../Button/Button';
+import '../MoviesCard/MoviesCard.css';
+import { getTimeFromMins } from '../../utils/functions';
+import { apiBestMovieUrl } from '../../utils/constants';
 
 function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
-//  console.log(savedMovies)
   const savedMovie = savedMovies
     ? savedMovies.find((item) => item.movieId === movie.id)
-    : "";
+    : '';
   const isLiked = savedMovies
     ? savedMovies.some((i) => i.movieId === movie.id)
     : false;
@@ -19,8 +18,7 @@ function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
   const imageUrl = movie.image.url
     ? `${apiBestMovieUrl}${movie.image.url}`
     : movie.image;
-    
-    console.log(movie)
+
   return (
     <li className="movies__item">
       <div className="movies__heading">
@@ -35,27 +33,24 @@ function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
       >
         <img className="movies__image" src={imageUrl} alt={movie.nameRU} />
       </Link>
-      {location.pathname === "/saved-movies" && (
+      {location.pathname === '/saved-movies' && (
         <Button
           btnClass="button button_type_movie  button_type_movie-delete"
           btnType="button"
-          onClick={() => onDeleteMovie(movie)}
+          onClick={() => onDeleteMovie(movie._id)}
         />
       )}
 
       {/* <Button btnClass='button  button_type_movie  button_type_movie-save button_type_save_active' btnType='button' /> */}
-      {location.pathname === "/movies" && (
+      {location.pathname === '/movies' && (
         <Button
           btnClass={`button_type_movie button_type_save ${
-            isLiked ? "button_type_movie-save_active" : ""
+            isLiked ? 'button_type_movie-save_active' : ''
           }`}
           btnType="button"
-          btnText={isLiked ? "" : "Coхранить"}
+          btnText={isLiked ? '' : 'Coхранить'}
           onClick={() => {
-            console.log(movie.id,'айди карточки')
-             console.log('айди карточки фильтр',savedMovie)
-              console.log('я лайкнутая',isLiked)
-            onSaveMovie(movie, isLiked, savedMovie?.id);
+            onSaveMovie(movie, isLiked, savedMovie?._id);
           }}
         />
       )}
