@@ -28,18 +28,16 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-
   const headerView = checkPath(headerRoutes, location);
   const footerView = checkPath(footerRoutes, location);
 
   const [currentUser, setCurrentUser] = React.useState({});
   // const [movies, setMovies] = React.useState([]);
-  const [isOwnMovies, setIsOwnMovies] = React.useState([]);
-  // const [isRegistration, setIsRegistration] = React.useState(false);
+  const [isMovieSave, setMovieSave] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  // const [isSearchMovies, setSearchMovies] = React.useState(false);
-  // const [isMovieSave, setMovieSave] = React.useState(false);
+  const [isSearchMovies, setSearchMovies] = React.useState(false);
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
@@ -60,47 +58,55 @@ function App() {
     },
   });
 
-  const { handleSetSearch, handleSetShortMovies, movies,setSearch,error,searchValue,notFound} = useMovies(apiDataMovies.getAllMovies);
+  const { handleSetSearch, handleSetShortMovies, movies, setSearch, error, searchValue, notFound } =
+    useMovies(apiDataMovies.getAllMovies);
+  // запрос к апи на получение фильмов и юзера из бэка
   // React.useEffect(() => {
   //   isLoggedIn &&
   //     apiDataMain
   //       .getAllData()
-  //       .then(([userData, initialOwnMovies]) => {
-  //         setIsOwnMovies(initialOwnMovies);
+  //       .then(([userData, savedMovies]) => {
+  //         setMovieSave(savedMovies);
+  //         localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
   //         setCurrentUser(userData);
-  //         // console.log(userData)
+  //         console.log(userData);
   //         // console.log(res)
-  //         // console.log(initialOwnMovies);
+  //         console.log(savedMovies);
   //       })
   //       .catch((err) => {
-  //         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+  //         console.log(
+  //           `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+  //         );
   //       });
   // }, [isLoggedIn]);
 
-  // console.log(movies,'movieapp')
-
-  // React.useEffect(() => {
-  //   if (isSearchMovies) {
-  //     setIsLoading(true);
-  //     // выставляем задержку в одну секунду для отображения лоудера
-  //     const timeoutId = setTimeout(() => {
-  //       apiDataMovies
-  //         .getAllData()
-  //         .then(([initialMovies]) => {
-  //           setMovies(initialMovies);
-  //           // console.log(initialMovies);
-  //         })
-  //         .catch((err) => {
-  //           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-  //         })
-  //         .finally(() => {
+  // //тут я пытаюсь достать фильмы из апи бестмуви
+  //   React.useEffect(() => {
+  //     if (localStorage.getItem("movies")) {
+  //       setMovies(JSON.parse(localStorage.getItem("movies")));
+  //     }
+  //     if (isLoggedIn) {
+  //       setIsLoading(true);
+  //       // выставляем задержку в одну секунду для отображения лоудера
+  //       const timeoutId = setTimeout(async () => {
+  //         try {
+  //           try {
+  //             const [movies] = await apiDataMovies.getAllData();
+  //             setMovies(movies);
+  //             localStorage.setItem("movies", JSON.stringify(movies));
+  //           } catch (err) {
+  //             console.log(
+  //               `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+  //             );
+  //           }
+  //         } finally {
   //           setIsLoading(false);
-  //         });
-  //     }, 1000);
+  //         }
+  //       }, 1000);
 
-  //     return () => clearTimeout(timeoutId);
-  //   }
-  // }, [isSearchMovies]);
+  //       return () => clearTimeout(timeoutId);
+  //     }
+  //   }, [isLoggedIn]);
 
   // проверка токена
   React.useEffect(() => {
@@ -116,43 +122,59 @@ function App() {
           }
         })
         .catch((err) => {
-          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+          console.log(
+            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+          );
         });
     }
   }, []);
 
+  // это авторское, понимаешь да
+  React.useEffect(() => {
+    isLoggedIn && localStorage.setItem('savedMovies', JSON.stringify(isMovieSave));
+  }, [isMovieSave, isLoggedIn]);
+
+  // для попапа на открытие
   const handleOpenPopupSuccess = () => {
     setIsInfoTooltipOpen(true);
   };
 
+  // для попапа на закрытие
   const closePopup = () => {
     setIsInfoTooltipOpen(false);
   };
 
-  const handleSaveMovie = (movie) => {
-    const isLiked = movies.some((i) => i._id === currentUser._id);
-    apiDataMain
-      .saveMovie(movie)
-      .then((res) => {
-        console.log(res);
-        setIsOwnMovies(res);
-      })
-      .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
+  // тут фильм сохрани
+  const handleSaveMovie = (movie, isLiked, id) => {
+    if (isLiked) {
+      handleDeleteMovie(id);
+    } else {
+      apiDataMain
+        .saveMovie(movie)
+        .then((res) => {
+          setMovieSave([...isMovieSave, res]);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
-  const handleDeleteMovie = (movie) => {
+  // тут фильм удали
+  const handleDeleteMovie = (id) => {
     apiDataMain
-      .deleteMovie(movie._id)
+      .deleteMovie(id)
       .then(() => {
-        setIsOwnMovies((state) => state.filter((item) => (item._id === movie._id ? '' : item)));
+        const newSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
+
+        setMovieSave(newSavedMovies);
       })
       .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        console.log(
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+        );
       });
   };
 
+  // все что ниже работает на ура
   const handleUpdateUser = (data) => {
     apiDataMain
       .updateUserData(data)
@@ -163,7 +185,9 @@ function App() {
         console.log(data);
       })
       .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
+        console.log(
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+        );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
@@ -174,14 +198,15 @@ function App() {
     apiAuth
       .register(data)
       .then((res) => {
-        // setIsRegistration(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(res);
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
+        console.log(
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+        );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
@@ -201,7 +226,9 @@ function App() {
         navigate('/', { replace: true });
       })
       .catch((err) => {
-        console.log(`Что-то пошло не так: ошибка запроса ${err.status}  😔`);
+        console.log(
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+        );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
         setErrorMessage(err.errorText);
@@ -212,12 +239,14 @@ function App() {
     localStorage.removeItem('jwt');
     navigate('/signin', { replace: true });
     setIsLoggedIn(false);
+    // для очистки локального хранилища после выхода из приложения
+    localStorage.clear();
   };
 
-  // отрефакторить
-  // const handleSearchMovies = () => {
-  //   setSearchMovies(true);
-  // };
+  // отрефакторить чисто нужен для того, чтобы на кнопочку нажать и фильмы появились. временно убрала
+  const handleSearchMovies = () => {
+    setSearchMovies(true);
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -231,7 +260,10 @@ function App() {
               component={Movies}
               isLoggedIn={isLoggedIn}
               movies={movies}
+              savedMovies={isMovieSave}
+              searchActive={isSearchMovies}
               isLoadingActive={isLoading}
+              // onSearch={handleSearchMovies}
               onSaveMovie={handleSaveMovie}
               setSearch={setSearch}
               onChangeFilter={handleSetShortMovies}
@@ -245,12 +277,19 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute
+              movies={isMovieSave}
               component={SavedMovies}
               isLoggedIn={isLoggedIn}
-              movies={isOwnMovies}
-              onSearch={handleSetSearch}
+              // onSearch={handleSetSearch}
+              savedMovies={isMovieSave}
+              // onSearch={handleSearchMovies}
               onDeleteMovie={handleDeleteMovie}
+              // onChangeFilter={handleSetShortMovies}
+              setSearch={setSearch}
               onChangeFilter={handleSetShortMovies}
+              isError={error}
+              isNotFound={notFound}
+              isSearchValue={searchValue}
             />
           }
         />

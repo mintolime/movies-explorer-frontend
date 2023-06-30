@@ -33,7 +33,7 @@ export class MainApi {
     }).then((res) => handleResponce(res));
   }
 
-  saveMovie(movie) {
+  saveMovie = async (movie) => {
     return fetch(`${this.url}/movies`, {
       method: 'POST',
       headers: this.headers,
@@ -48,13 +48,13 @@ export class MainApi {
         thumbnail: `${apiBestMovieUrl}${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
         nameRU: movie.nameRU,
-        nameEN: movie.nameEN
+        nameEN: movie.nameEN,
       }),
     })
-      .then((res) => { handleResponce(res) });
+      .then((res) => handleResponce(res));
   }
 
-   deleteMovie(id) {
+  deleteMovie(id) {
     return fetch(`${this.url}/movies/${id}`, {
       method: 'DELETE',
       headers: this.headers

@@ -1,15 +1,28 @@
 // import '../SavedMovies/SavedMovies.css'
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import { moviesData } from "../../utils/movies";
-import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
 
-function SavedMovies({ movies, onSearch, onDeleteMovie }) {
+function SavedMovies({
+  movies,
+  onSearch,
+  savedMovies,
+  onDeleteMovie,
+  onChangeFilter,
+  setSearch,
+  error,
+  isSearchValue,
+  isNotFound,
+}) {
   return (
     <>
-      <SearchForm onSearchMovies={onSearch} />
-      <MoviesCardList moviesData={movies} onDeleteMovie={onDeleteMovie} />
-      {/* <MoviesCard movie={moviesData}/> */}
+      <SearchForm
+        onChangeFilter={onChangeFilter}
+        setSearch={setSearch}
+        error={error}
+        searchValue={isSearchValue}
+      />
+      {isNotFound ? <p className="page__api-error">Ничего не найдено, попробуйте еще раз!</p> : ''}
+      <MoviesCardList moviesData={movies} onDeleteMovie={onDeleteMovie} savedMovies={savedMovies} />
     </>
   );
 }

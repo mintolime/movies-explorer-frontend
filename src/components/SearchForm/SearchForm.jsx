@@ -9,14 +9,14 @@ function SearchForm({ onChangeFilter,setSearch,error,searchValue }) {
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-
-
   }
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
- console.log(searchValue)
+//  console.log(searchValue)
+
   return (
     <section className="search-form" aria-label="форма поиска фильмов">
       <form className="search-form__inner" onSubmit={handleSubmit}>

@@ -54,7 +54,7 @@ export const useMovies = (fetchMovies) => {
 
     for (const movie of movies) {
       const { nameEN, nameRU, duration } = movie;
-      const searched = search && nameEN.includes(search) && nameRU.includes(search);
+     const searched = search && (nameEN.toLowerCase().trim().includes(search) || nameRU.toLowerCase().trim().includes(search));
       const short = shortMovies && duration < SHORT_DURATION;
 
       if (search && shortMovies) {
@@ -79,7 +79,7 @@ export const useMovies = (fetchMovies) => {
   }, [search, shortMovies, state.movies]);
 
   const notFound = (search || shortMovies) && filteredMovies.length === 0;
-  
+
   const handleSetSearch = useCallback((value) => {
     if (!value) {
       setState((state) => ({
@@ -98,11 +98,11 @@ export const useMovies = (fetchMovies) => {
 
   console.log({ state, filteredMovies, search, shortMovies, notFound })
   return {
-    searchValue:search,
+    searchValue: search,
     movies: filteredMovies,
     error: state.error,
     setSearch: handleSetSearch,
-    notFound:notFound,
+    notFound: notFound,
     handleSetShortMovies,
   }
 }
