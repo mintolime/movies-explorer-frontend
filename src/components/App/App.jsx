@@ -17,11 +17,11 @@ import { headerRoutes, footerRoutes } from '../../utils/constants';
 import { checkPath } from '../../utils/functions';
 import { apiDataMovies } from '../../utils/api/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { MainApi } from '../../utils/api/MainApi';
 import { Auth } from '../../utils/api/AuthApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useMovies } from '../../hooks/useMovies';
+import { apiDataMain } from '../../utils/api/MainApi';
 // import {} from
 
 function App() {
@@ -33,23 +33,13 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   // const [movies, setMovies] = React.useState([]);
-  const [isMovieSave, setMovieSave] = React.useState([]);
+  // const [isMovieSave, setMovieSave] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const [isSearchMovies, setSearchMovies] = React.useState(false);
-
-  const [isLoading, setIsLoading] = React.useState(false);
+  // const [isLoading, setIsLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
-
-  const apiDataMain = new MainApi({
-    url: 'https://api.mintolime-movies.nomoredomains.rocks',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    },
-  });
 
   const apiAuth = new Auth({
     url: 'https://api.mintolime-movies.nomoredomains.rocks',
@@ -58,8 +48,31 @@ function App() {
     },
   });
 
-  const { handleSetSearch, handleSetShortMovies, movies, setSearch, error, searchValue, notFound } =
-    useMovies(apiDataMovies.getAllMovies);
+  // const { handleSetShortMovies, movies, setSearch, isActiveSearch, error, searchValue, notFound } =
+  //   useMovies(apiDataMovies.getAllMovies);
+
+  //   const { movies } = useMovies(apiDataMovies.getAllMovies,'movies');
+  // console.log(movies,'mov')
+  const {
+    initMovies: saveMovies,
+    setState: setSaveMovies,
+    // setSearch: setSaveSearch,
+    // movies:saveFiltered,
+    // searchValue: searchSaveMovie,
+    // handleSetShortMovies: handleSetSaveShortMovies,
+    // isActiveSearch: isActiveSaveSearch,
+  } = useMovies(apiDataMain.getAllOwnMovies, 'savedMovies');
+
+  // const {
+  //   initMovies: saveMovies,
+  //   setState: setSaveMovies,
+  //   setSearch: setSaveSearch,
+  //   movies:saveFiltered,
+  //   searchValue: searchSaveMovie,
+  //   handleSetShortMovies: handleSetSaveShortMovies,
+  //   isActiveSearch: isActiveSaveSearch,
+  // } = useMovies(apiDataMain.getAllOwnMovies);
+
   // запрос к апи на получение фильмов и юзера из бэка
   // React.useEffect(() => {
   //   isLoggedIn &&
@@ -80,33 +93,20 @@ function App() {
   //       });
   // }, [isLoggedIn]);
 
-  // //тут я пытаюсь достать фильмы из апи бестмуви
-  //   React.useEffect(() => {
-  //     if (localStorage.getItem("movies")) {
-  //       setMovies(JSON.parse(localStorage.getItem("movies")));
-  //     }
-  //     if (isLoggedIn) {
-  //       setIsLoading(true);
-  //       // выставляем задержку в одну секунду для отображения лоудера
-  //       const timeoutId = setTimeout(async () => {
-  //         try {
-  //           try {
-  //             const [movies] = await apiDataMovies.getAllData();
-  //             setMovies(movies);
-  //             localStorage.setItem("movies", JSON.stringify(movies));
-  //           } catch (err) {
-  //             console.log(
-  //               `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
-  //             );
-  //           }
-  //         } finally {
-  //           setIsLoading(false);
-  //         }
-  //       }, 1000);
-
-  //       return () => clearTimeout(timeoutId);
-  //     }
-  //   }, [isLoggedIn]);
+  React.useEffect(() => {
+    isLoggedIn &&
+      apiDataMain
+        .getUserData()
+        .then((userData) => {
+          setCurrentUser(userData);
+          console.log(userData);
+        })
+        .catch((err) => {
+          console.log(
+            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+          );
+        });
+  }, [isLoggedIn]);
 
   // проверка токена
   React.useEffect(() => {
@@ -129,10 +129,9 @@ function App() {
     }
   }, []);
 
-  // это авторское, понимаешь да
   React.useEffect(() => {
-    isLoggedIn && localStorage.setItem('savedMovies', JSON.stringify(isMovieSave));
-  }, [isMovieSave, isLoggedIn]);
+    isLoggedIn && localStorage.setItem('saveMovies', JSON.stringify(saveMovies));
+  }, [saveMovies, isLoggedIn]);
 
   // для попапа на открытие
   const handleOpenPopupSuccess = () => {
@@ -144,28 +143,29 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
-  // тут фильм сохрани
-  const handleSaveMovie = (movie, isLiked, id) => {
-    if (isLiked) {
-      handleDeleteMovie(id);
-    } else {
-      apiDataMain
-        .saveMovie(movie)
-        .then((res) => {
-          setMovieSave([...isMovieSave, res]);
-        })
-        .catch((error) => console.log(error));
-    }
-  };
+  // // тут фильм сохрани
+const handleSaveMovie = (movie, isLiked, id) => {
+  if (isLiked) {
+    handleDeleteMovie(id);
+  } else {
+    apiDataMain
+      .saveMovie(movie)
+      .then((res) => {
+        setSaveMovies([...saveMovies, res]); // Добавляем новую карточку фильма в массив
+        console.log({ saveMovies, res });
+      })
+      .catch((error) => console.log(error));
+  }
+};
 
-  // тут фильм удали
+  // // тут фильм удали
   const handleDeleteMovie = (id) => {
     apiDataMain
       .deleteMovie(id)
       .then(() => {
-        const newSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
-
-        setMovieSave(newSavedMovies);
+        const newSavedMovies = saveMovies.filter((movies) => movies._id !== id);
+        console.log('delete', newSavedMovies);
+        setSaveMovies(newSavedMovies);
       })
       .catch((err) => {
         console.log(
@@ -243,11 +243,6 @@ function App() {
     localStorage.clear();
   };
 
-  // отрефакторить чисто нужен для того, чтобы на кнопочку нажать и фильмы появились. временно убрала
-  const handleSearchMovies = () => {
-    setSearchMovies(true);
-  };
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {headerView && <Header isLoggedIn={isLoggedIn} />}
@@ -259,17 +254,15 @@ function App() {
             <ProtectedRoute
               component={Movies}
               isLoggedIn={isLoggedIn}
-              movies={movies}
-              savedMovies={isMovieSave}
-              searchActive={isSearchMovies}
-              isLoadingActive={isLoading}
-              // onSearch={handleSearchMovies}
+              // movies={movies}
+              savedMovies={saveMovies}
+              // searchActive={isActiveSearch}
               onSaveMovie={handleSaveMovie}
-              setSearch={setSearch}
-              onChangeFilter={handleSetShortMovies}
-              isError={error}
-              isNotFound={notFound}
-              isSearchValue={searchValue}
+              // setSearch={setSearch}
+              // onChangeFilter={handleSetShortMovies}
+              // isError={error}
+              // isNotFound={notFound}
+              // isSearchValue={searchValue}
             />
           }
         />
@@ -277,19 +270,16 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute
-              movies={isMovieSave}
               component={SavedMovies}
+              // movies={movies}
               isLoggedIn={isLoggedIn}
-              // onSearch={handleSetSearch}
-              savedMovies={isMovieSave}
-              // onSearch={handleSearchMovies}
+              savedMovies={saveMovies}
               onDeleteMovie={handleDeleteMovie}
-              // onChangeFilter={handleSetShortMovies}
-              setSearch={setSearch}
-              onChangeFilter={handleSetShortMovies}
-              isError={error}
-              isNotFound={notFound}
-              isSearchValue={searchValue}
+              // setSearch={setSaveSearch}
+              // onChangeFilter={handleSetSaveShortMovies}
+              // isError={error}
+              // isNotFound={notFound}
+              // isSearchValue={searchSaveMovie}
             />
           }
         />

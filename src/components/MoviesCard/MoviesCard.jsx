@@ -7,18 +7,16 @@ import { getTimeFromMins } from '../../utils/functions';
 import { apiBestMovieUrl } from '../../utils/constants';
 
 function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
-  const savedMovie = savedMovies
-    ? savedMovies.find((item) => item.movieId === movie.id)
-    : '';
-  const isLiked = savedMovies
-    ? savedMovies.some((i) => i.movieId === movie.id)
-    : false;
-
-  const location = useLocation();
+    const location = useLocation();
   const imageUrl = movie.image.url
     ? `${apiBestMovieUrl}${movie.image.url}`
     : movie.image;
 
+ const savedMovie = savedMovies ? savedMovies.find((item) => item.movieId === movie.id) : '';
+const isLiked = savedMovies ? savedMovies.some((i) => i.movieId === movie.id) : false;
+
+  // console.log('isLiked',isLiked)
+console.log('savedMovie',savedMovies)
   return (
     <li className="movies__item">
       <div className="movies__heading">

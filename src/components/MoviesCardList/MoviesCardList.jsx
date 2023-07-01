@@ -1,17 +1,17 @@
-import "../MoviesCardList/MoviesCardList.css";
+import '../MoviesCardList/MoviesCardList.css';
 // import { moviesData } from '../../utils/movies';
-import MoviesCard from "../MoviesCard/MoviesCard";
-import Button from "../Button/Button";
-import { useResize } from "../../hooks/useResize";
-import React from "react";
+import MoviesCard from '../MoviesCard/MoviesCard';
+import Button from '../Button/Button';
+import { useResize } from '../../hooks/useResize';
+import React from 'react';
 
-function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onDeleteMovie }) {
+function MoviesCardList({ movies, savedMovies, searchActive, onSaveMovie, onDeleteMovie}) {
   const size = useResize();
-  // стейт отображает количество карточек в зависимости от размера экрана 
+  // стейт отображает количество карточек в зависимости от размера экрана
   const [moviesToShow, setMoviesToShow] = React.useState(
-    size.isScreenSm ? 5 : size.isScreenMd ? 8 : size.isScreenXl ? 12 : 0
+    size.isScreenSm ? 5 : size.isScreenMd ? 8 : size.isScreenXl ? 12 : 0,
   );
-  
+
   // тут он у нас отслеживает хук изменения страницы
   const handleLoadMore = () => {
     if (size.isScreenSm || size.isScreenMd) {
@@ -20,11 +20,10 @@ function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onD
       setMoviesToShow(moviesToShow + 3);
     }
   };
-
   return (
     <section className="movies" aria-label="галерея фильмов пользователя">
       <ul className="movies__list">
-        {moviesData?.slice(0, moviesToShow).map((movie) => (
+        {movies?.slice(0, moviesToShow).map((movie) => (
           <MoviesCard
             movie={movie}
             savedMovies={savedMovies}
@@ -34,7 +33,7 @@ function MoviesCardList({ moviesData,savedMovies, searchActive, onSaveMovie, onD
           />
         ))}
       </ul>
-     {searchActive && moviesData.length > moviesToShow && (
+      {searchActive && movies.length > moviesToShow && (
         <Button
           btnClass="button_type_more"
           btnType="button"

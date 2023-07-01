@@ -7,11 +7,7 @@ export class MainApi {
     this.headers = headers;
   }
 
-  getAllData() {
-    return Promise.all([this.getUserData(), this.getAllOwnMovies()]);
-  }
-
-  getAllOwnMovies() {
+  getAllOwnMovies = async () => {
     return fetch(`${this.url}/movies`, {
       headers: this.headers,
       method: 'GET',
@@ -62,4 +58,10 @@ export class MainApi {
   }
 }
 
-
+  export const apiDataMain = new MainApi({
+    url: 'https://api.mintolime-movies.nomoredomains.rocks',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    },
+  });

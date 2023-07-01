@@ -1,9 +1,8 @@
-import React, { useCallback } from "react";
-import { apiDataMovies } from "../utils/api/MoviesApi";
+import React, { useCallback, useEffect } from "react";
 import { SHORT_DURATION } from "../utils/constants";
 
 
-export const useMovies = (fetchMovies) => {
+export const useMovies = (fetchMovies, localStorageName) => {
   const [state, setState] = React.useState({
     loading: false,
     movies: [],
@@ -11,35 +10,36 @@ export const useMovies = (fetchMovies) => {
   })
 
   const [search, setSearch] = React.useState('')
-  const [shortMovies, setShortMovies] = React.useState(false)
+  const [shortMovies, setShortMovies] = React.useState(false);
+  const [isSearchMoviesActive, setSearchMoviesActive] = React.useState(false);
 
   React.useEffect(() => {
-    // if (!search) { return }
-
     setState((state) => ({ ...state, loading: true }));
 
     const handleFetchMovies = async () => {
-      try {
-        const movies = await fetchMovies();
-        setState((state) => ({
-          ...state,
-          movies, // записываем массив movies в состояние
-        }));
-      } catch (error) {
-        console.log(error)
-        setState((state) => ({
-          ...state,
-          error: error.status,
-          loading: false,
-        }));
-      }
-      finally {
-        setState((state) => ({
-          ...state,
-          loading: false,
-        }))
-      }
-    };
+          try {
+            const movies = await fetchMovies();
+            setState((state) => ({
+              ...state,
+              movies, // записываем массив movies в состояние
+            }));
+
+            localStorage.setItem(localStorageName, JSON.stringify(movies))
+          } catch (error) {
+            console.log(error)
+            setState((state) => ({
+              ...state,
+              error: error.status,
+              loading: false,
+            }));
+          }
+          finally {
+            setState((state) => ({
+              ...state,
+              loading: false,
+            }))
+          }
+        };
 
     handleFetchMovies();
   }, []);
@@ -54,7 +54,7 @@ export const useMovies = (fetchMovies) => {
 
     for (const movie of movies) {
       const { nameEN, nameRU, duration } = movie;
-     const searched = search && (nameEN.toLowerCase().trim().includes(search) || nameRU.toLowerCase().trim().includes(search));
+      const searched = search && (nameEN.toLowerCase().trim().includes(search) || nameRU.toLowerCase().trim().includes(search));
       const short = shortMovies && duration < SHORT_DURATION;
 
       if (search && shortMovies) {
@@ -81,14 +81,19 @@ export const useMovies = (fetchMovies) => {
   const notFound = (search || shortMovies) && filteredMovies.length === 0;
 
   const handleSetSearch = useCallback((value) => {
-    if (!value) {
+    if (!value && value.length < 3) {
       setState((state) => ({
         ...state,
         error: 'Нужно ввести ключевое слово',
       }))
       setSearch('')
+    } else {
+      setState((state) => ({
+        ...state,
+        error: '',
+      }))
+      setSearch(value)
     }
-    setSearch(value)
   }, [])
 
   const handleSetShortMovies = useCallback((e) => {
@@ -96,14 +101,32 @@ export const useMovies = (fetchMovies) => {
     setShortMovies(checked)
   }, [])
 
-  console.log({ state, filteredMovies, search, shortMovies, notFound })
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  // функция активации поиска и запроса к апи
+  const handleSubmitSearch = (evt) => {
+    evt.preventDefault();
+
+    if (search) {
+      setSearchMoviesActive(true);
+    }
+  };
+
+  console.log({ state, filteredMovies, search, shortMovies, notFound, isSearchMoviesActive, fetchMovies })
+
   return {
-    searchValue: search,
+    initMovies: state.movies,
+    setState,
     movies: filteredMovies,
     error: state.error,
-    setSearch: handleSetSearch,
     notFound: notFound,
+    searchValue: search,
+    setSearch: handleSetSearch,
     handleSetShortMovies,
+    handleChange,
+    isActiveSearch: handleSubmitSearch,
   }
 }
 
