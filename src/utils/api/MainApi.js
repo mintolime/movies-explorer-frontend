@@ -1,4 +1,4 @@
-import { apiBestMovieUrl } from "../constants";
+import { apiBestMovieUrlImg } from "../config";
 import { handleResponce } from "../functions";
 
 export class MainApi {
@@ -33,7 +33,7 @@ export class MainApi {
     }).then((res) => handleResponce(res));
   }
 
-  saveMovie = async (movie) => {
+  saveMovie(movie) {
     return fetch(`${this.url}/movies`, {
       method: "POST",
       headers: this.headers,
@@ -43,9 +43,9 @@ export class MainApi {
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: `${apiBestMovieUrl}${movie.image.url}`,
+        image: `${apiBestMovieUrlImg}${movie.image.url}`,
         trailerLink: movie.trailerLink,
-        thumbnail: `${apiBestMovieUrl}${movie.image.formats.thumbnail.url}`,
+        thumbnail: `${apiBestMovieUrlImg}${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,

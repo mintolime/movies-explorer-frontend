@@ -11,6 +11,7 @@
 
 .movies__heading {
   width: inherit;
+  height: 20px;
   display: flex;
   justify-content: space-between;
   padding: 14px;
@@ -23,6 +24,9 @@
   line-height: 18px;
   padding: 0;
   margin: 0;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 720px) {
@@ -34,8 +38,6 @@
 .movies__time {
   font-size: 10px;
   line-height: 18px;
-  /* identical to box height, or 180% */
-  /* text-align: right; */
   color: #A0A0A0;
 }
 
@@ -49,10 +51,35 @@
 .movies__link-trailer {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
-.movies__image:hover {
-  transition: transform .5s;
-  transform: scale(.98);
-  border-radius: 2px;
+.movies__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .5s ease, background-color 0.3s ease;
+}
+
+.movies__overlay:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.movies__text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  font-weight: 400;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+  padding: 5px;
 }

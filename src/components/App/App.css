@@ -26,10 +26,6 @@
   opacity: .7;
 }
 
-/* .page__link:active {
-  border-bottom: #000 1px solid;
-} */
-
 .page__icon-profile {
   padding: 8px;
   background: #F5F5F5;
@@ -49,8 +45,6 @@
 }
 
 /*миксы для блоков контента*/
-
-
 .page__box-main {
   padding: 70px 15px;
   box-sizing: border-box;

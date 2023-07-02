@@ -4,20 +4,15 @@ import { Link, useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 import '../MoviesCard/MoviesCard.css';
 import { getTimeFromMins } from '../../utils/functions';
-import { apiBestMovieUrl } from '../../utils/constants';
+import { apiBestMovieUrlImg } from '../../utils/config';
 
 function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
-  const savedMovie = savedMovies
-    ? savedMovies.find((item) => item.movieId === movie.id)
-    : '';
-  const isLiked = savedMovies
-    ? savedMovies.some((i) => i.movieId === movie.id)
-    : false;
+  const [isHovered, setIsHovered] = React.useState(false);
+  const savedMovie = savedMovies ? savedMovies.find((item) => item.movieId === movie.id) : '';
+  const isLiked = savedMovies ? savedMovies.some((i) => i.movieId === movie.id) : false;
 
   const location = useLocation();
-  const imageUrl = movie.image.url
-    ? `${apiBestMovieUrl}${movie.image.url}`
-    : movie.image;
+  const imageUrl = movie.image.url ? `${apiBestMovieUrlImg}${movie.image.url}` : movie.image;
 
   return (
     <li className="movies__item">
@@ -30,8 +25,14 @@ function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
         to={movie.trailerLink}
         target="_blank"
         rel="noreferrer"
-      >
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
         <img className="movies__image" src={imageUrl} alt={movie.nameRU} />
+        {isHovered && (
+          <div className="movies__overlay">
+            <p className="movies__text">{movie.description}</p>
+          </div>
+        )}
       </Link>
       {location.pathname === '/saved-movies' && (
         <Button
@@ -40,8 +41,6 @@ function MoviesCard({ movie, savedMovies, onSaveMovie, onDeleteMovie }) {
           onClick={() => onDeleteMovie(movie._id)}
         />
       )}
-
-      {/* <Button btnClass='button  button_type_movie  button_type_movie-save button_type_save_active' btnType='button' /> */}
       {location.pathname === '/movies' && (
         <Button
           btnClass={`button_type_movie button_type_save ${

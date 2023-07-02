@@ -19,22 +19,25 @@ function AboutMe() {
             фронтенд-разработке. После окончания планирую также развиваться в этой области.
           </p>
           <ul className="about-me__links">
-            <li><a
-              className="page__link about-me__link"
-              href="https://github.com/mintolime"
-              target="_blank"
-              rel="noreferrer">
-              Github
-            </a></li>
-            <li><a
-              className="page__link about-me__link"
-              href="https://unsplash.com/@mintolime"
-              target="_blank"
-              rel="noreferrer">
-              Unsplash
-            </a></li>
+            <li>
+              <a
+                className="page__link about-me__link"
+                href="https://github.com/mintolime"
+                target="_blank"
+                rel="noreferrer">
+                Github
+              </a>
+            </li>
+            <li>
+              <a
+                className="page__link about-me__link"
+                href="https://unsplash.com/@mintolime"
+                target="_blank"
+                rel="noreferrer">
+                Unsplash
+              </a>
+            </li>
           </ul>
-
         </div>
       </article>
     </section>

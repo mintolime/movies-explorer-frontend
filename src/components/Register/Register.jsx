@@ -1,14 +1,13 @@
-// import '../Register/Register.css'
-import React from "react";
-import EntryForm from "../EntryForm/EntryForm";
-import useFormAndValidation from "../../hooks/useFormAndValidation";
+import React from 'react';
+import EntryForm from '../EntryForm/EntryForm';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Register({ onRegister }) {
   const { values, handleChange, isValid, errors } = useFormAndValidation();
+
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    console.log("values", values);
     onRegister(values);
   }
 
@@ -18,13 +17,12 @@ function Register({ onRegister }) {
       btnText="Зарегистрироваться"
       linkText="Войти"
       onSubmit={handleSubmit}
-      isValidBtn={isValid}
-    >
+      isValidBtn={isValid}>
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
         <input
-          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
-          value={values.name || ""}
+          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
+          value={values.name || ''}
           onChange={handleChange}
           name="name"
           type="text"
@@ -39,8 +37,8 @@ function Register({ onRegister }) {
 
         <label className="form__label">Email</label>
         <input
-          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
-          value={values.email || ""}
+          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
+          value={values.email || ''}
           onChange={handleChange}
           name="email"
           type="email"
@@ -55,12 +53,12 @@ function Register({ onRegister }) {
 
         <label className="form__label">Пароль</label>
         <input
-          className={`form__input ${isValid ? "" : "form__input-error_active"}`}
+          className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
           name="password"
           type="password"
           aria-label="Ваш пароль"
           placeholder="Ваш пароль"
-          value={values.password || ""}
+          value={values.password || ''}
           minLength="8"
           maxLength="30"
           onChange={handleChange}

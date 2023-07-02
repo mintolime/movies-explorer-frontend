@@ -1,26 +1,25 @@
-import React from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
-import "./App.css";
+import './App.css';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import Movies from '../Movies/Movies';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Profile from '../Profile/Profile';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
-import Movies from "../Movies/Movies";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import Profile from "../Profile/Profile";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import PageNotFound from "../PageNotFound/PageNotFound";
-
-import { headerRoutes, footerRoutes } from "../../utils/constants";
-import { checkPath } from "../../utils/functions";
-import { apiDataMovies } from "../../utils/api/MoviesApi";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { MainApi } from "../../utils/api/MainApi";
-import { Auth } from "../../utils/api/AuthApi";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { headerRoutes, footerRoutes, apiBdMainData } from '../../utils/config';
+import { checkPath } from '../../utils/functions';
+import { apiDataMovies } from '../../utils/api/MoviesApi';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { MainApi } from '../../utils/api/MainApi';
+import { Auth } from '../../utils/api/AuthApi';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const location = useLocation();
@@ -32,80 +31,69 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const [isMovieSave, setMovieSave] = React.useState([]);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const [isSearchMovies, setSearchMovies] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
+  const [isSearchMovies, setSearchMovies] = React.useState(false);
 
   const apiDataMain = new MainApi({
-    url: "https://api.mintolime-movies.nomoredomains.rocks",
+    url: apiBdMainData,
     headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   });
 
   const apiAuth = new Auth({
-    url: "https://api.mintolime-movies.nomoredomains.rocks",
+    url: apiBdMainData,
     headers: {
-      "Content-Type": "application/json; charset=UTF-8",
+      'Content-Type': 'application/json; charset=UTF-8',
     },
   });
 
-// запрос к апи на получение фильмов и юзера из бэка
+  // запрос к апи на получение фильмов и юзера из бэка
   React.useEffect(() => {
     isLoggedIn &&
       apiDataMain
         .getAllData()
         .then(([userData, savedMovies]) => {
           setMovieSave(savedMovies);
-          localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
+          localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
           setCurrentUser(userData);
-          console.log(userData);
-          // console.log(res)
-          console.log(savedMovies);
         })
         .catch((err) => {
           console.log(
-            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
           );
         });
   }, [isLoggedIn]);
 
-//тут я пытаюсь достать фильмы из апи бестмуви 
+  //тут я пытаюсь достать фильмы из апи бестмуви
   React.useEffect(() => {
-    if (localStorage.getItem("movies")) {
-      setMovies(JSON.parse(localStorage.getItem("movies")));
-    }
     if (isLoggedIn) {
-      setIsLoading(true);
-      // выставляем задержку в одну секунду для отображения лоудера
-      const timeoutId = setTimeout(async () => {
-        try {
-          try {
-            const [movies] = await apiDataMovies.getAllData();
+      if (localStorage.getItem('movies')) {
+        setMovies(JSON.parse(localStorage.getItem('movies')));
+      } else {
+        apiDataMovies
+          .getAllMovies()
+          .then((movies) => {
+            localStorage.setItem('movies', JSON.stringify(movies));
             setMovies(movies);
-            localStorage.setItem("movies", JSON.stringify(movies));
-          } catch (err) {
+          })
+          .catch((err) => {
             console.log(
-              `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+              `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
             );
-          }
-        } finally {
-          setIsLoading(false);
-        }
-      }, 1000);
-
-      return () => clearTimeout(timeoutId);
+          });
+      }
     }
   }, [isLoggedIn]);
 
   // проверка токена
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       // проверим токен
       apiAuth
@@ -118,29 +106,27 @@ function App() {
         })
         .catch((err) => {
           console.log(
-            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
           );
         });
     }
   }, []);
 
-// это авторское, понимаешь да
   React.useEffect(() => {
-    isLoggedIn &&
-      localStorage.setItem("savedMovies", JSON.stringify(isMovieSave));
+    isLoggedIn && localStorage.setItem('savedMovies', JSON.stringify(isMovieSave));
   }, [isMovieSave, isLoggedIn]);
 
-// для попапа на открытие
+  // для попапа на открытие
   const handleOpenPopupSuccess = () => {
     setIsInfoTooltipOpen(true);
   };
 
-// для попапа на закрытие
+  // для попапа на закрытие
   const closePopup = () => {
     setIsInfoTooltipOpen(false);
   };
 
-// тут фильм сохрани
+  // тут фильм сохрани
   const handleSaveMovie = (movie, isLiked, id) => {
     if (isLiked) {
       handleDeleteMovie(id);
@@ -160,17 +146,15 @@ function App() {
       .deleteMovie(id)
       .then(() => {
         const newSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
-
         setMovieSave(newSavedMovies);
       })
       .catch((err) => {
         console.log(
-          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
         );
       });
   };
 
-// все что ниже работает на ура
   const handleUpdateUser = (data) => {
     apiDataMain
       .updateUserData(data)
@@ -178,11 +162,10 @@ function App() {
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         setCurrentUser(data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(
-          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
         );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
@@ -197,11 +180,11 @@ function App() {
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
         console.log(res);
-        navigate("/signin", { replace: true });
+        navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(
-          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
         );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
@@ -216,14 +199,13 @@ function App() {
         setIsLoggedIn(true);
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
-        console.log(data);
 
-        localStorage.setItem("jwt", data.token);
-        navigate("/", { replace: true });
+        localStorage.setItem('jwt', data.token);
+        navigate('/movies', { replace: true });
       })
       .catch((err) => {
         console.log(
-          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`
+          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
         );
         handleOpenPopupSuccess();
         setIsSuccessResponse(false);
@@ -232,17 +214,17 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt");
-    navigate("/signin", { replace: true });
+    localStorage.removeItem('jwt');
+    navigate('/signin', { replace: true });
     setIsLoggedIn(false);
     // для очистки локального хранилища после выхода из приложения
     localStorage.clear();
   };
 
-  // отрефакторить чисто нужен для того, чтобы на кнопочку нажать и фильмы появились. временно убрала
-  // const handleSearchMovies = () => {
-  //   setSearchMovies(true);
-  // };
+  // отрефакторить чисто нужен для того, чтобы на кнопочку нажать и фильмы появились.
+  const handleSearchMovies = () => {
+    setSearchMovies(true);
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -258,8 +240,7 @@ function App() {
               movies={movies}
               savedMovies={isMovieSave}
               searchActive={isSearchMovies}
-              isLoadingActive={isLoading}
-              // onSearch={handleSearchMovies}
+              onSearch={handleSearchMovies}
               onSaveMovie={handleSaveMovie}
             />
           }
@@ -268,11 +249,12 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute
-              movies={isMovieSave}
+              movies={movies}
               component={SavedMovies}
               isLoggedIn={isLoggedIn}
               savedMovies={isMovieSave}
-              // onSearch={handleSearchMovies}
+              searchActive={isSearchMovies}
+              onSearch={handleSearchMovies}
               onDeleteMovie={handleDeleteMovie}
             />
           }
@@ -290,14 +272,8 @@ function App() {
             />
           }
         />
-        <Route
-          path="/signup"
-          element={<Register onRegister={handleRegister} />}
-        />
-        <Route
-          path="/signin"
-          element={<Login onAuthorization={handleAuthorization} />}
-        />
+        <Route path="/signup" element={<Register onRegister={handleRegister} />} />
+        <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {footerView && <Footer />}

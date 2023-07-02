@@ -38,7 +38,7 @@
   border: 0;
   border-bottom: 1px #E8E8E8 solid;
   /* todo подумать над стилизацией кнопки очистки */
-  padding:0 45px 15px 10px;
+  padding: 0 45px 15px 10px;
 }
 
 .search-form__input[type="search"]::-webkit-search-cancel-button {

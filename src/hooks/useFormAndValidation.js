@@ -1,5 +1,5 @@
-import React from "react";
-import { regExpEmail, regExpName } from "../utils/constants";
+import React from 'react';
+import { regExpEmail, regExpName } from '../utils/config';
 
 export default function useFormAndValidation() {
   const [values, setValues] = React.useState({});
@@ -9,22 +9,22 @@ export default function useFormAndValidation() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    setIsValid(e.target.closest("form").checkValidity());
+    setIsValid(e.target.closest('form').checkValidity());
 
     // Валидация поля "Имя"
-    if (name === "name") {
+    if (name === 'name') {
       const isValidName = regExpName.test(value);
       setErrors({
         ...errors,
-        [name]: isValidName ? "" : "Введите корректное имя",
+        [name]: isValidName ? '' : 'Введите корректное имя',
       });
     }
     // Валидация поля "Email"
-    else if (name === "email") {
-      const isValidEmail = regExpEmail.test(String(value).toLowerCase());
+    else if (name === 'email') {
+      const isValidEmail = regExpEmail.test(String(value).toLowerCase().trim());
       setErrors({
         ...errors,
-        [name]: isValidEmail ? "" : "Введите корректный email",
+        [name]: isValidEmail ? '' : 'Введите корректный email',
       });
     }
     // в случае других ошибок задается ошибка валидации от браузера
@@ -39,7 +39,7 @@ export default function useFormAndValidation() {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setValues, setErrors, setIsValid],
   );
 
   return {

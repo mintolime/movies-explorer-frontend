@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import icon from '../../images/icon-profile.svg';
 
-function HeaderNav({isLoggedIn}) {
+function HeaderNav({ isLoggedIn }) {
   const location = useLocation();
   // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 

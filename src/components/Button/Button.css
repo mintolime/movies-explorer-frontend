@@ -82,13 +82,6 @@
   margin: 50px 40px 0;
 }
 
-/* .button_type_profile-edit {
-  color: #000;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-} */
-
 .button_type_profile-save {
   background-color: #000;
   color: #fff;
@@ -118,8 +111,6 @@
 }
 
 .button_disabled {
-  /* background: #F8F8F8;
-  color: #C2C2C2; */
   opacity: .3;
   pointer-events: none;
 }

@@ -1,3 +1,4 @@
+import { apiBestMovieData } from "../config";
 import { handleResponce } from "../functions";
 
 class MovieApi {
@@ -18,7 +19,7 @@ class MovieApi {
 }
 
 export const apiDataMovies = new MovieApi({
-  url: 'https://api.nomoreparties.co/beatfilm-movies',
+  url: apiBestMovieData,
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
   },
