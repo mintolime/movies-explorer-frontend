@@ -11,6 +11,13 @@
 
 https://mintolime-movies.nomoredomains.rocks
 
+#### Эти данные вы можете использовать для тестирования проекта 
+- Email
+  
+`cookies@test.ru`
+- Пароль
+  
+ `1234567890`
 
 ## Технологии
 
