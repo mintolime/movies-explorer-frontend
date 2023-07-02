@@ -9,7 +9,7 @@
 
 ## Страница проекта
 
-https://github.com/mintolime/movies-explorer-frontend
+https://mintolime-movies.nomoredomains.rocks/signin
 
 
 ## Технологии
