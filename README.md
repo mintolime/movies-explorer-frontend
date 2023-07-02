@@ -11,6 +11,9 @@
 
 https://mintolime-movies.nomoredomains.rocks
 
+## Pull request 
+https://github.com/mintolime/movies-explorer-frontend/pull/21
+
 #### Эти данные вы можете использовать для тестирования проекта 
 - Email
   
