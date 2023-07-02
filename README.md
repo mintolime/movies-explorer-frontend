@@ -9,7 +9,7 @@
 
 ## Страница проекта
 
-https://mintolime-movies.nomoredomains.rocks/signin
+https://mintolime-movies.nomoredomains.rocks
 
 
 ## Технологии
