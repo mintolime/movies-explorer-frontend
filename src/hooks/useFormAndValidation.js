@@ -33,10 +33,11 @@ export default function useFormAndValidation() {
         setIsValid(false)
       }
     }
-    // в случае других ошибок задается ошибка валидации от браузера
-    else {
+    // Валидация поля "Password"
+    else if (name === 'password') {
       setErrors({ ...errors, [name]: e.target.validationMessage });
     }
+
   };
 
   const resetForm = React.useCallback(
