@@ -3,8 +3,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import React, { useState, useEffect } from 'react';
+import { MOVIE_DURATION_MIN } from '../../utils/config';
 
-function Movies({ movies, savedMovies, onSearch, searchActive,  onSaveMovie }) {
+function Movies({ movies, savedMovies, onSearch, searchActive, onSaveMovie }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const searchedMovies = localStorage.getItem('searchedMovies');
   const queries = localStorage.getItem('searchQueryMovies');
@@ -26,28 +27,33 @@ function Movies({ movies, savedMovies, onSearch, searchActive,  onSaveMovie }) {
   const filterMovies = (query) => {
     setIsLoading(!filteredMovies.length); // Установка значения isLoading в зависимости от наличия уже отфильтрованных фильмов
 
-    setTimeout(() => {
-      let filtered = [];
-      localStorage.setItem('searchQueryMovies', JSON.stringify(query));
+    setTimeout(
+      () => {
+        let filtered = [];
+        localStorage.setItem('searchQueryMovies', JSON.stringify(query));
 
-      if (query.isShortFilmChecked) {
-        filtered = movies.filter((m) => {
-          return (
-            m.duration <= 40 &&
-            (m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase()) ||
-              m.nameEN.toLowerCase().trim().includes(query.searchText.toLowerCase()))
-          );
-        });
-      } else {
-        filtered = movies.filter((m) => {
-          return m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase());
-        });
-      }
+        if (query.isShortFilmChecked) {
+          filtered = movies.filter((m) => {
+            return (
+              m.duration <= MOVIE_DURATION_MIN &&
+              (m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase()) ||
+                m.nameEN.toLowerCase().trim().includes(query.searchText.toLowerCase()))
+            );
+          });
+        } else {
+          filtered = movies.filter((m) => {
+            return m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase());
+          });
+        }
 
-      setFilteredMovies(filtered);
-      localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-      setIsLoading(false);
-    }, filteredMovies.length ? 0 : 300);
+        setFilteredMovies(filtered);
+        localStorage.setItem('searchedMovies', JSON.stringify(filtered));
+        setTimeout(() => {
+          setIsLoading(false); // значение isLoading в false через две секунды
+        }, 2000);
+      },
+      filteredMovies.length ? 0 : 300,
+    );
   };
 
   return (
@@ -63,7 +69,9 @@ function Movies({ movies, savedMovies, onSearch, searchActive,  onSaveMovie }) {
           onSaveMovie={onSaveMovie}
         />
       ) : (
-        searchedMovies && <p className="movies__error-search">Упс.. По вашему запросу ничего не найдено</p>
+        searchedMovies && (
+          <p className="movies__error-search">Упс.. По вашему запросу ничего не найдено</p>
+        )
       )}
     </>
   );

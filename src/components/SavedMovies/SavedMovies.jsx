@@ -2,6 +2,7 @@ import React from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
+import { MOVIE_DURATION_MIN } from '../../utils/config';
 
 function SavedMovies({ onSearch, savedMovies, onDeleteMovie, isLoadingActive, searchActive }) {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
@@ -32,7 +33,8 @@ function SavedMovies({ onSearch, savedMovies, onDeleteMovie, isLoadingActive, se
     if (query.isShortFilmChecked) {
       filtered = savedMovies.filter((m) => {
         return (
-          m.duration <= 40 && m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase())
+          m.duration <= MOVIE_DURATION_MIN &&
+          m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase())
         );
       });
       setFilteredMovies(filtered);

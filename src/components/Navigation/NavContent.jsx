@@ -1,35 +1,46 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 import icon from '../../images/icon-profile.svg';
 
-function NavContent({isLoggedIn}) {
-  // const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+function NavContent({ isLoggedIn }) {
+  const activeLinkClass = 'page__link_active';
+  const inativeLinkClass = 'navigation__link navigation__link-item page__link';
 
   return isLoggedIn ? (
     <>
-      <Link to="/" className="navigation__link navigation__link-item page__link">
+      <NavLink to="/" className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
         Главная
-      </Link>
-      <Link to="/movies" className="navigation__link navigation__link-item page__link">
+      </NavLink>
+      <NavLink
+        to="/movies"
+        className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
         Фильмы
-      </Link>
-      <Link to="/saved-movies" className="navigation__link navigation__link-item page__link">
+      </NavLink>
+      <NavLink
+        to="/saved-movies"
+        className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
         Сохранённые фильмы
-      </Link>
-      <Link to="/profile" className="navigation__link navigation__link-profile page__link page__link-profile">
+      </NavLink>
+      <NavLink
+        to="/profile"
+        className="navigation__link navigation__link-profile page__link page__link-profile page__link_active">
         <p>Аккаунт</p>
         <img src={icon} className="page__icon-profile" alt="иконка профиля" />
-      </Link>
+      </NavLink>
     </>
   ) : (
     <>
-      <Link to="/signin" className="navigation__link navigation__link-item page__link">
+      <NavLink
+        to="/signin"
+        className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
         Войти
-      </Link>
-      <Link to="/signup" className="navigation__link navigation__link-item page__link">
+      </NavLink>
+      <NavLink
+        to="/signup"
+        className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
         Регистрация
-      </Link>
+      </NavLink>
     </>
   );
 }

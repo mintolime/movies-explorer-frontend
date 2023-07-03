@@ -4,27 +4,46 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Button/Button';
 import { useResize } from '../../hooks/useResize';
 import React from 'react';
+import {
+  DESKTOP_RENDER_CARD,
+  MOBILE_RENDER_CARD,
+  TABLET_RENDER_CARD,
+  MAX_ADD_CARD,
+  MIN_ADD_CARD,
+} from '../../utils/config';
+import { useLocation } from 'react-router-dom';
 
-function MoviesCardList({ moviesData, savedMovies, searchActive, onSaveMovie, onDeleteMovie }) {
+const MoviesCardList = ({ moviesData, savedMovies, onSaveMovie, onDeleteMovie }) => {
   const size = useResize();
-  // стейт отображает количество карточек в зависимости от размера экрана
-  const [moviesToShow, setMoviesToShow] = React.useState(
-    size.isScreenSm ? 5 : size.isScreenMd ? 8 : size.isScreenXl ? 12 : 0,
-  );
+  const location = useLocation();
+  const [moviesToAdd, setMoviesToAdd] = React.useState(0);
 
-  // тут он у нас отслеживает хук изменения страницы
-  const handleLoadMore = () => {
-    if (size.isScreenSm || size.isScreenMd) {
-      setMoviesToShow(moviesToShow + 2);
-    } else if (size.isScreenXl) {
-      setMoviesToShow(moviesToShow + 3);
+  React.useEffect(() => {
+    setMoviesToAdd(0);
+  }, [moviesData]);
+
+  const moviesToShow = React.useMemo(() => {
+    let countToRender;
+    let minAddCard;
+
+    if (size.isScreenSm) {
+      countToRender = MOBILE_RENDER_CARD;
+      minAddCard = MIN_ADD_CARD;
+    } else if (size.isScreenMd) {
+      countToRender = TABLET_RENDER_CARD;
+      minAddCard = MIN_ADD_CARD;
+    } else {
+      countToRender = DESKTOP_RENDER_CARD;
+      minAddCard = MAX_ADD_CARD;
     }
-  };
+
+    return moviesData.slice(0, countToRender + moviesToAdd);
+  }, [moviesData, moviesToAdd, size]);
 
   return (
     <section className="movies" aria-label="галерея фильмов пользователя">
       <ul className="movies__list">
-        {moviesData?.slice(0, moviesToShow).map((movie) => (
+        {moviesToShow.map((movie) => (
           <MoviesCard
             movie={movie}
             savedMovies={savedMovies}
@@ -34,16 +53,18 @@ function MoviesCardList({ moviesData, savedMovies, searchActive, onSaveMovie, on
           />
         ))}
       </ul>
-      {searchActive && moviesData.length > moviesToShow && (
+      {location.pathname === '/movies' && moviesData.length > moviesToShow.length && (
         <Button
           btnClass="button_type_more"
           btnType="button"
           btnText="Ещё"
-          onClick={handleLoadMore}
+          onClick={() => {
+            setMoviesToAdd((prev) => prev + (size.isScreenXl ? 3 : 2));
+          }}
         />
       )}
     </section>
   );
-}
+};
 
 export default MoviesCardList;

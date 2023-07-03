@@ -37,6 +37,7 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
   const [isSearchMovies, setSearchMovies] = React.useState(false);
+  const [isInputDisabled, setIsInputDisabled] = React.useState(false);
 
   const apiDataMain = new MainApi({
     url: apiBdMainData,
@@ -119,13 +120,17 @@ function App() {
   // для попапа на открытие
   const handleOpenPopupSuccess = () => {
     setIsInfoTooltipOpen(true);
+    // также блокируем при запросе импут,что не позволит ввести юзеру данные
+    setIsInputDisabled(true);
   };
 
   // для попапа на закрытие
   const closePopup = () => {
     setIsInfoTooltipOpen(false);
+    // при закрытии обратно разблокируем
+    setIsInputDisabled(false);
   };
-
+  
   // тут фильм сохрани
   const handleSaveMovie = (movie, isLiked, id) => {
     if (isLiked) {
@@ -142,16 +147,21 @@ function App() {
 
   // тут фильм удали
   const handleDeleteMovie = (id) => {
+    const savedMoviesData = JSON.parse(localStorage.getItem('searchedSavedMovies'));
+
     apiDataMain
       .deleteMovie(id)
       .then(() => {
-        const newSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
-        setMovieSave(newSavedMovies);
+        const updatedSavedMovies = isMovieSave.filter((movie) => movie._id !== id);
+        setMovieSave(updatedSavedMovies);
+
+        if (savedMoviesData) {
+          const updatedSavedMoviesData = savedMoviesData.filter((movie) => movie._id !== id);
+          localStorage.setItem('searchedSavedMovies', JSON.stringify(updatedSavedMoviesData));
+        }
       })
-      .catch((err) => {
-        console.log(
-          `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
-        );
+      .catch((error) => {
+        console.log(`Ошибка запроса: ${error.status}, сообщение: ${error.message} 😔`);
       });
   };
 
@@ -173,14 +183,14 @@ function App() {
       });
   };
 
-  const handleRegister = (data) => {
+  const handleRegister = ({ name, email, password }) => {
     apiAuth
-      .register(data)
+      .register(name, email, password)
       .then((res) => {
         setIsSuccessResponse(true);
         handleOpenPopupSuccess();
-        console.log(res);
-        navigate('/signin', { replace: true });
+        handleAuthorization({ email, password });
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(
@@ -192,16 +202,17 @@ function App() {
       });
   };
 
-  const handleAuthorization = (data) => {
+  const handleAuthorization = ({ email, password }) => {
     apiAuth
-      .authorize(data)
+      .authorize(email, password)
       .then((data) => {
-        setIsLoggedIn(true);
-        setIsSuccessResponse(true);
-        handleOpenPopupSuccess();
-
-        localStorage.setItem('jwt', data.token);
-        navigate('/movies', { replace: true });
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+          setIsLoggedIn(true);
+          navigate('/movies');
+          setIsSuccessResponse(true);
+          handleOpenPopupSuccess();
+        }
       })
       .catch((err) => {
         console.log(
@@ -227,63 +238,84 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      {headerView && <Header isLoggedIn={isLoggedIn} />}
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRoute
-              component={Movies}
-              isLoggedIn={isLoggedIn}
-              movies={movies}
-              savedMovies={isMovieSave}
-              searchActive={isSearchMovies}
-              onSearch={handleSearchMovies}
-              onSaveMovie={handleSaveMovie}
-            />
-          }
+    <>
+      <CurrentUserContext.Provider value={currentUser}>
+        {headerView && <Header isLoggedIn={isLoggedIn} />}
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute
+                component={Movies}
+                isLoggedIn={isLoggedIn}
+                movies={movies}
+                savedMovies={isMovieSave}
+                searchActive={isSearchMovies}
+                onSearch={handleSearchMovies}
+                onSaveMovie={handleSaveMovie}
+              />
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRoute
+                movies={movies}
+                component={SavedMovies}
+                isLoggedIn={isLoggedIn}
+                savedMovies={isMovieSave}
+                searchActive={isSearchMovies}
+                onSearch={handleSearchMovies}
+                onDeleteMovie={handleDeleteMovie}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                component={Profile}
+                isOpen={isInfoTooltipOpen}
+                isLoggedIn={isLoggedIn}
+                isInputDisabled={isInputDisabled}
+                onLogout={handleLogout}
+                onUpdateUser={handleUpdateUser}
+                isCorrectResponse={isSuccessResponse}
+              />
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                isLoggedIn={isLoggedIn}
+                onRegister={handleRegister}
+                isInputDisabled={isInputDisabled}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                isLoggedIn={isLoggedIn}
+                onAuthorization={handleAuthorization}
+                isInputDisabled={isInputDisabled}
+              />
+            }
+          />
+          <Route path="*" element={<PageNotFound isLoggedIn={isLoggedIn} />} />
+        </Routes>
+        {footerView && <Footer />}
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closePopup}
+          isCorrectResponse={isSuccessResponse}
+          isError={errorMessage}
         />
-        <Route
-          path="/saved-movies"
-          element={
-            <ProtectedRoute
-              movies={movies}
-              component={SavedMovies}
-              isLoggedIn={isLoggedIn}
-              savedMovies={isMovieSave}
-              searchActive={isSearchMovies}
-              onSearch={handleSearchMovies}
-              onDeleteMovie={handleDeleteMovie}
-            />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute
-              component={Profile}
-              isOpen={isInfoTooltipOpen}
-              isLoggedIn={isLoggedIn}
-              onLogout={handleLogout}
-              onUpdateUser={handleUpdateUser}
-              isCorrectResponse={isSuccessResponse}
-            />
-          }
-        />
-        <Route path="/signup" element={<Register onRegister={handleRegister} />} />
-        <Route path="/signin" element={<Login onAuthorization={handleAuthorization} />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-      {footerView && <Footer />}
-      <InfoTooltip
-        isOpen={isInfoTooltipOpen}
-        onClose={closePopup}
-        isCorrectResponse={isSuccessResponse}
-        isError={errorMessage}
-      />
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ export class Auth {
     this.headers = headers;
   }
 
-  register({ name, email, password }) {
+  register(name, email, password) {
     return fetch(`${this.url}/signup`, {
       method: 'POST',
       headers: this.headers,
@@ -14,7 +14,7 @@ export class Auth {
     }).then((res) => handleResponce(res));
   }
 
-  authorize({ email, password }) {
+  authorize(email, password) {
     return fetch(`${this.url}/signin`, {
       method: 'POST',
       headers: this.headers,

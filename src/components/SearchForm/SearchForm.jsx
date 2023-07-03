@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 
 function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
   const [searchText, setSearchText] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [isValid, setIsValid] = React.useState(true);
   const isChecked = JSON.parse(localStorage.getItem('filterCheckBox'));
   const [isShortFilmChecked, setIsShortFilmChecked] = React.useState(isChecked);
 
@@ -36,22 +36,20 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFilter({ searchText, isShortFilmChecked });
+    onFilter({ searchText, isShortFilmChecked: searchQuery.isShortFilmChecked });
     onSearchMovies();
   };
 
   const handleChange = (e) => {
-    if (searchText) {
-      setError(e.target.validationMessage);
-    }
     setSearchText(e.target.value);
+    setIsValid(e.target.value !== '');
   };
 
   return (
     <section className="search-form" aria-label="форма поиска фильмов">
       <form className="search-form__inner" onSubmit={handleSubmit}>
         <input
-          className="search-form__input"
+          className={`search-form__input ${!isValid ? 'input_invalid' : ''}`}
           type="search"
           placeholder="Фильм"
           name="search"
@@ -60,13 +58,11 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
           aria-label="Поиск фильмов"
           minLength="1"
           maxLength="100"
-          required></input>
-        <Button
-          btnClass={`button_type_search ${!searchText ? 'button_disabled' : ''}`}
-          btnType="submit"
+          required
         />
+        <Button btnClass={`button_type_search ${!isValid && 'button_disabled'}`} btnType="submit" />
       </form>
-      <span className="search-form__input-error">{error}</span>
+      <span className="search-form__input-error">{!isValid && 'Нужно ввести ключевое слово'}</span>
       <FilterCheckbox isChecked={searchQuery.isShortFilmChecked} onCheck={checkFilterBox} />
     </section>
   );

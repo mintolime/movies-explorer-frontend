@@ -82,6 +82,10 @@
   margin: 50px 40px 0;
 }
 
+.button_type_more:hover {
+  background-color: #ccc;
+}
+
 .button_type_profile-save {
   background-color: #000;
   color: #fff;

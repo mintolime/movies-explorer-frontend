@@ -6,7 +6,7 @@ import "../Profile/Profile.css";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import React from "react";
 
-function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
+function Profile({ onLogout, onUpdateUser, isCorrectResponse,isInputDisabled }) {
   const { values, handleChange, errors, isValid, setValues, setIsValid } =
     useFormAndValidation();
   const currentUser = React.useContext(CurrentUserContext);
@@ -46,6 +46,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
             className="profile__input"
             value={values.name || ""}
             onChange={handleChange}
+            disabled={isInputDisabled}
             name="name"
             type="text"
             aria-label="Ваше имя"
@@ -64,6 +65,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
             className="profile__input"
             value={values.email || ""}
             onChange={handleChange}
+            disabled={isInputDisabled}
             name="email"
             type="email"
             aria-label="Ваша почта"
@@ -79,7 +81,7 @@ function Profile({ onLogout, onUpdateUser, isCorrectResponse }) {
           <span className="profile__input-error">{errors.email}</span>
         </fieldset>
         <div className="profile__button-box">
-          {/* по тз должна быть откл. кнопка редактирования  
+          {/* по тз должна быть откл. кнопка редактирования
            в моей реализации она служит ссылкой на импут и переход в режим редактирования  */}
           {showSaveBtn ? (
             <Button

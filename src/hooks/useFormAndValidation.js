@@ -18,6 +18,9 @@ export default function useFormAndValidation() {
         ...errors,
         [name]: isValidName ? '' : 'Введите корректное имя',
       });
+      if (!isValidName) {
+        setIsValid(false)
+      }
     }
     // Валидация поля "Email"
     else if (name === 'email') {
@@ -26,6 +29,9 @@ export default function useFormAndValidation() {
         ...errors,
         [name]: isValidEmail ? '' : 'Введите корректный email',
       });
+      if (!isValidEmail) {
+        setIsValid(false)
+      }
     }
     // в случае других ошибок задается ошибка валидации от браузера
     else {

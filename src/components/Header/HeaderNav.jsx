@@ -1,22 +1,27 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, NavLink } from 'react-router-dom';
 import icon from '../../images/icon-profile.svg';
 
 function HeaderNav({ isLoggedIn }) {
   const location = useLocation();
-  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const activeLinkClass = 'header__movies-link_active';
+  const inativeLinkClass = 'header__movies-link page__link';
 
   return isLoggedIn ? (
     <>
       <div className="header__nav-box  header__nav-box_movies ">
-        <Link to="/movies" className="header__movies-link page__link">
+        <NavLink
+          to="/movies"
+          className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
           Фильмы
-        </Link>
-        <Link to="/saved-movies" className="header__movies-link page__link">
+        </NavLink>
+        <NavLink
+          to="/saved-movies"
+          className={({ isActive }) => (isActive ? activeLinkClass : inativeLinkClass)}>
           Сохранённые фильмы
-        </Link>
+        </NavLink>
       </div>
-      <Link to="/profile" className="page__link-profile page__link">
+      <NavLink to="/profile" className="page__link-profile page__link">
         <p className="header__link-text">Аккаунт</p>
         <img
           className={`page__icon-profile  ${
@@ -25,7 +30,7 @@ function HeaderNav({ isLoggedIn }) {
           src={icon}
           alt="иконка профиля"
         />
-      </Link>
+      </NavLink>
     </>
   ) : (
     <div className="header__nav-box">

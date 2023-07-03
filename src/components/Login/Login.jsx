@@ -3,9 +3,17 @@ import React from 'react';
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import '../Login/Login.css';
+import { useNavigate } from 'react-router-dom';
 
-function Login({ onAuthorization }) {
+function Login({ onAuthorization, isLoggedIn, isInputDisabled }) {
   const { values, handleChange, isValid, errors } = useFormAndValidation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/movies');
+    }
+  }, [isLoggedIn]);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -29,6 +37,7 @@ function Login({ onAuthorization }) {
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
           value={values.email || ''}
           onChange={handleChange}
+          disabled={isInputDisabled}
           name="email"
           type="email"
           aria-label="Ваша почта"
@@ -50,6 +59,7 @@ function Login({ onAuthorization }) {
           minLength="8"
           maxLength="30"
           onChange={handleChange}
+          disabled={isInputDisabled}
           required
         />
         <span className="form__input-error">{errors.password}</span>
