@@ -36,13 +36,17 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFilter({ searchText, isShortFilmChecked: searchQuery.isShortFilmChecked });
-    onSearchMovies();
+    if (!searchText) {
+      setIsValid(false);
+      return;
+    } else {
+      onFilter({ searchText, isShortFilmChecked });
+    }
   };
+  console.log(isValid);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
-    setIsValid(e.target.value !== '');
   };
 
   return (
@@ -58,9 +62,9 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
           aria-label="Поиск фильмов"
           minLength="1"
           maxLength="100"
-          required
         />
-        <Button btnClass={`button_type_search ${!isValid && 'button_disabled'}`} btnType="submit" />
+        {/* <Button btnClass={`button_type_search ${!isValid && 'button_disabled'}`} btnType="submit" /> */}
+        <Button btnClass="button_type_search" btnType="submit" />
       </form>
       <span className="search-form__input-error">{!isValid && 'Нужно ввести ключевое слово'}</span>
       <FilterCheckbox isChecked={searchQuery.isShortFilmChecked} onCheck={checkFilterBox} />

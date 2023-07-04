@@ -25,10 +25,12 @@ function Movies({ movies, savedMovies, onSearch, searchActive, onSaveMovie }) {
   }, [queries]);
 
   const filterMovies = (query) => {
-    setIsLoading(!filteredMovies.length); // Установка значения isLoading в зависимости от наличия уже отфильтрованных фильмов
+  //  if (!filteredMovies.length) {
+      setIsLoading(true);
+    // }
 
-    setTimeout(
-      () => {
+    // setTimeout(
+    //   () => {
         let filtered = [];
         localStorage.setItem('searchQueryMovies', JSON.stringify(query));
 
@@ -51,9 +53,9 @@ function Movies({ movies, savedMovies, onSearch, searchActive, onSaveMovie }) {
         setTimeout(() => {
           setIsLoading(false); // значение isLoading в false через две секунды
         }, 2000);
-      },
-      filteredMovies.length ? 0 : 300,
-    );
+      // },
+      // filteredMovies.length ? 0 : 300,
+    // );
   };
 
   return (
