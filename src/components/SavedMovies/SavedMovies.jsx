@@ -18,7 +18,7 @@ function SavedMovies({ onSearch, savedMovies, onDeleteMovie, isLoadingActive, se
     }
   }, [searchedMovies, savedMovies, searchQuery]);
 
- React.useEffect(() => {
+  React.useEffect(() => {
     if (queries) {
       setSearchQuery(JSON.parse(queries));
       filterMovies(JSON.parse(queries));

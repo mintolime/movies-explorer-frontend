@@ -25,37 +25,30 @@ function Movies({ movies, savedMovies, onSearch, searchActive, onSaveMovie }) {
   }, [queries]);
 
   const filterMovies = (query) => {
-  //  if (!filteredMovies.length) {
-      setIsLoading(true);
-    // }
+    setIsLoading(true);
 
-    // setTimeout(
-    //   () => {
-        let filtered = [];
-        localStorage.setItem('searchQueryMovies', JSON.stringify(query));
+    let filtered = [];
+    localStorage.setItem('searchQueryMovies', JSON.stringify(query));
 
-        if (query.isShortFilmChecked) {
-          filtered = movies.filter((m) => {
-            return (
-              m.duration <= MOVIE_DURATION_MIN &&
-              (m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase()) ||
-                m.nameEN.toLowerCase().trim().includes(query.searchText.toLowerCase()))
-            );
-          });
-        } else {
-          filtered = movies.filter((m) => {
-            return m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase());
-          });
-        }
+    if (query.isShortFilmChecked) {
+      filtered = movies.filter((m) => {
+        return (
+          m.duration <= MOVIE_DURATION_MIN &&
+          (m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase()) ||
+            m.nameEN.toLowerCase().trim().includes(query.searchText.toLowerCase()))
+        );
+      });
+    } else {
+      filtered = movies.filter((m) => {
+        return m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase());
+      });
+    }
 
-        setFilteredMovies(filtered);
-        localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-        setTimeout(() => {
-          setIsLoading(false); // значение isLoading в false через две секунды
-        }, 2000);
-      // },
-      // filteredMovies.length ? 0 : 300,
-    // );
+    setFilteredMovies(filtered);
+    localStorage.setItem('searchedMovies', JSON.stringify(filtered));
+    setTimeout(() => {
+      setIsLoading(false); // значение isLoading в false через две секунды
+    }, 2000);
   };
 
   return (
