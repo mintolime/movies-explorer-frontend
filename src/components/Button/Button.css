@@ -31,7 +31,7 @@
   border-radius: 3px;
 }
 
-.button_type_save {
+.button_type_movie {
   width: 100px;
   height: 30px;
   font-weight: 400;
@@ -44,15 +44,19 @@
   align-self: center;
   margin: 0 auto 14px;
   border-radius: 30px;
-  background: #F9F9F9;
+  background-color: #F9F9F9;
 }
 
-.button_type_save_active {
+.button_type_movie:hover {
+  background-color: #ccc;
+}
+
+.button_type_movie-save_active {
   background: center no-repeat #FF4062 url('../../images/icon-done.svg');
 }
 
-.button_type_delete {
-  background: center no-repeat #F9F9F9 url('../../images/icon-delete.svg');
+.button_type_movie-delete {
+  background: center no-repeat #f3f3f3 url('../../images/icon-delete.svg');
 }
 
 .button_type_search {
@@ -61,7 +65,7 @@
   height: 34px;
   /* margin-right: 20px; */
   /* для позиционирования кнопки в импуте поиска фильмов */
-  transform: translate(-33px, -9px);
+  transform: translate(-40px, -5px);
   background: center/100% no-repeat url('../../images/icon-find.svg');
 }
 
@@ -78,11 +82,8 @@
   margin: 50px 40px 0;
 }
 
-.button_type_profile-edit {
-   color: #000;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
+.button_type_more:hover {
+  background-color: #ccc;
 }
 
 .button_type_profile-save {
@@ -90,10 +91,30 @@
   color: #fff;
   border-radius: 3px;
   padding: 14px 67px;
+  margin-top: 50px;
+}
+
+.button_type_close {
+  background: url('../../images/icon-close.svg');
+  background-size: cover;
+  border: none;
+  position: absolute;
+  top: -35px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (min-width: 720px) {
+  .button_type_close {
+    top: -45px;
+    right: -45px;
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .button_disabled {
-  background: #F8F8F8;
-  color: #C2C2C2;
-  cursor: no-drop;
+  opacity: .3;
+  pointer-events: none;
 }

@@ -22,12 +22,16 @@
   opacity: 1;
 }
 
-.page__link:hover {
-  opacity: .7;
+.page__link_active {
+  color: #000;
+  padding: 24px 0 3px;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
 }
 
-.page__link:active {
-  border-bottom: #000 2px solid;
+.page__link:hover {
+  opacity: .7;
 }
 
 .page__icon-profile {
@@ -49,8 +53,6 @@
 }
 
 /*миксы для блоков контента*/
-
-
 .page__box-main {
   padding: 70px 15px;
   box-sizing: border-box;

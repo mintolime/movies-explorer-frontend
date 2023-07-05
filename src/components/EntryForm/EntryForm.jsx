@@ -6,7 +6,7 @@ import logo from '../../images/logo-header.svg';
 import Button from '../Button/Button';
 
 //поправить название
-function EntryForm({ title, children, btnText, linkText, onSubmit }) {
+function EntryForm({ title, children, btnText, linkText, onSubmit, isValidBtn, isValidEmail }) {
   const location = useLocation();
 
   return (
@@ -18,12 +18,15 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
         <h3 className="entry-form__title">{title}</h3>
         <form name="form" className="entry-form__box" onSubmit={onSubmit}>
           {children}
+          <Button
+            btnClass={`button_type_entry button_type_entry_profile ${
+              isValidBtn ? '' : 'button_disabled'
+            }`}
+            btnType="submit"
+            btnText={btnText}
+          />
         </form>
-        <Button
-          btnClass="button_type_entry button_type_entry_profile"
-          btnType="submit"
-          btnText={btnText}
-        />
+
         {location.pathname === '/signup' && (
           <p className=" entry-form__auth-text">
             Уже зарегистрированы?

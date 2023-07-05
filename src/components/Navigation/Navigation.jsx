@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 
-import icon from '../../images/icon-profile.svg';
 import '../Navigation/Navigation.css';
 import NavContent from './NavContent';
 
-function Navigation() {
+function Navigation({isLoggedIn}) {
   const [isToggle, setIsToggle] = React.useState(false);
 
   return (
@@ -20,7 +18,7 @@ function Navigation() {
         <span className="navigation__toogle"></span>
         <span className="navigation__toogle"></span>
         <ul className="navigation__list">
-          <NavContent />
+          <NavContent isLoggedIn={isLoggedIn}/>
         </ul>
       </div>
     </nav>

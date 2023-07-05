@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  SCREEN_SM, SCREEN_MD, SCREEN_XL
-} from '../utils/constants';
-
+import { SCREEN_SM, SCREEN_MD, SCREEN_XL } from '../utils/config';
 
 export const useResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -19,8 +16,11 @@ export const useResize = () => {
 
   return {
     width,
-    // isScreenSm: width >= SCREEN_SM,
-    isScreenMd: width <= SCREEN_MD,
-    // isScreenXl: width >= SCREEN_XL,
+    // 319 & 767
+    isScreenSm: width >= SCREEN_SM && width < SCREEN_MD,
+    // 767 & 1279
+    isScreenMd: width >= SCREEN_MD && width < SCREEN_XL,
+    // 1279
+    isScreenXl: width >= SCREEN_XL,
   };
-}
+};

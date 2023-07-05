@@ -1,33 +1,45 @@
-// import '../Register/Register.css'
+import React from 'react';
 import EntryForm from '../EntryForm/EntryForm';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { useNavigate } from 'react-router-dom';
 
-function Register({ onRegister }) {
+function Register({ onRegister, isLoggedIn, isInputDisabled }) {
   const { values, handleChange, isValid, errors } = useFormAndValidation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/movies');
+    }
+  }, [isLoggedIn]);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     onRegister(values);
   }
+
   return (
     <EntryForm
       title="Добро пожаловать!"
       btnText="Зарегистрироваться"
       linkText="Войти"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      isValidBtn={isValid}>
       <fieldset className="form__inner form__inner_padding-bottom">
         <label className="form__label">Имя</label>
         <input
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
           value={values.name || ''}
           onChange={handleChange}
+          disabled={isInputDisabled}
           name="name"
           type="text"
           aria-label="Ваше имя"
           placeholder="Ваше имя"
           minLength="2"
           maxLength="100"
+          autoComplete="off"
           required
         />
         <span className="form__input-error">{errors.name}</span>
@@ -37,12 +49,14 @@ function Register({ onRegister }) {
           className={`form__input ${isValid ? '' : 'form__input-error_active'}`}
           value={values.email || ''}
           onChange={handleChange}
+          disabled={isInputDisabled}
           name="email"
           type="email"
           aria-label="Ваша почта"
           placeholder="Ваша почта"
           minLength="2"
           maxLength="30"
+          autoComplete="off"
           required
         />
         <span className="form__input-error">{errors.email}</span>
@@ -58,6 +72,8 @@ function Register({ onRegister }) {
           minLength="8"
           maxLength="30"
           onChange={handleChange}
+          disabled={isInputDisabled}
+          autoComplete="off"
           required
         />
         <span className="form__input-error"> {errors.password}</span>
