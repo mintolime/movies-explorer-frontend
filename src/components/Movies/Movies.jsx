@@ -51,9 +51,16 @@ function Movies({ movies, savedMovies, onSearch, searchActive, onSaveMovie }) {
     }, 2000);
   };
 
+    const handleResetInput = () => {
+    setFilteredMovies([]);
+    setSearchQuery({});
+    localStorage.removeItem('searchedMovies');
+    localStorage.removeItem('searchQueryMovies');
+  };
+
   return (
     <>
-      <SearchForm onSearchMovies={onSearch} onFilter={filterMovies} searchQuery={searchQuery} />
+      <SearchForm onSearchMovies={onSearch} onFilter={filterMovies} searchQuery={searchQuery} onResetInput={handleResetInput}/>
       {isLoading ? (
         <Preloader />
       ) : filteredMovies.length ? (

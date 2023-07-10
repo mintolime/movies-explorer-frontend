@@ -65,7 +65,7 @@
   height: 34px;
   /* margin-right: 20px; */
   /* для позиционирования кнопки в импуте поиска фильмов */
-  transform: translate(-40px, -5px);
+  transform: translate(-60px, -5px);
   background: center/100% no-repeat url('../../images/icon-find.svg');
 }
 
@@ -112,6 +112,14 @@
     width: 42px;
     height: 42px;
   }
+}
+
+.button_type_reset {
+  width: 30px;
+  height: 30px;
+  transform: translate(-70px, -5px);
+  background: url('../../images/icon-close.svg');
+  background-size: cover;
 }
 
 .button_disabled {

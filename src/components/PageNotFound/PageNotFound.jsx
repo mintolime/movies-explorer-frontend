@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import '../PageNotFound/PageNotFound.css';
+import PreloaderPage from '../PreloaderPage/PreloaderPage';
 
 function PageNotFound({ isLoggedIn }) {
   const navigate = useNavigate();
 
   return (
     <section className="not-found">
-      <div className="not-found__inner">
+     <PreloaderPage/>
+      {/* <div className="not-found__inner">
         <div className="not-found__text">
           <h2 className="not-found__heading">404</h2>
           <p className="not-found__subtitle">Страница не найдена</p>
@@ -19,7 +21,7 @@ function PageNotFound({ isLoggedIn }) {
           }}>
           Назад
         </Link>
-      </div>
+      </div> */}
     </section>
   );
 }

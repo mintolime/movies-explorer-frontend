@@ -20,6 +20,7 @@ import { MainApi } from '../../utils/api/MainApi';
 import { Auth } from '../../utils/api/AuthApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import PreloaderPage from '../PreloaderPage/PreloaderPage';
 
 function App() {
   const location = useLocation();
@@ -38,6 +39,7 @@ function App() {
   const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
   const [isSearchMovies, setSearchMovies] = React.useState(false);
   const [isInputDisabled, setIsInputDisabled] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const apiDataMain = new MainApi({
     url: apiBdMainData,
@@ -84,6 +86,11 @@ function App() {
             setMovies(movies);
           })
           .catch((err) => {
+            if (err.status === 401) {
+              localStorage.removeItem('jwt');
+              setIsLoading(false);
+            }
+            navigate('/signin');
             console.log(
               `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
             );
@@ -95,21 +102,30 @@ function App() {
   // проверка токена
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      // проверим токен
+
+    // Создаем функцию-обертку для задержки
+    const delayedCheckToken = () => {
       apiAuth
         .checkToken(jwt)
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
             navigate(location.pathname);
+            setIsLoading(false);
           }
         })
         .catch((err) => {
           console.log(
-            `Что-то пошло не так: ошибка запроса ${err.status} , сообщение:${err.message} 😔`,
+            `Что-то пошло не так: ошибка запроса ${err.status}, сообщение: ${err.message} 😔`,
           );
         });
+    };
+
+    if (jwt) {
+      // Задержка загрузки на две секунды
+      setTimeout(delayedCheckToken, 2000);
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
@@ -130,7 +146,7 @@ function App() {
     // при закрытии обратно разблокируем
     setIsInputDisabled(false);
   };
-  
+
   // тут фильм сохрани
   const handleSaveMovie = (movie, isLiked, id) => {
     if (isLiked) {
@@ -239,82 +255,86 @@ function App() {
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
-        {headerView && <Header isLoggedIn={isLoggedIn} />}
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute
-                component={Movies}
-                isLoggedIn={isLoggedIn}
-                movies={movies}
-                savedMovies={isMovieSave}
-                searchActive={isSearchMovies}
-                onSearch={handleSearchMovies}
-                onSaveMovie={handleSaveMovie}
-              />
-            }
+      {isLoading ? (
+        <PreloaderPage />
+      ) : (
+        <CurrentUserContext.Provider value={currentUser}>
+          {headerView && <Header isLoggedIn={isLoggedIn} />}
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute
+                  component={Movies}
+                  isLoggedIn={isLoggedIn}
+                  movies={movies}
+                  savedMovies={isMovieSave}
+                  searchActive={isSearchMovies}
+                  onSearch={handleSearchMovies}
+                  onSaveMovie={handleSaveMovie}
+                />
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute
+                  movies={movies}
+                  component={SavedMovies}
+                  isLoggedIn={isLoggedIn}
+                  savedMovies={isMovieSave}
+                  searchActive={isSearchMovies}
+                  onSearch={handleSearchMovies}
+                  onDeleteMovie={handleDeleteMovie}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  component={Profile}
+                  isOpen={isInfoTooltipOpen}
+                  isLoggedIn={isLoggedIn}
+                  isInputDisabled={isInputDisabled}
+                  onLogout={handleLogout}
+                  onUpdateUser={handleUpdateUser}
+                  isCorrectResponse={isSuccessResponse}
+                />
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <Register
+                  isLoggedIn={isLoggedIn}
+                  onRegister={handleRegister}
+                  isInputDisabled={isInputDisabled}
+                />
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <Login
+                  isLoggedIn={isLoggedIn}
+                  onAuthorization={handleAuthorization}
+                  isInputDisabled={isInputDisabled}
+                />
+              }
+            />
+            <Route path="*" element={<PageNotFound isLoggedIn={isLoggedIn} />} />
+          </Routes>
+          {footerView && <Footer />}
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closePopup}
+            isCorrectResponse={isSuccessResponse}
+            isError={errorMessage}
           />
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                movies={movies}
-                component={SavedMovies}
-                isLoggedIn={isLoggedIn}
-                savedMovies={isMovieSave}
-                searchActive={isSearchMovies}
-                onSearch={handleSearchMovies}
-                onDeleteMovie={handleDeleteMovie}
-              />
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                component={Profile}
-                isOpen={isInfoTooltipOpen}
-                isLoggedIn={isLoggedIn}
-                isInputDisabled={isInputDisabled}
-                onLogout={handleLogout}
-                onUpdateUser={handleUpdateUser}
-                isCorrectResponse={isSuccessResponse}
-              />
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Register
-                isLoggedIn={isLoggedIn}
-                onRegister={handleRegister}
-                isInputDisabled={isInputDisabled}
-              />
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <Login
-                isLoggedIn={isLoggedIn}
-                onAuthorization={handleAuthorization}
-                isInputDisabled={isInputDisabled}
-              />
-            }
-          />
-          <Route path="*" element={<PageNotFound isLoggedIn={isLoggedIn} />} />
-        </Routes>
-        {footerView && <Footer />}
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closePopup}
-          isCorrectResponse={isSuccessResponse}
-          isError={errorMessage}
-        />
-      </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>
+      )}
     </>
   );
 }

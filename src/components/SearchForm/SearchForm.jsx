@@ -4,7 +4,7 @@ import '../SearchForm/SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Button from '../Button/Button';
 
-function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
+function SearchForm({ onSearchMovies, searchQuery, onFilter, onResetInput }) {
   const [searchText, setSearchText] = React.useState('');
   const [isValid, setIsValid] = React.useState(true);
   const isChecked = JSON.parse(localStorage.getItem('filterCheckBox'));
@@ -43,7 +43,6 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
       onFilter({ searchText, isShortFilmChecked });
     }
   };
-  console.log(isValid);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -54,7 +53,6 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
       <form className="search-form__inner" onSubmit={handleSubmit}>
         <input
           className={`search-form__input ${!isValid ? 'input_invalid' : ''}`}
-          type="search"
           placeholder="Фильм"
           name="search"
           value={searchText || ''}
@@ -63,6 +61,17 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter }) {
           minLength="1"
           maxLength="100"
         />
+        {searchText && (
+          <Button
+            btnClass="button_type_reset"
+            btnType="button"
+            onClick={() => {
+              onResetInput();
+              setSearchText('');
+            }}
+          />
+        )}
+
         {/* <Button btnClass={`button_type_search ${!isValid && 'button_disabled'}`} btnType="submit" /> */}
         <Button btnClass="button_type_search" btnType="submit" />
       </form>
