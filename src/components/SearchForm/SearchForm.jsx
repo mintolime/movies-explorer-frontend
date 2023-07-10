@@ -24,6 +24,8 @@ function SearchForm({ onSearchMovies, searchQuery, onFilter, onResetInput }) {
         searchText: searchText,
         isShortFilmChecked: !isShortFilmChecked,
       });
+    } else if (searchText === '') {
+      setSearchText('');
     } else {
       setIsShortFilmChecked(!isShortFilmChecked);
 
